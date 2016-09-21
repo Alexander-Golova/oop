@@ -4,7 +4,7 @@
 
 int main(int argc, char * argv[])
 {
-	if (argc != 3)
+	if (argc != 3) 
 	{
 		std::cerr << "Invalid arguments count" << std::endl
 			<< "Usage: findtext <file name> <text to search>" << std::endl;
@@ -32,7 +32,7 @@ int main(int argc, char * argv[])
 	{
 		if (currentStr.find(searchString) != std::string::npos)
 		{
-			std::cout << searchString << " was found on the " << strNum << " line" << std::endl;
+			std::cout << "\"" << searchString << "\" was found on the " << strNum << " line" << std::endl;
 			isFound = true;
 		}
 		++strNum;
