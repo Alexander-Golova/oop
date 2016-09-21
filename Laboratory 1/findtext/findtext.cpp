@@ -18,22 +18,21 @@ int main(int argc, char * argv[])
 		return 1;
 	}
 
-	std::string searshingString = argv[2];
-	if (!searshingString.length())
+	std::string searchString = argv[2];
+	if (searchString.empty())
 	{
 		std::cerr << "Searching string must be not empty" << std::endl;
 		return 1;
 	}
 
 	bool isFound = false;
-	unsigned strNum = 0;
-	while (!input.eof())
+	std::string currentStr;
+	unsigned strNum = 1;
+	while (std::getline(input, currentStr))
 	{
-		std::string currentStr = "";
-		std::getline(input, currentStr);
-		if (currentStr.find(searshingString) != std::string::npos)
+		if (currentStr.find(searchString) != std::string::npos)
 		{
-			std::cout << searshingString << " was founded on the " << strNum << " line" << std::endl;
+			std::cout << searchString << " was found on the " << strNum << " line" << std::endl;
 			isFound = true;
 		}
 		++strNum;
