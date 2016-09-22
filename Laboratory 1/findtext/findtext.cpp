@@ -7,7 +7,7 @@ int main(int argc, char * argv[])
 	if (argc != 3) 
 	{
 		std::cerr << "Invalid arguments count" << std::endl
-			<< "Usage: findtext <file name> <text to search>" << std::endl;
+			      << "Usage: findtext <file name> <text to search>" << std::endl;
 		return 1;
 	}
 
