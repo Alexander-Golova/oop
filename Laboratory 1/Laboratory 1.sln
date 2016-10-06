@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "findtext", "findtext\findte
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "flipbyte", "flipbyte\flipbyte.vcxproj", "{D6FBD2BA-49AF-4EBF-9E41-A025FCE52644}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "invert", "invert\invert.vcxproj", "{F9992103-CE76-44A5-A014-9CC8FD42A43D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{D6FBD2BA-49AF-4EBF-9E41-A025FCE52644}.Release|x64.Build.0 = Release|x64
 		{D6FBD2BA-49AF-4EBF-9E41-A025FCE52644}.Release|x86.ActiveCfg = Release|Win32
 		{D6FBD2BA-49AF-4EBF-9E41-A025FCE52644}.Release|x86.Build.0 = Release|Win32
+		{F9992103-CE76-44A5-A014-9CC8FD42A43D}.Debug|x64.ActiveCfg = Debug|x64
+		{F9992103-CE76-44A5-A014-9CC8FD42A43D}.Debug|x64.Build.0 = Debug|x64
+		{F9992103-CE76-44A5-A014-9CC8FD42A43D}.Debug|x86.ActiveCfg = Debug|Win32
+		{F9992103-CE76-44A5-A014-9CC8FD42A43D}.Debug|x86.Build.0 = Debug|Win32
+		{F9992103-CE76-44A5-A014-9CC8FD42A43D}.Release|x64.ActiveCfg = Release|x64
+		{F9992103-CE76-44A5-A014-9CC8FD42A43D}.Release|x64.Build.0 = Release|x64
+		{F9992103-CE76-44A5-A014-9CC8FD42A43D}.Release|x86.ActiveCfg = Release|Win32
+		{F9992103-CE76-44A5-A014-9CC8FD42A43D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
