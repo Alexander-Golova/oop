@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="test_data">
+      <UniqueIdentifier>{7c1ec328-3a82-4a0b-accc-7f357474eac8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="invert.cpp">
@@ -23,5 +26,40 @@
     <None Include="test.bat">
       <Filter>Source Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="testInput\matrix0.txt">
+      <Filter>test_data</Filter>
+    </Text>
+    <Text Include="testInput\matrix1.txt">
+      <Filter>test_data</Filter>
+    </Text>
+    <Text Include="testInput\matrix2.txt">
+      <Filter>test_data</Filter>
+    </Text>
+    <Text Include="testInput\matrix3.txt">
+      <Filter>test_data</Filter>
+    </Text>
+    <Text Include="testInput\matrix4.txt">
+      <Filter>test_data</Filter>
+    </Text>
+    <Text Include="testInput\matrix5.txt">
+      <Filter>test_data</Filter>
+    </Text>
+    <Text Include="testInput\matrix6.txt">
+      <Filter>test_data</Filter>
+    </Text>
+    <Text Include="testInput\matrix7.txt">
+      <Filter>test_data</Filter>
+    </Text>
+    <Text Include="testInput\matrix8.txt">
+      <Filter>test_data</Filter>
+    </Text>
+    <Text Include="testInput\matrix9.txt">
+      <Filter>test_data</Filter>
+    </Text>
+    <Text Include="testInput\matrix10.txt">
+      <Filter>test_data</Filter>
+    </Text>
   </ItemGroup>
 </Project>

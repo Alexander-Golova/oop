@@ -1,7 +1,7 @@
-@ECHO OFF
+@ECHO on
 SET PROGRAM="%~1"
 
-REM Invert identity matrix
+echo Invert identity matrix
 CALL %PROGRAM% testInput\matrix1.txt > %TEMP%\correctMatrix1.txt
 IF ERRORLEVEL 1 GOTO errs
 FC %TEMP%\correctMatrix1.txt correctTest\correctMatrix1.txt
@@ -9,7 +9,7 @@ IF ERRORLEVEL 1 GOTO errs
 DEL %TEMP%\correctMatrix1.txt
 ECHO Test on invertion the identity matrix SUCCEED
 
-REM Invert null matrix
+echo Invert null matrix
 CALL %PROGRAM% testInput\matrix0.txt > %TEMP%\correctMatrix0.txt
 IF ERRORLEVEL 1 GOTO errs
 FC %TEMP%\correctMatrix0.txt correctTest\correctMatrix0.txt
@@ -17,15 +17,15 @@ IF ERRORLEVEL 1 GOTO errs
 DEL %TEMP%\correctMatrix0.txt
 ECHO Test on invertion the null matrix SUCCEED
 
-REM Invert matrix
-CALL %PROGRAM% testInput\matrix2.txt > %TEMP%\correctMatrix2.txt
-IF ERRORLEVEL 1 GOTO errs
+echo Invert matrix2
+CALL %PROGRAM% testInput\matrix2.txt 2> %TEMP%\correctMatrix2.txt
+IF NOT ERRORLEVEL 1 GOTO errs
 FC %TEMP%\correctMatrix2.txt correctTest\correctMatrix2.txt
 IF ERRORLEVEL 1 GOTO errs
 DEL %TEMP%\correctMatrix2.txt
 ECHO Test on invertion matrix SUCCEED
 
-REM Invert matrix
+echo Invert matrix3
 CALL %PROGRAM% testInput\matrix3.txt > %TEMP%\correctMatrix3.txt
 IF ERRORLEVEL 1 GOTO errs
 FC %TEMP%\correctMatrix3.txt correctTest\correctMatrix3.txt
@@ -33,7 +33,7 @@ IF ERRORLEVEL 1 GOTO errs
 DEL %TEMP%\correctMatrix3.txt
 ECHO Test on invertion matrix SUCCEED
 
-REM Invert matrix
+echo Invert matrix4
 CALL %PROGRAM% testInput\matrix4.txt > %TEMP%\correctMatrix4.txt
 IF ERRORLEVEL 1 GOTO errs
 FC %TEMP%\correctMatrix4.txt correctTest\correctMatrix4.txt
@@ -41,15 +41,8 @@ IF ERRORLEVEL 1 GOTO errs
 DEL %TEMP%\correctMatrix4.txt
 ECHO Test on invertion matrix SUCCEED
 
-REM Invert matrix
-CALL %PROGRAM% testInput\matrix4.txt > %TEMP%\correctMatrix4.txt
-IF ERRORLEVEL 1 GOTO errs
-FC %TEMP%\correctMatrix4.txt correctTest\correctMatrix4.txt
-IF ERRORLEVEL 1 GOTO errs
-DEL %TEMP%\correctMatrix4.txt
-ECHO Test on invertion matrix SUCCEED
 
-REM Invert matrix
+echo Invert matrix5
 CALL %PROGRAM% testInput\matrix5.txt > %TEMP%\correctMatrix5.txt
 IF ERRORLEVEL 1 GOTO errs
 FC %TEMP%\correctMatrix5.txt correctTest\correctMatrix5.txt
@@ -57,7 +50,7 @@ IF ERRORLEVEL 1 GOTO errs
 DEL %TEMP%\correctMatrix5.txt
 ECHO Test on invertion matrix SUCCEED
 
-REM Invert matrix
+echo Invert matrix6
 CALL %PROGRAM% testInput\matrix6.txt > %TEMP%\correctMatrix6.txt
 IF ERRORLEVEL 1 GOTO errs
 FC %TEMP%\correctMatrix6.txt correctTest\correctMatrix6.txt

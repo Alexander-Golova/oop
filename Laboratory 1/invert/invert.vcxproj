@@ -95,7 +95,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>test.bat $(TargetPath)</Command>
+      <Command>test.bat "$(TargetPath)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -112,7 +112,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>test.bat $(TargetPath)</Command>
+      <Command>test.bat "$(TargetPath)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -133,7 +133,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>test.bat $(TargetPath)</Command>
+      <Command>test.bat "$(TargetPath)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -154,7 +154,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>test.bat $(TargetPath)</Command>
+      <Command>test.bat "$(TargetPath)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -162,6 +162,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="test.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="testInput\matrix0.txt" />
+    <Text Include="testInput\matrix1.txt" />
+    <Text Include="testInput\matrix10.txt" />
+    <Text Include="testInput\matrix2.txt" />
+    <Text Include="testInput\matrix3.txt" />
+    <Text Include="testInput\matrix4.txt" />
+    <Text Include="testInput\matrix5.txt" />
+    <Text Include="testInput\matrix6.txt" />
+    <Text Include="testInput\matrix7.txt" />
+    <Text Include="testInput\matrix8.txt" />
+    <Text Include="testInput\matrix9.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
