@@ -17,6 +17,10 @@ Matrix GetIdentityMatrix()
 	Matrix identityMatrix;
 	for (size_t row = 0; row < dim; ++row)
 	{
+		for (size_t col = 0; col < dim; ++col)
+		{
+			identityMatrix[row][col] = 0;
+		}
 		identityMatrix[row][row] = 1;
 	}
 	return identityMatrix;
@@ -36,7 +40,7 @@ void PrintMatrix(const Matrix & initialMatrix)
 
 Matrix GetMatrixFromFile(std::ifstream & input, bool & error)
 {
-	Matrix initialMatrix;
+	Matrix initialMatrix = GetIdentityMatrix();
 	size_t row = 0;
 	for (std::string line; getline(input, line) && row < dim; ++row)
 	{
@@ -50,8 +54,12 @@ Matrix GetMatrixFromFile(std::ifstream & input, bool & error)
 			}
 		}
 	}
+	if (row < 3)
+	{
+		error = true;
+	}
+	return initialMatrix;
 }
-
 
 bool InvertMatrix(Matrix sourceMatrix, Matrix & invertedMatrix)
 {
@@ -60,7 +68,7 @@ bool InvertMatrix(Matrix sourceMatrix, Matrix & invertedMatrix)
 	for (size_t row = 0; row < dim && !error; ++row)
 	{
 		double leadingMember = sourceMatrix[row][row];
-		unsigned leadingPosition = row;
+		size_t leadingPosition = row;
 		for (size_t col = row; col < dim; ++col)
 		{
 			if (fabs(sourceMatrix[col][row]) > fabs(leadingMember))
@@ -87,8 +95,8 @@ bool InvertMatrix(Matrix sourceMatrix, Matrix & invertedMatrix)
 					double multiplier = sourceMatrix[col][row] / sourceMatrix[row][row];
 					for (size_t i = 0; i < dim; ++i)
 					{
-						sourceMatrix[col][row] -= sourceMatrix[row][i] * multiplier;
-						invertedMatrix[col][row] -= invertedMatrix[row][i] * multiplier;
+						sourceMatrix[col][i] -= sourceMatrix[row][i] * multiplier;
+						invertedMatrix[col][i] -= invertedMatrix[row][i] * multiplier;
 					}
 				}
 			}
@@ -96,10 +104,10 @@ bool InvertMatrix(Matrix sourceMatrix, Matrix & invertedMatrix)
 	}
 	for (size_t row = 0; row < dim; ++row)
 	{
-		invertedMatrix[row][row] /= invertedMatrix[row][row];
+		invertedMatrix[row][row] /= sourceMatrix[row][row];
 		sourceMatrix[row][row] /= sourceMatrix[row][row];
 	}
-	return error;
+	return !error;
 }
 
 int main(int argc, char * argv[])
@@ -107,7 +115,7 @@ int main(int argc, char * argv[])
 	if (argc != 2)
 	{
 		std::cerr << "Invalid arguments count" << std::endl
-			<< "Usage: invert <Matrix file>" << std::endl;
+			<< "Usage: invert <matrix file>" << std::endl;
 		return 1;
 	}
 
@@ -137,7 +145,7 @@ int main(int argc, char * argv[])
 	}
 	else
 	{
-		std::cout << "The inverse Matrix does not exist" << std::endl;
+		std::cout << "The inverse matrix does not exist" << std::endl;
 		return 1;
 	}
 }
