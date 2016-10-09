@@ -2,6 +2,24 @@
 #include <fstream>
 #include <string>
 
+bool FindTextInFile(std::ifstream & input, const std::string & searchString)
+{
+	bool isFound = false;
+	std::string currentStr;
+	unsigned strNum = 1;
+	while (std::getline(input, currentStr))
+	{
+		if (currentStr.find(searchString) != std::string::npos)
+		{
+			std::cout << "\"" << searchString << "\" was found on the " << strNum << " line" << std::endl;
+			isFound = true;
+		}
+		++strNum;
+	}
+	return isFound;
+}
+
+
 int main(int argc, char * argv[])
 {
 	if (argc != 3) 
@@ -25,20 +43,7 @@ int main(int argc, char * argv[])
 		return 1;
 	}
 
-	bool isFound = false;
-	std::string currentStr;
-	unsigned strNum = 1;
-	while (std::getline(input, currentStr))
-	{
-		if (currentStr.find(searchString) != std::string::npos)
-		{
-			std::cout << "\"" << searchString << "\" was found on the " << strNum << " line" << std::endl;
-			isFound = true;
-		}
-		++strNum;
-	}
-
-	if (!isFound)
+	if (!FindTextInFile(input, searchString))
 	{
 		std::cout << "Text not found" << std::endl;
 	}

@@ -158,10 +158,10 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="findtext.cpp" />
+    <None Include="test.bat" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="test.bat" />
+    <ClCompile Include="findtext.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
