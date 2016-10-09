@@ -131,7 +131,6 @@ int main(int argc, char * argv[])
 	bool error = false;
 	
 	sourceMatrix = GetMatrixFromFile(input, error);
-
 	if (error)
 	{
 		std::cerr << "The array is defined correctly" << std::endl;
