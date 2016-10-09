@@ -1,1 +1,1 @@
-Few rows of the matrix
+The array is defined correctly
