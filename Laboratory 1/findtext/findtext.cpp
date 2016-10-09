@@ -19,7 +19,6 @@ bool FindTextInFile(std::ifstream & input, const std::string & searchString)
 	return isFound;
 }
 
-
 int main(int argc, char * argv[])
 {
 	if (argc != 3) 
