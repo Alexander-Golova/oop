@@ -54,7 +54,7 @@ Matrix GetMatrixFromFile(std::ifstream & input, bool & error)
 			}
 		}
 	}
-	if (row < 3)
+	if (row != dim)
 	{
 		error = true;
 	}
@@ -115,7 +115,7 @@ int main(int argc, char * argv[])
 	if (argc != 2)
 	{
 		std::cerr << "Invalid arguments count" << std::endl
-			<< "Usage: invert <matrix file>" << std::endl;
+			      << "Usage: invert <matrix file>" << std::endl;
 		return 1;
 	}
 
@@ -140,11 +140,10 @@ int main(int argc, char * argv[])
 	if (InvertMatrix(sourceMatrix, invertedMatrix))
 	{
 		PrintMatrix(invertedMatrix);
-		return 0;
 	}
 	else
 	{
 		std::cout << "The inverse matrix does not exist" << std::endl;
-		return 1;
 	}
+	return 0;
 }
