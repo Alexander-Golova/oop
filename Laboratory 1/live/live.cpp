@@ -7,7 +7,7 @@
 #include <cctype> 
 #include <sstream>
 
-const unsigned dim = 6;
+const unsigned dim = 256;
 
 typedef std::array<std::array<char, dim>, dim> Matrix;
 
@@ -36,30 +36,20 @@ void PrintMatrix(const Matrix & sourceMatrix)
 	}
 }
 
-/*
 Matrix GetMatrixFromFile(std::ifstream & input, bool & error)
 {
 	Matrix initialMatrix = GetNullMatrix();
 	size_t row = 0;
 	for (std::string line; getline(input, line) && row < dim; ++row)
 	{
-		std::istringstream coeffs(line);
-		for (size_t col = 0; col < dim; ++col)
+		for (size_t col = 0; col < line.length(); ++col)
 		{
-			if (!(coeffs >> initialMatrix[row][col]))
-			{
-				error = true;
-				return initialMatrix;
-			}
+			initialMatrix[row][col] = line[col];
 		}
-	}
-	if (row < 3)
-	{
-		error = true;
 	}
 	return initialMatrix;
 }
-*/
+
 
 int main(int argc, char * argv[])
 {
@@ -79,18 +69,18 @@ int main(int argc, char * argv[])
 
 	Matrix firstGeneration;
 	Matrix nextGeneration;
+	bool error = false;
 
-	PrintMatrix(GetNullMatrix());
-	/*bool error = false;
+	firstGeneration = GetMatrixFromFile(input, error);
+	PrintMatrix(firstGeneration);
 
-	
 	if (error)
 	{
 		std::cerr << "The array is defined correctly" << std::endl;
 		return 1;
 	}
 
-	*/
+	
 
 	//PrintMatrix(nextGeneration);
 	
