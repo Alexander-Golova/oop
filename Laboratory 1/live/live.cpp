@@ -111,10 +111,7 @@ Matrix nextGeneration(const Matrix & generation)
 				{
 					stateMatrix[row][col] = '#';
 				}
-				if (numberOfNeighbors(generation, row, col) == 2 && generation[row][col] == '*')
-				{
-					stateMatrix[row][col] = '#';
-				}
+				if (numberOfNeighbors(generation, row, col) == 2 && generation[row][col] == '#')
 				{
 					stateMatrix[row][col] = '#';
 				}
@@ -134,7 +131,7 @@ int main(int argc, char * argv[])
 	if (argc != 2 && argc != 3)
 	{
 		std::cerr << "Invalid arguments count" << std::endl
-			<< "Usage: life <input file> [<output file>]" << std::endl;
+			      << "Usage: life <input file> [<output file>]" << std::endl;
 		return 1;
 	}
 
@@ -146,7 +143,6 @@ int main(int argc, char * argv[])
 	}
 
 	Matrix firstGeneration;
-	Matrix secondGeneration;
 	bool error = false;
 	firstGeneration = GetMatrixFromFile(input, error);
 	if (error)
@@ -155,8 +151,6 @@ int main(int argc, char * argv[])
 		return 1;
 	}
 	
-	secondGeneration = nextGeneration(firstGeneration);
-
-	PrintMatrix(secondGeneration);
+	PrintMatrix(nextGeneration(firstGeneration));
 	return 0;
 }
