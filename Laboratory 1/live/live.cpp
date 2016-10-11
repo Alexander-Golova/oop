@@ -53,37 +53,15 @@ Matrix GetMatrixFromFile(std::ifstream & input, bool & error)
 size_t numberOfNeighbors(const Matrix & generation, const size_t & row, const size_t & col)
 {
 	size_t count = 0;
-	if (generation[row - 1][col - 1] == '#')
+	for (size_t i = row - 1; i < row + 1; ++i)
 	{
-		++count;
-	}
-	if (generation[row - 1][col] == '#')
-	{
-		++count;
-	}
-	if (generation[row - 1][col + 1] == '#')
-	{
-		++count;
-	}
-	if (generation[row][col - 1] == '#')
-	{
-		++count;
-	}
-	if (generation[row][col + 1] == '#')
-	{
-		++count;
-	}
-	if (generation[row + 1][col - 1] == '#')
-	{
-		++count;
-	}
-	if (generation[row + 1][col] == '#')
-	{
-		++count;
-	}
-	if (generation[row + 1][col + 1] == '#')
-	{
-		++count;
+		for (size_t j = col - 1; j < col + 1; ++j)
+		{
+			if (i != row && j != col && generation[i][j] == '#')
+			{
+				++count;
+			}
+		}
 	}
 	return count;
 }
