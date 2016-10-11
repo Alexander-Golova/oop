@@ -24,11 +24,11 @@ Matrix GetNullMatrix()
 	return nullMatrix;
 }
 
-void PrintMatrix(const Matrix & sourceMatrix)
+void PrintMatrix(const Matrix & sourceMatrix, size_t & maxRow, size_t & maxCol)
 {
-	for (size_t row = 0; row < dim; ++row)
+	for (size_t row = 0; row < maxRow; ++row)
 	{
-		for (size_t col = 0; col < dim; ++col)
+		for (size_t col = 0; col < maxCol; ++col)
 		{
 			std::cout << sourceMatrix[row][col];
 		}
@@ -45,7 +45,7 @@ Matrix GetMatrixFromFile(std::ifstream & input, size_t & maxRow, size_t & maxCol
 		for (size_t col = 0; col < line.length(); ++col)
 		{
 			initialMatrix[row][col] = line[col];
-			if (line[col] != ' ' || line[col] != '*' || line[col] != '#')
+			if (line[col] != ' ' && line[col] != '*' && line[col] != '#')
 			{
 				error = true;
 			}
@@ -56,17 +56,21 @@ Matrix GetMatrixFromFile(std::ifstream & input, size_t & maxRow, size_t & maxCol
 		}		
 	}
 	maxRow = row;
+	if (maxRow > 256 || maxCol > 256)
+	{
+		error = true;
+	}
 	return initialMatrix;
 }
 
-size_t numberOfNeighbors(const Matrix & generation, const size_t & row, const size_t & col)
+size_t numberOfNeighbors(const Matrix & generation, size_t & row, size_t & col)
 {
 	size_t count = 0;
-	for (size_t i = row - 1; i < row + 1; ++i)
+	for (size_t i = row - 1; i <= row + 1; ++i)
 	{
-		for (size_t j = col - 1; j < col + 1; ++j)
+		for (size_t j = col - 1; j <= col + 1; ++j)
 		{
-			if (i != row && j != col && generation[i][j] == '#')
+			if ((i != row || j != col) && generation[i][j] == '#')
 			{
 				++count;
 			}
@@ -75,22 +79,28 @@ size_t numberOfNeighbors(const Matrix & generation, const size_t & row, const si
 	return count;
 }
 
-Matrix nextGeneration(const Matrix & generation)
+Matrix ConstructionOfBorder(const Matrix & generation, const size_t & maxRow, const size_t & maxCol)
 {
-	Matrix stateMatrix = GetNullMatrix();
-	for (size_t row = 0; row < dim; ++row)
+	Matrix borderMatrix = GetNullMatrix();
+	for (size_t row = 0; row < maxRow; ++row)
 	{
-		for (size_t col = 0; col < dim; ++col)
+		for (size_t col = 0; col < maxCol; ++col)
 		{
 			if (generation[row][col] == '*')
 			{
-				stateMatrix[row][col] = '*';
+				borderMatrix[row][col] = '*';
 			}
 		}
 	}
-	for (size_t row = 1; row < dim - 1; ++row)
+	return borderMatrix;
+}
+
+Matrix nextGeneration(const Matrix & generation, const size_t & maxRow, const size_t & maxCol)
+{
+	Matrix stateMatrix = ConstructionOfBorder(generation, maxRow, maxCol);
+	for (size_t row = 1; row < maxRow - 1; ++row)
 	{
-		for (size_t col = 1; col < dim - 1; ++col)
+		for (size_t col = 1; col < maxCol - 1; ++col)
 		{
 			if (generation[row][col] != '*')
 			{
@@ -139,8 +149,6 @@ int main(int argc, char * argv[])
 		std::cerr << "The array is defined correctly" << std::endl;
 		return 1;
 	}
-	std::cout << maxRow << std::endl;
-	std::cout << maxCol << std::endl;
-	PrintMatrix(nextGeneration(firstGeneration));
+	PrintMatrix(nextGeneration(firstGeneration, maxRow, maxCol), maxRow, maxCol);
 	return 0;
 }
