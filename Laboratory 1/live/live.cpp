@@ -36,7 +36,7 @@ void PrintMatrix(const Matrix & sourceMatrix)
 	}
 }
 
-Matrix GetMatrixFromFile(std::ifstream & input, bool & error)
+Matrix GetMatrixFromFile(std::ifstream & input, size_t & maxRow, size_t & maxCol, bool & error)
 {
 	Matrix initialMatrix = GetNullMatrix();
 	size_t row = 0;
@@ -45,8 +45,17 @@ Matrix GetMatrixFromFile(std::ifstream & input, bool & error)
 		for (size_t col = 0; col < line.length(); ++col)
 		{
 			initialMatrix[row][col] = line[col];
+			if (line[col] != ' ' || line[col] != '*' || line[col] != '#')
+			{
+				error = true;
+			}
 		}
+		if (line.length() > maxCol)
+		{
+			maxCol = line.length();
+		}		
 	}
+	maxRow = row;
 	return initialMatrix;
 }
 
@@ -122,13 +131,16 @@ int main(int argc, char * argv[])
 
 	Matrix firstGeneration;
 	bool error = false;
-	firstGeneration = GetMatrixFromFile(input, error);
+	size_t maxRow = 0;
+	size_t maxCol = 0;
+	firstGeneration = GetMatrixFromFile(input, maxRow, maxCol, error);
 	if (error)
 	{
 		std::cerr << "The array is defined correctly" << std::endl;
 		return 1;
 	}
-	
+	std::cout << maxRow << std::endl;
+	std::cout << maxCol << std::endl;
 	PrintMatrix(nextGeneration(firstGeneration));
 	return 0;
 }
