@@ -1,21 +1,17 @@
 #include "stdafx.h"
+#include "vector_utils.h"
 
 int main(int, char * [])
 {
-	std::vector<double> numbers(std::istream_iterator<double>(std::cin), (std::istream_iterator<double>()));
-	
-	std::copy(numbers.begin(), numbers.end(), std::ostream_iterator<double>(std::cout, " "));
-	
-	auto min = *std::min_element(numbers.begin(), numbers.end());
+	std::vector<double> numbers = GetNumbers(std::cin);
 
-
-	std::cout << std::endl << std::fixed << std::setprecision(3) << min << std::endl;
+	vectorÑonversion(numbers);
 
 	std::sort(numbers.begin(), numbers.end(), [](double a, double b) {
 		return a < b;
 	});
 
-
+	PrintVector(std::cout, numbers);
 
 	return 0;
 }
