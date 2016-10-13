@@ -1,0 +1,2 @@
+Invalid arguments count
+Usage: life <input file> [<output file>]
