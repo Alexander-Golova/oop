@@ -30,10 +30,11 @@ BOOST_AUTO_TEST_CASE(Getting_numbers)
 		};
 		BOOST_CHECK(numbers == correctVec);
 	}
+
 	{
 		std::stringstream str("");
 		auto numbers = GetNumbers(str);
-		const std::vector<double> correctVec = {};
+		const std::vector<double> correctVec = { };
 		BOOST_CHECK(numbers == correctVec);
 	}
 }
@@ -64,6 +65,7 @@ BOOST_AUTO_TEST_CASE(Vector_processing)
 		};
 		BOOST_CHECK(numbers == correctVec);
 	}
+
 	{
 		std::vector<double> numbers = {
 			10, 6, -2, 100, 26
