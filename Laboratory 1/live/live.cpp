@@ -36,6 +36,18 @@ void PrintMatrix(const Matrix & sourceMatrix, size_t & maxRow, size_t & maxCol)
 	}
 }
 
+void PrintMatrixOfFile(std::ofstream & output, const Matrix & sourceMatrix, size_t & maxRow, size_t & maxCol)
+{
+	for (size_t row = 0; row < maxRow; ++row)
+	{
+		for (size_t col = 0; col < maxCol; ++col)
+		{
+			output << sourceMatrix[row][col];
+		}
+		output << std::endl;
+	}
+}
+
 Matrix GetMatrixFromFile(std::ifstream & input, size_t & maxRow, size_t & maxCol, bool & error)
 {
 	Matrix initialMatrix = GetNullMatrix();
@@ -149,6 +161,21 @@ int main(int argc, char * argv[])
 		std::cerr << "The array is defined correctly" << std::endl;
 		return 1;
 	}
-	PrintMatrix(nextGeneration(firstGeneration, maxRow, maxCol), maxRow, maxCol);
+
+	if (argc == 3)
+	{
+		std::ofstream output(argv[2]);
+		if (!output.is_open())
+		{
+			std::cout << "Failed to open " << argv[2] << " for writing" << std::endl;
+			return 1;
+		}
+		PrintMatrixOfFile(output, nextGeneration(firstGeneration, maxRow, maxCol), maxRow, maxCol);
+	}
+	else
+	{
+		PrintMatrix(nextGeneration(firstGeneration, maxRow, maxCol), maxRow, maxCol);
+	}
+		
 	return 0;
 }
