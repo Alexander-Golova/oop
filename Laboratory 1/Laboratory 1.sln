@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "flipbyte", "flipbyte\flipby
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "invert", "invert\invert.vcxproj", "{F9992103-CE76-44A5-A014-9CC8FD42A43D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "live", "live\live.vcxproj", "{1AFB27FD-A8CF-41BC-8036-A76F76737F02}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{F9992103-CE76-44A5-A014-9CC8FD42A43D}.Release|x64.Build.0 = Release|x64
 		{F9992103-CE76-44A5-A014-9CC8FD42A43D}.Release|x86.ActiveCfg = Release|Win32
 		{F9992103-CE76-44A5-A014-9CC8FD42A43D}.Release|x86.Build.0 = Release|Win32
+		{1AFB27FD-A8CF-41BC-8036-A76F76737F02}.Debug|x64.ActiveCfg = Debug|x64
+		{1AFB27FD-A8CF-41BC-8036-A76F76737F02}.Debug|x64.Build.0 = Debug|x64
+		{1AFB27FD-A8CF-41BC-8036-A76F76737F02}.Debug|x86.ActiveCfg = Debug|Win32
+		{1AFB27FD-A8CF-41BC-8036-A76F76737F02}.Debug|x86.Build.0 = Debug|Win32
+		{1AFB27FD-A8CF-41BC-8036-A76F76737F02}.Release|x64.ActiveCfg = Release|x64
+		{1AFB27FD-A8CF-41BC-8036-A76F76737F02}.Release|x64.Build.0 = Release|x64
+		{1AFB27FD-A8CF-41BC-8036-A76F76737F02}.Release|x86.ActiveCfg = Release|Win32
+		{1AFB27FD-A8CF-41BC-8036-A76F76737F02}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
