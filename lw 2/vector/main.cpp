@@ -1,17 +1,18 @@
 #include "stdafx.h"
 #include "vector_utils.h"
 
+
 int main(int, char * [])
 {
-	std::vector<double> numbers = GetNumbers(std::cin);
+	vector<double> numbers = GetNumbers(std::cin);
 
-	vectorÑonversion(numbers);
+	VectorÑonversion(numbers);
 
-	std::sort(numbers.begin(), numbers.end(), [](double a, double b) {
+	sort(numbers.begin(), numbers.end(), [](double a, double b) {
 		return a < b;
 	});
 
-	PrintVector(std::cout, numbers);
+	PrintVector(cout, numbers);
 
 	return 0;
 }

@@ -2,46 +2,37 @@
 
 #include "stdafx.h"
 
-void PrintVector(std::ostream & output, const std::vector<double> & numbers)
+using namespace std;
+
+void PrintVector(ostream & output, const vector<double> & numbers)
 {
 	for (const auto & element : numbers)
 	{
-		output << std::fixed << std::setprecision(3) << element << " ";
+		output << fixed << setprecision(3) << element << " ";
 	}
-	output << std::endl;
+	output << endl;
 }
 
-std::vector<double> GetNumbers(std::istream & input)
+vector<double> GetNumbers(istream & input)
 {
-	std::vector<double> sourceVector;
-	std::copy(std::istream_iterator<double>(input), std::istream_iterator<double>(), std::back_inserter(sourceVector));
-	return sourceVector;
+	return{ istream_iterator<double>(input), istream_iterator<double>() };
 }
 
-double max(const std::vector<double> & numbers)
-{
-	return *std::max_element(numbers.begin(), numbers.end());
-}
-
-double min(const std::vector<double> & numbers)
-{
-	return *std::min_element(numbers.begin(), numbers.end());
-}
-
-void vectorÑonversion(std::vector<double> & numbers)
+void VectorÑonversion(vector<double> & numbers)
 {
 	if (numbers.empty())
 	{
 		return;
 	}
 	
-	if (min(numbers) == 0)
+	double min = *min_element(numbers.begin(), numbers.end());
+	if (min == 0)
 	{
 		return;
 	}
 
-	double multiplier = max(numbers) / min(numbers);
-	std::transform(numbers.begin(), numbers.end(), numbers.begin(), [=](double element) {
+	double multiplier = *max_element(numbers.begin(), numbers.end()) / min;
+	transform(numbers.begin(), numbers.end(), numbers.begin(), [=](double element) {
 		return element * multiplier;
 	});
 
