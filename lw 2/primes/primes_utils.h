@@ -4,7 +4,8 @@
 
 using namespace std;
 
+bool CheckArgumentCount(const int argumentCount);
 
 bool IsNumber(const std::string & str);
 
-std::set<unsigned> GeneratePrimeNumbersSet(const unsigned upperBound);
+set<uint32_t> GeneratePrimeNumbersSet(const unsigned upperBound);
