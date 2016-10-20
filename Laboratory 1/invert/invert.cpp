@@ -61,52 +61,68 @@ Matrix GetMatrixFromFile(std::ifstream & input, bool & error)
 	return initialMatrix;
 }
 
+size_t GetMaximumNumberElementsRow(const Matrix & sourceMatrix, const size_t row, bool & error)
+{
+	double maxElement = sourceMatrix[row][row];
+	size_t maxNumber = row;
+	for (size_t col = row; col < dim; ++col)
+	{
+		if (fabs(sourceMatrix[col][row]) > fabs(maxElement))
+		{
+			maxElement = sourceMatrix[col][row];
+			maxNumber = col;
+		}
+	}
+	if (fabs(maxElement) < eps)
+	{
+		error = true;
+	}
+	return maxNumber;
+}
+
+void TransformMatrixColumn(Matrix & sourceMatrix, Matrix & invertedMatrix, const size_t & row)
+{
+	for (size_t col = 0; col < dim; ++col)
+	{
+		if (row != col)
+		{
+			double multiplier = sourceMatrix[col][row] / sourceMatrix[row][row];
+			for (size_t i = 0; i < dim; ++i)
+			{
+				sourceMatrix[col][i] -= sourceMatrix[row][i] * multiplier;
+				invertedMatrix[col][i] -= invertedMatrix[row][i] * multiplier;
+			}
+		}
+	}
+}
+
+void NormalizeDiagonalMatrix(const Matrix & sourceMatrix, Matrix & invertedMatrix)
+{
+	for (size_t row = 0; row < dim; ++row)
+	{
+		invertedMatrix[row][row] /= sourceMatrix[row][row];
+	}
+}
+
 bool InvertMatrix(Matrix sourceMatrix, Matrix & invertedMatrix)
 {
 	bool error = false;
 	invertedMatrix = GetIdentityMatrix();
 	for (size_t row = 0; row < dim && !error; ++row)
 	{
-		double leadingMember = sourceMatrix[row][row];
-		size_t leadingPosition = row;
-		for (size_t col = row; col < dim; ++col)
+		size_t leadingPosition = GetMaximumNumberElementsRow(sourceMatrix, row, error);
+		if (error)
 		{
-			if (fabs(sourceMatrix[col][row]) > fabs(leadingMember))
-			{
-				leadingMember = sourceMatrix[col][row];
-				leadingPosition = col;
-			}
-		}
-		if (fabs(leadingMember) < eps)
-		{
-			error = true;
+			return !error;
 		}
 		else
 		{
-			for (size_t col = 0; col < dim; ++col)
-			{
-				std::swap(sourceMatrix[row][col], sourceMatrix[leadingPosition][col]);
-				std::swap(invertedMatrix[row][col], invertedMatrix[leadingPosition][col]);
-			}
-			for (size_t col = 0; col < dim; ++col)
-			{
-				if (row != col)
-				{
-					double multiplier = sourceMatrix[col][row] / sourceMatrix[row][row];
-					for (size_t i = 0; i < dim; ++i)
-					{
-						sourceMatrix[col][i] -= sourceMatrix[row][i] * multiplier;
-						invertedMatrix[col][i] -= invertedMatrix[row][i] * multiplier;
-					}
-				}
-			}
+			std::swap(sourceMatrix[row], sourceMatrix[leadingPosition]);
+			std::swap(invertedMatrix[row], invertedMatrix[leadingPosition]);
+			TransformMatrixColumn(sourceMatrix, invertedMatrix, row);
 		}
 	}
-	for (size_t row = 0; row < dim; ++row)
-	{
-		invertedMatrix[row][row] /= sourceMatrix[row][row];
-		sourceMatrix[row][row] /= sourceMatrix[row][row];
-	}
+	NormalizeDiagonalMatrix(sourceMatrix, invertedMatrix);
 	return !error;
 }
 

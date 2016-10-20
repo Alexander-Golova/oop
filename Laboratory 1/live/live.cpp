@@ -24,19 +24,7 @@ Matrix GetNullMatrix()
 	return nullMatrix;
 }
 
-void PrintMatrix(const Matrix & sourceMatrix, size_t & maxRow, size_t & maxCol)
-{
-	for (size_t row = 0; row < maxRow; ++row)
-	{
-		for (size_t col = 0; col < maxCol; ++col)
-		{
-			std::cout << sourceMatrix[row][col];
-		}
-		std::cout << std::endl;
-	}
-}
-
-void PrintMatrixOfFile(std::ofstream & output, const Matrix & sourceMatrix, size_t & maxRow, size_t & maxCol)
+void PrintMatrix(std::ostream & output, const Matrix & sourceMatrix, size_t & maxRow, size_t & maxCol)
 {
 	for (size_t row = 0; row < maxRow; ++row)
 	{
@@ -75,7 +63,7 @@ Matrix GetMatrixFromFile(std::ifstream & input, size_t & maxRow, size_t & maxCol
 	return initialMatrix;
 }
 
-size_t numberOfNeighbors(const Matrix & generation, size_t & row, size_t & col)
+size_t CalculateNeighbors(const Matrix & generation, size_t & row, size_t & col)
 {
 	size_t count = 0;
 	for (size_t i = row - 1; i <= row + 1; ++i)
@@ -107,7 +95,7 @@ Matrix ConstructionOfBorder(const Matrix & generation, const size_t & maxRow, co
 	return borderMatrix;
 }
 
-Matrix nextGeneration(const Matrix & generation, const size_t & maxRow, const size_t & maxCol)
+Matrix NextGeneration(const Matrix & generation, const size_t & maxRow, const size_t & maxCol)
 {
 	Matrix stateMatrix = ConstructionOfBorder(generation, maxRow, maxCol);
 	for (size_t row = 1; row < maxRow - 1; ++row)
@@ -116,15 +104,15 @@ Matrix nextGeneration(const Matrix & generation, const size_t & maxRow, const si
 		{
 			if (generation[row][col] != '*')
 			{
-				if (numberOfNeighbors(generation, row, col) == 3)
+				if (CalculateNeighbors(generation, row, col) == 3)
 				{
 					stateMatrix[row][col] = '#';
 				}
-				if (numberOfNeighbors(generation, row, col) == 2 && generation[row][col] == '#')
+				if (CalculateNeighbors(generation, row, col) == 2 && generation[row][col] == '#')
 				{
 					stateMatrix[row][col] = '#';
 				}
-				if (numberOfNeighbors(generation, row, col) < 2 || numberOfNeighbors(generation, row, col) > 3)
+				if (CalculateNeighbors(generation, row, col) < 2 || CalculateNeighbors(generation, row, col) > 3)
 				{
 					stateMatrix[row][col] = ' ';
 				}
@@ -170,11 +158,11 @@ int main(int argc, char * argv[])
 			std::cout << "Failed to open " << argv[2] << " for writing" << std::endl;
 			return 1;
 		}
-		PrintMatrixOfFile(output, nextGeneration(firstGeneration, maxRow, maxCol), maxRow, maxCol);
+		PrintMatrix(output, NextGeneration(firstGeneration, maxRow, maxCol), maxRow, maxCol);
 	}
 	else
 	{
-		PrintMatrix(nextGeneration(firstGeneration, maxRow, maxCol), maxRow, maxCol);
+		PrintMatrix(std::cout, NextGeneration(firstGeneration, maxRow, maxCol), maxRow, maxCol);
 	}
 		
 	return 0;
