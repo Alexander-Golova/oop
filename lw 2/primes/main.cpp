@@ -4,7 +4,7 @@
 
 int main(int argc, char * argv[])
 {
-	if (!CheckArgumentCount(argc) && !IsNumber(argv[1]))
+	if (!CheckArgumentCount(argc) || !IsNumber(argv[1]))
 	{
 		return 1;
 	}
