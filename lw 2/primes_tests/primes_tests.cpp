@@ -46,6 +46,12 @@ BOOST_AUTO_TEST_CASE(compare_sets)
 	}
 
 	{
+		const set<unsigned> expectedResult = { 2, 3 };
+		const auto primes = GeneratePrimeNumbersSet(3);
+		BOOST_CHECK(primes == expectedResult);
+	}
+
+	{
 		const set<unsigned> expectedResult = {
 			2, 3, 5, 7, 11, 13, 17, 19
 		};
