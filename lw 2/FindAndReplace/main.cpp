@@ -1,10 +1,10 @@
 #include "stdafx.h"
-#include "string_utils.h"
 
+#include "string_utils.h"
 
 int main(int argc, char *argv[])
 {
-	if (!CheckArgumentCount(argc) && CheckReplacingString(argv[1]))
+	if (!CheckArgumentCount(argc) || !CheckReplacingString(argv[1]))
 	{
 		return 1;
 	}
