@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-#include "../FindAndReplace/string_utils.h"
+#include "../FindAndReplace/string_utils.cpp"
 
 BOOST_AUTO_TEST_SUITE(MyTest)
 
