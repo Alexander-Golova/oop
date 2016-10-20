@@ -8,7 +8,7 @@ bool CheckArgumentCount(const int argumentCount)
 	if (argumentCount != 4)
 	{
 		cerr << "Invalid arguments count" << endl
-			<< "Usage: replace <subject-string> <search-string> <replace-string>" << endl;
+		     << "Usage: replace <subject-string> <search-string> <replace-string>" << endl;
 		return false;
 	}
 	return true;
