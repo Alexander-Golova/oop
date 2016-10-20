@@ -30,11 +30,13 @@ BOOST_AUTO_TEST_CASE(primes_count)
 		BOOST_CHECK(primes.size() == expectedResult);
 	}
 
+#ifdef NDEBUG
 	{
 		const auto expectedResult = 5761455;
 		auto primes = GeneratePrimeNumbersSet(100000000);
 		BOOST_CHECK(primes.size() == expectedResult);
 	}
+#endif
 }
 
 BOOST_AUTO_TEST_CASE(compare_sets)
