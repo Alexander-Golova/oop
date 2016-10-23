@@ -6,6 +6,9 @@ using namespace std;
 
 int main(int argc, char * argv[])
 {
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
 	if (!CheckArgumentCount(argc))
 	{
 		return 1;
@@ -27,9 +30,8 @@ int main(int argc, char * argv[])
 	{
 		fileName = "dictionary.txt";
 	}
-	ofstream output(fileName);
-
-	Translation(output, dictionary);
+	
+	Translation(fileName, dictionary);
 
 	return 0;
 }

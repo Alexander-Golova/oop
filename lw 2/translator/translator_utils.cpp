@@ -12,7 +12,11 @@ void ReadDictionaryFromFile(ifstream & input, Dictionary & dictionary)
 	while (getline(input, word))
 	{
 		getline(input, translationWord);
-		AddWordToDictionaryy(word, translationWord, dictionary);
+		auto foundWords = FindWordInDictionary(word, dictionary);
+		if (foundWords.empty())
+		{
+			AddWordToDictionaryy(word, translationWord, dictionary);
+		}		
 	}
 }
 
@@ -50,7 +54,7 @@ bool CheckArgumentCount(const int argumentCount)
 	return true;
 }
 
-void Translation(ofstream & output, Dictionary & dictionary)
+void Translation(const string & fileName, Dictionary & dictionary)
 {
 	string inputString;
 	while (inputString != "...")
@@ -59,14 +63,15 @@ void Translation(ofstream & output, Dictionary & dictionary)
 		getline(cin, inputString);
 		if (inputString != "...")
 		{
-			HandleNewWord(inputString, dictionary);
+			HandleNewWord(ToLowCase(inputString), dictionary);
 		}
 	}
-	CompleteTranslation(output, dictionary);
+	CompleteTranslation(fileName, dictionary);
 }
 
 void HandleNewWord(const string & word, Dictionary & dictionary)
 {
+
 	auto foundWords = FindWordInDictionary(word, dictionary);
 	if (foundWords.empty())
 	{
@@ -99,13 +104,15 @@ void AddNewWordToDictionary(const string & word, Dictionary & dictionary)
 	}	
 }
 
-void CompleteTranslation(ofstream & output, Dictionary & dictionary)
+void CompleteTranslation(const string & fileName, Dictionary & dictionary)
 {
 	char ch;
 	cout << "В словарь были внесены изменения. Введите Y или y для сохранения перед выходом." << endl;
+	cout << ">";
 	cin >> ch;
 	if (ch == 'Y' || ch == 'y')
 	{
+		ofstream output(fileName);
 		SaveDictionaryToFile(output, dictionary);		
 		cout << "Изменения сохранены. До свидания." << endl;
 	}
@@ -113,4 +120,14 @@ void CompleteTranslation(ofstream & output, Dictionary & dictionary)
 	{
 		cout << "Изменения не сохранены. До свидания." << endl;
 	}
+}
+
+string ToLowCase(string str)
+{
+	locale loc;
+	for (auto & ch : str)
+	{
+		ch = tolower(ch, loc);
+	}
+	return str;
 }

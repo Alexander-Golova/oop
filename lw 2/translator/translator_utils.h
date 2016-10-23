@@ -14,10 +14,12 @@ std::vector<std::string> FindWordInDictionary(const std::string & word, Dictiona
 
 bool CheckArgumentCount(const int argumentCount);
 
-void Translation(std::ofstream & output, Dictionary & dictionary);
+void Translation(const std::string & fileName, Dictionary & dictionary);
 
 void AddNewWordToDictionary(const std::string & word, Dictionary & dictionary);
 
 void HandleNewWord(const std::string & str, Dictionary & dictionary);
 
-void CompleteTranslation(std::ofstream & output, Dictionary & dictionary);
+void CompleteTranslation(const std::string & fileName, Dictionary & dictionary);
+
+std::string ToLowCase(std::string str);
