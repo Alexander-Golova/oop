@@ -1,27 +1,23 @@
 #pragma once
 
-#include "stdafx.h"
-#include <boost/range/adaptor/map.hpp>
+typedef std::multimap<std::string, std::string> Dictionary;
 
 
-typedef multimap<string, string> Dictionary;
+void ReadDictionaryFromFile(std::ifstream & input, Dictionary & dictionary);
 
+void AddWordToDictionaryy(const std::string & word, const std::string & translationWord, Dictionary & dictionary);
 
-void ReadDictionaryFromFile(ifstream & input, Dictionary & dictionary);
+void SaveDictionaryToFile(std::ofstream & output, Dictionary & dictionary);
 
-void AddWordToDictionaryy(const string & word, const string & translationWord, Dictionary & dictionary);
-
-void SaveDictionaryToFile(ofstream & output, Dictionary & dictionary);
-
-vector<string> FindWordInDictionary(const string & word, Dictionary  & dictionary);
+std::vector<std::string> FindWordInDictionary(const std::string & word, Dictionary  & dictionary);
 
 
 bool CheckArgumentCount(const int argumentCount);
 
-void Translation(Dictionary & dictionary);
+void Translation(std::ofstream & output, Dictionary & dictionary);
 
-void AddANewWordToDictionary(const string & word, Dictionary & dictionary);
+void AddNewWordToDictionary(const std::string & word, Dictionary & dictionary);
 
-void HandleNewWord(const string & str, Dictionary & dictionary);
+void HandleNewWord(const std::string & str, Dictionary & dictionary);
 
-void CompleteTranslation(ofstream & output, Dictionary & dictionary);
+void CompleteTranslation(std::ofstream & output, Dictionary & dictionary);

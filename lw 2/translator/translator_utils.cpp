@@ -1,4 +1,5 @@
 ﻿#include "stdafx.h"
+#include <boost/range/adaptor/map.hpp>
 
 #include "translator_utils.h"
 
@@ -27,7 +28,7 @@ void SaveDictionaryToFile(ofstream & output, Dictionary & dictionary)
 	for (it = dictionary.begin(); it != dictionary.end(); ++it)
 	{
 		output << (*it).first << endl
-			<< (*it).second << endl;
+			   << (*it).second << endl;
 	}
 }
 
@@ -49,7 +50,7 @@ bool CheckArgumentCount(const int argumentCount)
 	return true;
 }
 
-void Translation(Dictionary & dictionary)
+void Translation(ofstream & output, Dictionary & dictionary)
 {
 	string inputString;
 	while (inputString != "...")
@@ -61,7 +62,7 @@ void Translation(Dictionary & dictionary)
 			HandleNewWord(inputString, dictionary);
 		}
 	}
-	CompleteTranslation(dictionary);
+	CompleteTranslation(output, dictionary);
 }
 
 void HandleNewWord(const string & word, Dictionary & dictionary)
@@ -69,7 +70,7 @@ void HandleNewWord(const string & word, Dictionary & dictionary)
 	auto foundWords = FindWordInDictionary(word, dictionary);
 	if (foundWords.empty())
 	{
-		AddANewWordToDictionary(word, dictionary);
+		AddNewWordToDictionary(word, dictionary);
 	}
 	else
 	{
@@ -81,7 +82,7 @@ void HandleNewWord(const string & word, Dictionary & dictionary)
 	}	
 }
 
-void AddANewWordToDictionary(const string & word, Dictionary & dictionary)
+void AddNewWordToDictionary(const string & word, Dictionary & dictionary)
 {
 	cout << "Неизвестное слово \"" << word << "\". Введите перевод или пустую строку для отказа." << endl;
 	cout << ">";

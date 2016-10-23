@@ -27,10 +27,10 @@ int main(int argc, char * argv[])
 	{
 		fileName = "dictionary.txt";
 	}
+	ofstream output(fileName);
 
+	Translation(output, dictionary);
 
-	Translation(dictionary);
-	CompleteTranslation(output, dictionary);	
 	return 0;
 }
 
