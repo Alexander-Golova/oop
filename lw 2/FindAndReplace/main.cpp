@@ -2,15 +2,23 @@
 
 #include "string_utils.h"
 
+using namespace std;
+using namespace std::placeholders;
+
 int main(int argc, char *argv[])
 {
-	if (!CheckArgumentCount(argc) || !CheckReplacingString(argv[1]))
+	if (!CheckArgumentCount(argc))
 	{
 		return 1;
 	}
+	 
+	string search = argv[1];
+	string replace = argv[2];
 
-	string modifiedString = FindAndReplace(argv[1], argv[2], argv[3]);
-	cout << modifiedString << endl;
-	
+	auto findReplace = [](auto & subject) {
+		return FindAndReplace(subject, search, replace)
+	};
+	transform(istream_iterator<string>(cin), istream_iterator<string>(), ostream_iterator<string>(cout), findReplace);
+
 	return 0;
 }

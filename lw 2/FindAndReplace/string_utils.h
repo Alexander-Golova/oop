@@ -2,10 +2,8 @@
 
 #include "stdafx.h"
 
-using namespace std;
-
 bool CheckArgumentCount(const int argumentCount);
 
-bool CheckReplacingString(const string & str);
+bool CheckReplacingString(const std::string & str);
 
-string FindAndReplace(string const & subject, string const & search, string  const & replace);
+std::string FindAndReplace(const std::string & subject, const std::string & search, const std::string & replace);
