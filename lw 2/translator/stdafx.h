@@ -10,3 +10,6 @@
 #include <fstream>
 #include <strstream>
 #include <locale>
+#include <vector>
+#include <iterator>
+#include <algorithm>
