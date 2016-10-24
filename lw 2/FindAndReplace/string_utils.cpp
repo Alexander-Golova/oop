@@ -4,7 +4,6 @@
 
 using namespace std;
 
-
 bool CheckArgumentCount(const int argumentCount)
 {
 
@@ -19,15 +18,14 @@ bool CheckArgumentCount(const int argumentCount)
 
 string FindAndReplace(string const & subject, string const & search, string  const & replace)
 {
-	string newString = "";
-
-	size_t leftPosition = 0;
-	size_t rightPosition = 0;
-
-	if (search.length() == 0)
+	if (subject.length() == 0 || search.length() == 0)
 	{
 		return subject;
 	}
+	
+	string newString = "";
+	size_t leftPosition = 0;
+	size_t rightPosition = 0;
 
 	while (rightPosition != string::npos)
 	{
