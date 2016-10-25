@@ -16,9 +16,9 @@ bool CheckArgumentCount(const int argumentCount);
 
 void Translation(const std::string & fileName, Dictionary & dictionary);
 
-void AddNewWordToDictionary(const std::string & word, Dictionary & dictionary);
+void AddNewWord(const std::string & word, Dictionary & dictionary, bool & dictionaryChange);
 
-void HandleNewWord(const std::string & str, Dictionary & dictionary);
+void HandleNewWord(const std::string & str, Dictionary & dictionary, bool & dictionaryChange);
 
 void CompleteTranslation(const std::string & fileName, Dictionary & dictionary);
 
