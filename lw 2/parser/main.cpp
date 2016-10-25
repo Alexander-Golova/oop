@@ -14,11 +14,18 @@ int main(int argc, char* argv[])
 	while (!cin.eof())
 	{
 		getline(cin, url);
-		ParseURL(url, protocol, port, host, document);
-		cout << url << endl;
-		cout << "HOST: " << host << endl;
-		cout << "PORT: " << port << endl;
-		cout << "DOC: " << document << endl;
+		if (ParseURL(url, protocol, port, host, document))
+		{
+			cout << url << endl;
+			cout << "HOST: " << host << endl;
+			cout << "PORT: " << port << endl;
+			cout << "DOC: " << document << endl;
+		}
+		else
+		{
+			cout << "The specified URL is invalid" << endl;
+		}
+
 	}
 
     return 0;
