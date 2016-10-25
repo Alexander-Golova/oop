@@ -13,6 +13,12 @@ BOOST_AUTO_TEST_CASE(Find_And_Replace)
 {
 	{
 		string subject = "123456789";
+		auto newString = FindAndReplace(subject, "1", "");
+		const string correctString = "23456789";
+		BOOST_CHECK(newString == correctString);
+	}
+	{
+		string subject = "123456789";
 		auto newString = FindAndReplace(subject, "1", "0");
 		const string correctString = "023456789";
 		BOOST_CHECK(newString == correctString);
