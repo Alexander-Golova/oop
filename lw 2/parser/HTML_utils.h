@@ -2,6 +2,10 @@
 
 #include "stdafx.h"
 
+const int HTTP_PORT = 80;
+const int HTTPS_PORT = 243;
+const int FTP_PORT = 21;
+
 enum class Protocol
 {
 	HTTP,

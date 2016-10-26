@@ -3,37 +3,72 @@
 
 using namespace std;
 
+string ToUpCase(string str)
+{
+	locale loc;
+	for (auto & ch : str)
+	{
+		ch = toupper(ch, loc);
+	}
+	return str;
+}
+
+bool GetProtocol(const string & st, Protocol & protocol)
+{
+	if (ToUpCase(st) == "HTTP")
+	{
+		protocol = Protocol::HTTP;
+		return true;
+	}
+	if (ToUpCase(st) == "HTTPS")
+	{
+		protocol = Protocol::HTTPS;
+		return true;
+	}
+	if (ToUpCase(st) == "FTP")
+	{
+		protocol = Protocol::FTP;
+		return true;
+	}
+	return false;
+}
+
+int GetPort(const Protocol & protocol)
+{
+	if (protocol == Protocol::HTTP)
+	{
+		return HTTP_PORT;
+	}
+	if (protocol == Protocol::HTTPS)
+	{
+		return HTTPS_PORT;
+	}
+	if (protocol == Protocol::FTP)
+	{
+		return FTP_PORT;
+	}
+	return -1;
+}
+
 bool ParseURL(string const & url, Protocol &  protocol, int & port, string & host, string & document)
 {
 	regex regexStr1("(http|https|ftp|HTTP|HTTPS|FTP)://([0-9a-z\.-]+):([0-9]+)/([^[:s:]]+){0,}");
-
 	smatch result;
 	if (regex_match(url, result, regexStr1))
 	{
 		string regProt(result[1].first, result[1].second);
-		if (regProt == "http" || regProt == "HTTP")
+		if (!GetProtocol(regProt, protocol))
 		{
-			protocol = Protocol::HTTP;
-		}
-		if (regProt == "https" || regProt == "HTTPS")
-		{
-			protocol = Protocol::HTTPS;
-		}
-		if (regProt == "ftp" || regProt == "FTP")
-		{
-			protocol = Protocol::FTP;
-		}
-
+			return false;
+		}		
 		string regPort(result[3].first, result[3].second);
 		port = atoi(regPort.c_str());
 		if (port < 1 || port > 65535)
 		{
 			return false;
-		}
-
+		}		
 		string regHost(result[2].first, result[2].second);
-		host = regHost;
-
+		host = regHost;		
 		string regDoc(result[4].first, result[4].second);
 		document = regDoc;
 		return true;
@@ -44,42 +79,16 @@ bool ParseURL(string const & url, Protocol &  protocol, int & port, string & hos
 	if (regex_match(url, result, regexStr2))
 	{
 		string regProt(result[1].first, result[1].second);
-		if (regProt == "http" || regProt == "HTTP")
+		if (!GetProtocol(regProt, protocol))
 		{
-			protocol = Protocol::HTTP;
+			return false;
 		}
-		if (regProt == "https" || regProt == "HTTPS")
-		{
-			protocol = Protocol::HTTPS;
-		}
-		if (regProt == "ftp" || regProt == "FTP")
-		{
-			protocol = Protocol::FTP;
-		}
-
-		if (protocol == Protocol::HTTP)
-		{
-			port = 80;
-		}
-		if (protocol == Protocol::HTTPS)
-		{
-			port = 443;
-		}
-		if (protocol == Protocol::FTP)
-		{
-			port = 21;
-		}
-
+		port = GetPort(protocol);		
 		string regHost(result[2].first, result[2].second);
 		host = regHost;
-
 		string regDoc(result[3].first, result[3].second);
 		document = regDoc;
-
 		return true;
 	}
-
-
-
 	return false;
 }
