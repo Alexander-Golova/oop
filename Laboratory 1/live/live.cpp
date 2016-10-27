@@ -36,7 +36,7 @@ void PrintMatrix(std::ostream & output, const Matrix & sourceMatrix, size_t & ma
 	}
 }
 
-Matrix GetMatrixFromFile(std::ifstream & input, size_t & maxRow, size_t & maxCol, bool & error)
+Matrix GetMatrixFromFile(std::istream & input, size_t & maxRow, size_t & maxCol, bool & error)
 {
 	Matrix initialMatrix = GetNullMatrix();
 	size_t row = 0;

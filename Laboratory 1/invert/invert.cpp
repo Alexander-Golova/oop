@@ -63,6 +63,7 @@ Matrix GetMatrixFromFile(std::ifstream & input, bool & error)
 
 size_t GetMaximumNumberElementsRow(const Matrix & sourceMatrix, const size_t row, bool & error)
 {
+	error = false;
 	double maxElement = sourceMatrix[row][row];
 	size_t maxNumber = row;
 	for (size_t col = row; col < dim; ++col)

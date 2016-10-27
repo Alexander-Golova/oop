@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-#include "../vector/vector_utils.cpp"
+#include "../vector/vector_utils.h"
 
 BOOST_AUTO_TEST_SUITE(Test)
 

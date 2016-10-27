@@ -2,10 +2,12 @@
 
 #include "string_utils.h"
 
+using namespace std;
+
 bool CheckArgumentCount(const int argumentCount)
 {
 
-	if (argumentCount != 4)
+	if (argumentCount != 3)
 	{
 		cerr << "Invalid arguments count" << endl
 		     << "Usage: replace <subject-string> <search-string> <replace-string>" << endl;
@@ -14,34 +16,29 @@ bool CheckArgumentCount(const int argumentCount)
 	return true;
 }
 
-bool CheckReplacingString(const string & str)
-{
-	if (str == "")
-	{
-		return true;
-	}
-	return false;
-}
-
 string FindAndReplace(string const & subject, string const & search, string  const & replace)
 {
+	if (subject.length() == 0 || search.length() == 0)
+	{
+		return subject;
+	}
+	
 	string newString = "";
-
-	int leftPosition = 0;
-	int rightPosition = 0;
+	size_t leftPosition = 0;
+	size_t rightPosition = 0;
 
 	while (rightPosition != string::npos)
 	{
 		rightPosition = subject.find(search, leftPosition);
 		if (rightPosition != string::npos)
 		{
-			newString += subject.substr(leftPosition, rightPosition - leftPosition);
+			newString.append(subject, leftPosition, rightPosition - leftPosition);
 			newString += replace;
 			leftPosition = rightPosition + search.length();
 		}
 	}
 
-	newString += subject.substr(leftPosition, subject.length());
+	newString.append(subject, leftPosition, subject.length());
 
 	return newString;
 }

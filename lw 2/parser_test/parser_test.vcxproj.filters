@@ -29,10 +29,10 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FindAndReplace_tests.cpp">
+    <ClCompile Include="parser_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\FindAndReplace\string_utils.cpp">
+    <ClCompile Include="..\parser\HTML_utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
