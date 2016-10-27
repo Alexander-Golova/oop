@@ -21,6 +21,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "translator_test", "translat
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "parser", "parser\parser.vcxproj", "{E36292F5-9DC0-4D64-A324-17B4D72033B9}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "parser_test", "parser_test\parser_test.vcxproj", "{CBBAC2C9-DCAB-4832-80BE-672005A30A17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -101,6 +103,14 @@ Global
 		{E36292F5-9DC0-4D64-A324-17B4D72033B9}.Release|x64.Build.0 = Release|x64
 		{E36292F5-9DC0-4D64-A324-17B4D72033B9}.Release|x86.ActiveCfg = Release|Win32
 		{E36292F5-9DC0-4D64-A324-17B4D72033B9}.Release|x86.Build.0 = Release|Win32
+		{CBBAC2C9-DCAB-4832-80BE-672005A30A17}.Debug|x64.ActiveCfg = Debug|x64
+		{CBBAC2C9-DCAB-4832-80BE-672005A30A17}.Debug|x64.Build.0 = Debug|x64
+		{CBBAC2C9-DCAB-4832-80BE-672005A30A17}.Debug|x86.ActiveCfg = Debug|Win32
+		{CBBAC2C9-DCAB-4832-80BE-672005A30A17}.Debug|x86.Build.0 = Debug|Win32
+		{CBBAC2C9-DCAB-4832-80BE-672005A30A17}.Release|x64.ActiveCfg = Release|x64
+		{CBBAC2C9-DCAB-4832-80BE-672005A30A17}.Release|x64.Build.0 = Release|x64
+		{CBBAC2C9-DCAB-4832-80BE-672005A30A17}.Release|x86.ActiveCfg = Release|Win32
+		{CBBAC2C9-DCAB-4832-80BE-672005A30A17}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
