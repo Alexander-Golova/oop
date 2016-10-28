@@ -3,7 +3,7 @@
 
 using namespace std;
 
-string ToUpCase(string str)
+string ToUpperCase(string str)
 {
 	locale loc;
 	for (auto & ch : str)
@@ -15,17 +15,17 @@ string ToUpCase(string str)
 
 bool GetProtocol(const string & st, Protocol & protocol)
 {
-	if (ToUpCase(st) == "HTTP")
+	if (ToUpperCase(st) == "HTTP")
 	{
 		protocol = Protocol::HTTP;
 		return true;
 	}
-	if (ToUpCase(st) == "HTTPS")
+	if (ToUpperCase(st) == "HTTPS")
 	{
 		protocol = Protocol::HTTPS;
 		return true;
 	}
-	if (ToUpCase(st) == "FTP")
+	if (ToUpperCase(st) == "FTP")
 	{
 		protocol = Protocol::FTP;
 		return true;
@@ -52,8 +52,8 @@ int GetPort(const Protocol & protocol)
 
 bool ParseURL(string const & url, Protocol &  protocol, int & port, string & host, string & document)
 {
-	regex regexStr1("(http|https|ftp|HTTP|HTTPS|FTP)://([0-9a-z\.-]+):([0-9]+)/([^[:s:]]+){0,}");
-	regex regexStr2("(http|https|ftp|HTTP|HTTPS|FTP)://([0-9a-z\.-]+)/([^[:s:]]+){0,}");
+	regex regexStr1("(http|https|ftp|HTTP|HTTPS|FTP)://([0-9a-z\\.-]+):([0-9]+)/([^[:s:]]+){0,}");
+	regex regexStr2("(http|https|ftp|HTTP|HTTPS|FTP)://([0-9a-z\\.-]+)/([^[:s:]]+){0,}");
 	smatch result;
 
 	if (regex_match(url, result, regexStr1))
