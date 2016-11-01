@@ -15,6 +15,11 @@ CCar::~CCar()
 
 bool CCar::TurnOnEngine()
 {
+	if (!m_isEngineTurnOn)
+	{
+		m_isEngineTurnOn = true;
+		return true;
+	}
 	return false;
 }
 
@@ -27,7 +32,7 @@ bool CCar::TurnOffEngine()
 
 bool CCar::IsEngineTurnOn() const
 {
-	return false;
+	return m_isEngineTurnOn;
 }
 
 
