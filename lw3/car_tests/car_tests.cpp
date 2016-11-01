@@ -1,4 +1,4 @@
-#include "stdafx.h"
+п»ї#include "stdafx.h"
 
 #include "../car/Car.h"
 
@@ -7,13 +7,18 @@ struct CarFixture
 	CCar car;
 };
 
-// автомобиль
+// Р°РІС‚РѕРјРѕР±РёР»СЊ
 BOOST_FIXTURE_TEST_SUITE(Car, CarFixture)
 
-	// изначально с выключенным двигателем
+	// РёР·РЅР°С‡Р°Р»СЊРЅРѕ СЃ РІС‹РєР»СЋС‡РµРЅРЅС‹Рј РґРІРёРіР°С‚РµР»РµРј
 	BOOST_AUTO_TEST_CASE(is_engine_turned_off_by_default)
 	{
 		BOOST_CHECK(!car.IsEngineTurnOn());
+	}
+	// РЅР°С…РѕРґРёС‚СЃСЏ РЅР° РЅРµР№С‚СЂР°Р»СЊРЅРѕР№ РїРµСЂРµРґР°С‡Рµ
+	BOOST_AUTO_TEST_CASE(on_the_engine_is_switched_off_is_in_neutral)
+	{
+		BOOST_CHECK(car.GetGear() == Gear::Neutral);
 	}
 
 BOOST_AUTO_TEST_SUITE_END()
