@@ -39,7 +39,7 @@ bool CCar::SetGear(Gear gear)
 
 Gear CCar::GetGear() const
 {
-	return Gear();
+	return m_gear;
 }
 
 
@@ -57,5 +57,16 @@ unsigned CCar::GetSpeed() const
 
 Direction CCar::GetDirection() const
 {
-	return Direction();
+	if (m_speed == 0)
+	{
+		return Direction::Stop;
+	}
+	else if (m_speed < 0)
+	{
+		return Direction::Back;
+	}
+	else
+	{
+		return Direction::Forward;
+	}
 }
