@@ -38,6 +38,14 @@ bool CCar::IsEngineTurnOn() const
 
 bool CCar::SetGear(Gear gear)
 {
+	if (!m_isEngineTurnOn)
+	{
+		if (gear == Gear::Neutral)
+		{
+			m_gear = gear;
+			return true;
+		}
+	}
 	return false;
 }
 
