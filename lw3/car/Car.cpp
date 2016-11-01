@@ -26,6 +26,11 @@ bool CCar::TurnOnEngine()
 
 bool CCar::TurnOffEngine()
 {
+	if ((m_isEngineTurnOn) && (m_gear == Gear::Neutral) && (m_speed == 0))
+	{
+		m_isEngineTurnOn = false;
+		return true;
+	}
 	return false;
 }
 
@@ -82,4 +87,9 @@ Direction CCar::GetDirection() const
 	{
 		return Direction::Forward;
 	}
+}
+
+bool CCar::operator==(const CCar & car)
+{
+	return (m_isEngineTurnOn == car.m_isEngineTurnOn) && (m_speed == car.m_speed) && (m_gear == car.m_gear);
 }

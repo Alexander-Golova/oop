@@ -38,6 +38,8 @@ public:
 
 	Direction GetDirection() const;
 
+	bool operator==(const CCar & car);
+
 private:
 	bool m_isEngineTurnOn = false;
 	Gear m_gear = Gear::Neutral;
