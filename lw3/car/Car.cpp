@@ -63,17 +63,15 @@ bool IsSpeedInGearInterval(Gear gear, unsigned speed)
 
 bool CCar::SetGear(Gear gear)
 {
-	if (!m_isEngineTurnOn)
+	if (gear == Gear::Neutral)
 	{
-		if (gear == Gear::Neutral)
-		{
-			m_gear = gear;
-			return true;
-		}
+		m_gear = gear;
+		return true;
 	}
-	else
+	if (IsSpeedInGearInterval(gear, abs(m_speed)) && m_isEngineTurnOn)
 	{
-		if (IsSpeedInGearInterval(gear, m_speed))
+		if (((static_cast<int>(gear) > 0) && (m_speed >= 0)) ||
+			((static_cast<int>(gear) < 0) && (m_speed == 0)))
 		{
 			m_gear = gear;
 			return true;
