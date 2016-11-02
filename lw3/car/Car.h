@@ -43,5 +43,5 @@ public:
 private:
 	bool m_isEngineTurnOn = false;
 	Gear m_gear = Gear::Neutral;
-	unsigned m_speed = 0;
+	int m_speed = 0;
 };

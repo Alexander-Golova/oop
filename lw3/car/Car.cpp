@@ -91,13 +91,35 @@ Gear CCar::GetGear() const
 
 bool CCar::SetSpeed(unsigned speed)
 {
+	if (m_gear == Gear::Neutral)
+	{
+		if (speed <= static_cast<unsigned>(m_speed))
+		{
+			m_speed = speed;
+			return true;
+		}
+		return false;
+	}
+	if (IsSpeedInGearInterval(m_gear, speed))
+	{
+		int signedSpeed = speed;
+		if (m_gear == Gear::Reverse)
+		{
+			m_speed = -signedSpeed;
+		}
+		else
+		{
+			m_speed = signedSpeed;
+		}
+		return true;
+	}
 	return false;
 }
 
 
 unsigned CCar::GetSpeed() const
 {
-	return 0;
+	return abs(m_speed);
 }
 
 
