@@ -91,9 +91,13 @@ bool CCar::SetSpeed(unsigned speed)
 {
 	if (m_gear == Gear::Neutral)
 	{
-		if (speed <= static_cast<unsigned>(m_speed))
+		if (speed <= static_cast<unsigned>(abs(m_speed)))
 		{
 			m_speed = speed;
+			if (m_gear == Gear::Reverse)
+			{
+				m_speed = -m_speed;
+			}
 			return true;
 		}
 		return false;
