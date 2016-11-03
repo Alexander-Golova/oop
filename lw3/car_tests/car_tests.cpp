@@ -242,6 +242,7 @@ BOOST_FIXTURE_TEST_SUITE(Car, CarFixture)
 		{
 				on_neutral_()
 			{
+
 				car.SetGear(Gear::Neutral);
 				car.SetSpeed(40);
 			}
@@ -252,7 +253,7 @@ BOOST_FIXTURE_TEST_SUITE(Car, CarFixture)
 			{
 				{
 					auto clone(car);
-					BOOST_CHECK(!car.SetSpeed(18));
+					BOOST_CHECK(!car.SetSpeed(48));
 					BOOST_CHECK(car == clone);;
 				}
 			}
