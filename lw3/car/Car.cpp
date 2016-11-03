@@ -7,12 +7,6 @@ CCar::CCar()
 {
 }
 
-
-CCar::~CCar()
-{
-}
-
-
 bool CCar::TurnOnEngine()
 {
 	if (!m_isEngineTurnOn)
@@ -22,7 +16,6 @@ bool CCar::TurnOnEngine()
 	}
 	return false;
 }
-
 
 bool CCar::TurnOffEngine()
 {
@@ -34,12 +27,10 @@ bool CCar::TurnOffEngine()
 	return false;
 }
 
-
 bool CCar::IsEngineTurnOn() const
 {
 	return m_isEngineTurnOn;
 }
-
 
 bool IsInRange(unsigned number, unsigned start, unsigned end)
 {
@@ -80,12 +71,10 @@ bool CCar::SetGear(Gear gear)
 	return false;
 }
 
-
 Gear CCar::GetGear() const
 {
 	return m_gear;
 }
-
 
 bool CCar::SetSpeed(unsigned speed)
 {
@@ -118,12 +107,10 @@ bool CCar::SetSpeed(unsigned speed)
 	return false;
 }
 
-
 unsigned CCar::GetSpeed() const
 {
 	return abs(m_speed);
 }
-
 
 Direction CCar::GetDirection() const
 {

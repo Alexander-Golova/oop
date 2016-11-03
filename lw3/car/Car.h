@@ -24,7 +24,7 @@ class CCar
 {
 public:
 	CCar();
-	~CCar();
+	~CCar() = default;
 
 	bool TurnOnEngine();
 	bool TurnOffEngine();
