@@ -67,6 +67,7 @@ BOOST_FIXTURE_TEST_SUITE(Car, CarFixture)
 		BOOST_CHECK(!car.IsEngineTurnOn());
 	}
 
+	// автомобиль с включенным двигателем
 	struct when_engine_turned_on_ : CarFixture
 	{
 		when_engine_turned_on_()
@@ -74,10 +75,8 @@ BOOST_FIXTURE_TEST_SUITE(Car, CarFixture)
 			car.TurnOnEngine();
 		}
 	};
-
-	// после включения
 	BOOST_FIXTURE_TEST_SUITE(when_engine_turned_on, when_engine_turned_on_)
-		// включенный автомобиль изначально находится на нейтральной передаче
+		// изначально находится на нейтральной передаче
 		BOOST_AUTO_TEST_CASE(can_be_turned_on_is_on_neutral_gear_by_default)
 		{
 			BOOST_CHECK(car.GetGear() == Gear::Neutral);
