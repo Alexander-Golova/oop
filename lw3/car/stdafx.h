@@ -1,5 +1,7 @@
 #pragma once
 
+#define _SCL_SECURE_NO_WARNINGS
+
 #include "targetver.h"
 
 #include <iostream>
@@ -12,7 +14,3 @@
 #include <cassert>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string/split.hpp>
-
-#define _CRT_SECURE_NO_WARNINGS
-//#include <boost/system/error_code.hpp>

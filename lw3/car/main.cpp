@@ -1,7 +1,21 @@
 #include "stdafx.h"
 
+#include "Car.h"
+#include "CarMenu.h"
 
-int main()
+using namespace std;
+
+int main(int, char *[])
 {
-    return 0;
+	CCar car;
+	CCarMenu carMenu(car);
+
+	string command;
+	cout << endl << ">";
+	while (getline(cin, command))
+	{
+		carMenu.RunCommand(command);
+		cout << endl << ">";
+	}
+	return 0;
 }

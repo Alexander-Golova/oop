@@ -43,7 +43,7 @@ bool CCar::IsEngineTurnOn() const
 
 bool IsInRange(unsigned number, unsigned start, unsigned end)
 {
-	return (start <= number) && (number <= end);
+	return ((start <= number) && (number <= end));
 }
 
 bool IsSpeedInGearInterval(Gear gear, unsigned speed)
@@ -94,9 +94,9 @@ bool CCar::SetSpeed(unsigned speed)
 		if (speed <= static_cast<unsigned>(abs(m_speed)))
 		{
 			m_speed = speed;
-			if (m_gear == Gear::Reverse)
+			if (GetDirection() == Direction::Back)
 			{
-				m_speed = -m_speed;
+				m_speed *= -1;
 			}
 			return true;
 		}
