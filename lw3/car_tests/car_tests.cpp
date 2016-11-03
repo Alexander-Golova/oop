@@ -1,57 +1,72 @@
 ﻿#include "stdafx.h"
 
 #include "../car/Car.h"
+#include <functional>
+
+using namespace std;
+using namespace std::placeholders;
 
 struct CarFixture
 {
 	CCar car;
+
+	void ExpectFailure(std::function<bool(CCar & car)> const& action)
+	{
+		auto clone(car);
+		BOOST_CHECK(!action(clone));
+		BOOST_CHECK(car == clone);
+	}
 };
 
 // автомобиль
 BOOST_FIXTURE_TEST_SUITE(Car, CarFixture)
 
-	// изначально с выключенным двигателем
-	BOOST_AUTO_TEST_CASE(is_engine_turned_off_by_default)
-	{
-		BOOST_CHECK(!car.IsEngineTurnOn());
-	}
-	// находится на нейтральной передаче
-	BOOST_AUTO_TEST_CASE(is_on_neutral_gear_by_default)
-	{
-		BOOST_CHECK(car.GetGear() == Gear::Neutral);
-	}
-	// имеет нулевую скорость
-	BOOST_AUTO_TEST_CASE(it_has_zero_speed)
-	{
-		BOOST_CHECK(car.GetSpeed() == 0);
-	}
-	// у выключенного автомобиля направление движения нет (стоим на месте)
-	BOOST_AUTO_TEST_CASE(auto_shut_down_at_the_direction_of_motion_is_not)
-	{
-		BOOST_CHECK(car.GetDirection() == Direction::Stop);
-	}
+	BOOST_AUTO_TEST_SUITE(by_default)
+		// изначально с выключенным двигателем
+		BOOST_AUTO_TEST_CASE(has_engine_turned_off_by_default)
+		{
+			BOOST_CHECK(!car.IsEngineTurnOn());
+		}
+		// находится на нейтральной передаче
+		BOOST_AUTO_TEST_CASE(is_on_neutral_gear)
+		{
+			BOOST_CHECK(car.GetGear() == Gear::Neutral);
+		}
+		// имеет нулевую скорость
+		BOOST_AUTO_TEST_CASE(has_zero_speed)
+		{
+			BOOST_CHECK(car.GetSpeed() == 0);
+		}
+		// у выключенного автомобиля направление движения нет (стоим на месте)
+		BOOST_AUTO_TEST_CASE(is_stopped)
+		{
+			BOOST_CHECK(car.GetDirection() == Direction::Stop);
+		}
 
-	// нельзя выбрать передачу в выключенном состоянии отличную от нейтральной
-	BOOST_AUTO_TEST_CASE(can_not_select_the_transmission_off)
-	{
+		// нельзя выбрать передачу в выключенном состоянии отличную от нейтральной
+		BOOST_AUTO_TEST_CASE(does_not_allow_gear_selection_other_than_neutral)
 		{
-			BOOST_CHECK(car.SetGear(Gear::Neutral));
-			BOOST_CHECK(car.GetGear() == Gear::Neutral);
-		}
-		{
-			auto clone(car);
-			BOOST_CHECK(!car.SetGear(Gear::First));
-			BOOST_CHECK(car.GetGear() == Gear::Neutral);
-			BOOST_CHECK(car == clone);
-		}
-		{
-			auto clone(car);
-			BOOST_CHECK(!car.SetGear(Gear::Reverse));
-			BOOST_CHECK(car.GetGear() == Gear::Neutral);
-			BOOST_CHECK(car == clone);
-		}
-	}
+			{
+				BOOST_CHECK(car.SetGear(Gear::Neutral));
+				BOOST_CHECK(car.GetGear() == Gear::Neutral);
+			}
+			{
+				ExpectFailure([](auto & car) { return car.SetGear(Gear::First); });
+				ExpectFailure(bind(&CCar::SetGear, _1, Gear::First));
 
+				auto clone(car);
+				BOOST_CHECK(!car.SetGear(Gear::First));
+				BOOST_CHECK(car.GetGear() == Gear::Neutral);
+				BOOST_CHECK(car == clone);
+			}
+			{
+				auto clone(car);
+				BOOST_CHECK(!car.SetGear(Gear::Reverse));
+				BOOST_CHECK(car.GetGear() == Gear::Neutral);
+				BOOST_CHECK(car == clone);
+			}
+		}
+	BOOST_AUTO_TEST_SUITE_END()
 
 	// может быть включен
 	BOOST_AUTO_TEST_CASE(can_be_turned_on)
