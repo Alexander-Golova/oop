@@ -15,9 +15,8 @@ int main(int argc, char *argv[])
 	string search = argv[1];
 	string replace = argv[2];
 	string subject;
-	while (!cin.eof())
+	while (getline(cin, subject))
 	{
-		getline(cin, subject);
 		cout << FindAndReplace(subject, search, replace) << endl;
 	}
 	return 0;
