@@ -73,7 +73,7 @@ bool CCarMenu::TurnOnEngine()
 	auto result = m_car.TurnOnEngine();
 	if (result)
 	{
-		cout << "engine was turned on" << endl;
+		cout << "the engine is turned on" << endl;
 	}
 	else
 	{
@@ -87,11 +87,11 @@ bool CCarMenu::TurnOffEngine()
 	auto result = m_car.TurnOffEngine();
 	if (result)
 	{
-		cout << "engine was turned off" << endl;
+		cout << "the engine is turned off" << endl;
 	}
 	else
 	{
-		cout << "engine wasn't turned off" << endl;
+		cout << "can not turn off the engine" << endl;
 	}
 	return result;
 }
@@ -178,7 +178,7 @@ void CCarMenu::RunCommand(string & command)
 	{
 		TurnOffEngine();
 	}
-	else if ((commands[0] == "setgear") && IsNumber(commands[1]))
+	else if ((commands[0] == "setgear") && (IsNumber(commands[1]) || commands[1] == "-1"))
 	{
 		SetGear(stoi(commands[1]));
 	}
