@@ -82,7 +82,7 @@ void HandleNewWord(const string & word, Dictionary & dictionary, bool & dictiona
 	}
 }
 
-void CompleteTranslation(const string & fileName, Dictionary & dictionary)
+void CompleteTranslation(const string & fileName, const Dictionary & dictionary)
 {
 	char ch;
 	cout << "В словарь были внесены изменения. Введите Y или y для сохранения перед выходом." << endl;
@@ -125,7 +125,7 @@ void AddWordToDictionaryy(const string & word, const string & translationWord, D
 	dictionary.insert({ translationWord, word });
 }
 
-void SaveDictionaryToFile(ofstream & output, Dictionary & dictionary)
+void SaveDictionaryToFile(ofstream & output, const Dictionary & dictionary)
 {
 	auto it = dictionary.begin();
 	for (it = dictionary.begin(); it != dictionary.end(); ++it)
