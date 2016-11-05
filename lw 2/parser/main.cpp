@@ -11,9 +11,8 @@ int main()
 	string host;
 	string document;
 
-	while (!cin.eof())
+	while (getline(cin, url))
 	{
-		getline(cin, url);
 		if (ParseURL(url, protocol, port, host, document))
 		{
 			cout << url << endl;
@@ -25,8 +24,6 @@ int main()
 		{
 			cout << "The specified URL is invalid" << endl;
 		}
-
 	}
-
     return 0;
 }
