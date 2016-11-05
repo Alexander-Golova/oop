@@ -22,4 +22,4 @@ void HandleNewWord(const std::string & str, Dictionary & dictionary, bool & dict
 
 void CompleteTranslation(const std::string & fileName, Dictionary & dictionary);
 
-std::string ToLowCase(std::string str);
+std::string ToLowerCase(std::string str);

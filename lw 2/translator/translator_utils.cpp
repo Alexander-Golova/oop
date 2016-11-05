@@ -17,7 +17,7 @@ bool CheckArgumentCount(const int argumentCount)
 	return true;
 }
 
-string ToLowCase(string str)
+string ToLowerCase(string str)
 {
 	locale loc;
 	for (auto & ch : str)
@@ -51,7 +51,7 @@ void Translation(const string & fileName, Dictionary & dictionary)
 		getline(cin, inputString);
 		if (inputString != "...")
 		{
-			HandleNewWord(ToLowCase(inputString), dictionary, dictionaryChange);
+			HandleNewWord(ToLowerCase(inputString), dictionary, dictionaryChange);
 		}
 	}
 	if (dictionaryChange)
