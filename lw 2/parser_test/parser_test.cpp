@@ -1,4 +1,4 @@
-#include "stdafx.h"
+п»ї#include "stdafx.h"
 
 #include "../parser/HTML_utils.h"
 #include <tuple>
@@ -16,9 +16,9 @@ void ExpectCorrectURL(const string& url, Protocol expectedProtocol, const string
 		tie(expectedProtocol, expectedPort, expectedHost, exepectedDocument));
 }
 
-// Функция ParseURL
+// Р¤СѓРЅРєС†РёСЏ ParseURL
 BOOST_AUTO_TEST_SUITE(Parse_URL_function)
-	// извлекает протокол, хост, порт и документ из URL-а
+	// РёР·РІР»РµРєР°РµС‚ РїСЂРѕС‚РѕРєРѕР», С…РѕСЃС‚, РїРѕСЂС‚ Рё РґРѕРєСѓРјРµРЅС‚ РёР· URL-Р°
 	BOOST_AUTO_TEST_CASE(it_extracts_the_protocol_host_port_document_from_URL)
 	{
 		{
@@ -31,7 +31,7 @@ BOOST_AUTO_TEST_SUITE(Parse_URL_function)
 			ExpectCorrectURL("https://hostname:87/doc.txt", Protocol::HTTPS, "hostname", 87, "doc.txt");
 		}
 	}
-	// если порт не указан, возвращает его в зависимости от протокола
+	// РµСЃР»Рё РїРѕСЂС‚ РЅРµ СѓРєР°Р·Р°РЅ, РІРѕР·РІСЂР°С‰Р°РµС‚ РµРіРѕ РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РїСЂРѕС‚РѕРєРѕР»Р°
 	BOOST_AUTO_TEST_CASE(if_the_port_is_not_specified_it_returns_depending_on_the_protocol)
 	{
 		{
@@ -44,7 +44,7 @@ BOOST_AUTO_TEST_SUITE(Parse_URL_function)
 			ExpectCorrectURL("https://www.mysite.com/doc.txt", Protocol::HTTPS, "www.mysite.com", HTTPS_PORT, "doc.txt");
 		}
 	}
-	// игнорирует регистр символа протокола
+	// РёРіРЅРѕСЂРёСЂСѓРµС‚ СЂРµРіРёСЃС‚СЂ СЃРёРјРІРѕР»Р° РїСЂРѕС‚РѕРєРѕР»Р°
 	BOOST_AUTO_TEST_CASE(ignores_the_case_of_the_protocol_character)
 	{
 		{
@@ -58,9 +58,9 @@ BOOST_AUTO_TEST_SUITE(Parse_URL_function)
 		}
 	}
 
-	// возвращает ошибку если
+	// РІРѕР·РІСЂР°С‰Р°РµС‚ РѕС€РёР±РєСѓ РµСЃР»Рё
 	BOOST_AUTO_TEST_SUITE(returns_an_error_if)
-		// номер порта вне диапазона 1-65535
+		// РЅРѕРјРµСЂ РїРѕСЂС‚Р° РІРЅРµ РґРёР°РїР°Р·РѕРЅР° 1-65535
 		BOOST_AUTO_TEST_CASE(port_number_out_of_range_1_65535)
 		{
 			{
@@ -78,7 +78,7 @@ BOOST_AUTO_TEST_SUITE(Parse_URL_function)
 				BOOST_CHECK(!ParseURL("ftp://www.mysite.com:0/doc.html", protocol, port, host, document));
 			}
 		}
-		// документ пустой
+		// РґРѕРєСѓРјРµРЅС‚ РїСѓСЃС‚РѕР№
 		BOOST_AUTO_TEST_CASE(empty_document)
 		{		
 			Protocol protocol;
@@ -87,7 +87,7 @@ BOOST_AUTO_TEST_SUITE(Parse_URL_function)
 			std::string document;
 			BOOST_CHECK(!ParseURL("ftp://www.mysite.com", protocol, port, host, document));
 		}
-		// порт не является числом
+		// РїРѕСЂС‚ РЅРµ СЏРІР»СЏРµС‚СЃСЏ С‡РёСЃР»РѕРј
 		BOOST_AUTO_TEST_CASE(port_is_not_a_number)
 		{
 			Protocol protocol;
@@ -96,7 +96,7 @@ BOOST_AUTO_TEST_SUITE(Parse_URL_function)
 			std::string document;
 			BOOST_CHECK(!ParseURL("ftp://www.mysite.com:aa/doc.txt", protocol, port, host, document));
 		}
-		// URL не содержит известных протоколов
+		// URL РЅРµ СЃРѕРґРµСЂР¶РёС‚ РёР·РІРµСЃС‚РЅС‹С… РїСЂРѕС‚РѕРєРѕР»РѕРІ
 		BOOST_AUTO_TEST_CASE(URL_it_does_not_contain_known_protocols)
 		{
 			Protocol protocol;
