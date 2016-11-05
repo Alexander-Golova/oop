@@ -1,5 +1,7 @@
 #pragma once
 
+#include "stdafx.h"
+
 typedef std::multimap<std::string, std::string> Dictionary;
 
 
