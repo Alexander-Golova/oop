@@ -32,12 +32,14 @@ void ReadDictionaryFromFile(ifstream & input, Dictionary & dictionary)
 	string word, translationWord;
 	while (getline(input, word))
 	{
-		getline(input, translationWord);
-		auto foundWords = FindWordInDictionary(word, dictionary);
-		if (foundWords.empty())
+		if (getline(input, translationWord))
 		{
-			AddWordToDictionaryy(word, translationWord, dictionary);
-		}
+			auto foundWords = FindWordInDictionary(word, dictionary);
+			if (foundWords.empty())
+			{
+				AddWordToDictionaryy(word, translationWord, dictionary);
+			}
+		}		
 	}
 }
 
