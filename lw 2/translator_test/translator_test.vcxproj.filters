@@ -32,10 +32,10 @@
     <ClCompile Include="translator_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\translator\translator_utils.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="..\translator\translator_utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

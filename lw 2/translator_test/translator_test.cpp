@@ -4,54 +4,49 @@
 
 using namespace std;
 
-BOOST_AUTO_TEST_SUITE(MyTest)
 
-BOOST_AUTO_TEST_CASE(Translations_into_lowercase_English_words)
-{
+// функци€ ToLowerCase
+BOOST_AUTO_TEST_SUITE(To_Lower_Case_function)
+	// ѕереводит в нижний регистр английские слова
+	BOOST_AUTO_TEST_CASE(Translations_into_lowercase_English_words)
 	{
-		BOOST_CHECK_EQUAL(ToLowCase("Cat"), "cat");
+		{
+			BOOST_CHECK_EQUAL(ToLowerCase("Cat"), "cat");
+		}
+		{
+			BOOST_CHECK_EQUAL(ToLowerCase("cAt"), "cat");
+		}
+		{
+			BOOST_CHECK_EQUAL(ToLowerCase("CAT"), "cat");
+		}
 	}
+	// не измен€ет регистр русских букв
+	BOOST_AUTO_TEST_CASE(it_does_not_change_the_case_of_russian_letters)
 	{
-		BOOST_CHECK_EQUAL(ToLowCase("cAt"), "cat");
+		{
+			BOOST_CHECK_EQUAL(ToLowerCase(" ош а"), " ош а");
+		}
 	}
-	{
-		BOOST_CHECK_EQUAL(ToLowCase("CAT"), "cat");
-	}
-	{
-		BOOST_CHECK_EQUAL(ToLowCase(" ош а"), " ош а");
-	}
-}
-
-BOOST_AUTO_TEST_CASE(Adding_and_searching_for_words_in_the_dictionary)
-{
-	{
-		Dictionary dictionary;
-		AddWordToDictionaryy("cat", "кот", dictionary);
-		auto words = FindWordInDictionary("cat", dictionary);
-		const vector<string> expectedResult = {
-			"кот"
-		};
- 		BOOST_CHECK(words == expectedResult);
-	}
-	{
-		Dictionary dictionary;
-		AddWordToDictionaryy("cat", "кот", dictionary);
-		auto words = FindWordInDictionary("кот", dictionary);
-		const vector<string> expectedResult = {
-			"cat"
-		};
-		BOOST_CHECK(words == expectedResult);
-	}
-	{
-		Dictionary dictionary;
-		AddWordToDictionaryy("кот", "cat", dictionary);
-		AddWordToDictionaryy("кошка", "cat", dictionary);
-		auto words = FindWordInDictionary("cat", dictionary);
-		const vector<string> expectedResult = {
-			"кот", "кошка"
-		};
-		BOOST_CHECK(words == expectedResult);
-	}
-}
-
 BOOST_AUTO_TEST_SUITE_END()
+
+// словарь
+
+	//может быть считан из файла
+
+	// может быть записан в файл
+
+	// происходит запрос на запись, только в случае, если словарь был изменен
+		
+		// если последнее действие было дабавить слово в словарь
+
+		// если последнее действие приводило к нахождению существующего слова
+
+		// если последнее действие приводило к отмене добавлени€ слова в словарь
+
+// перевод
+	
+	// на русский может быть выполнен, если слово есть в словаре
+
+	// на английский может быть выполнен, если пара слов есть в словаре
+
+	// если у слова есть несколько значений, то при переводе вывод€тс€ все
