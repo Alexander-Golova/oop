@@ -80,7 +80,6 @@ void HandleNewWord(const string & word, Dictionary & dictionary, bool & dictiona
 			cout << foundWords[i] << " ";
 		}
 		cout << endl;
-		dictionaryChange = false;
 	}
 }
 
@@ -117,7 +116,6 @@ void AddNewWord(const string & word, Dictionary & dictionary, bool & dictionaryC
 	else
 	{
 		cout << "Слово \"" + word + "\" проигнорировано." << endl;
-		dictionaryChange = false;
 	}
 }
 
