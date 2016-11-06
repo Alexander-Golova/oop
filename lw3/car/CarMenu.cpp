@@ -166,26 +166,33 @@ void CCarMenu::RunCommand(string & command)
 	boost::to_lower(command);
 	vector<string> commands;
 	boost::split(commands, command, boost::is_any_of(" "));
-	if ((commands[0] == "info") && (commands.size() == 1))
+	if (commands.size() == 1 || commands.size() == 2)
 	{
-		GetInfo();
-	}
-	else if ((commands[0] == "engine") && (commands[1] == "on"))
-	{
-		TurnOnEngine();
-	}
-	else if ((commands[0] == "engine") && (commands[1] == "off"))
-	{
-		TurnOffEngine();
-	}
-	else if ((commands[0] == "setgear") && (IsNumber(commands[1]) || commands[1] == "-1"))
-	{
-		SetGear(stoi(commands[1]));
-	}
-	else if ((commands[0] == "setspeed") && IsNumber(commands[1]))
-	{
-		SetSpeed(stoi(commands[1]));
-	}
+		if ((commands[0] == "info") && (commands.size() == 1))
+		{
+			GetInfo();
+		}
+		else if ((commands[0] == "engine") && (commands[1] == "on"))
+		{
+			TurnOnEngine();
+		}
+		else if ((commands[0] == "engine") && (commands[1] == "off"))
+		{
+			TurnOffEngine();
+		}
+		else if ((commands[0] == "setgear") && (stoi(commands[1]) >= -1 && stoi(commands[1]) <= 5))
+		{
+			SetGear(stoi(commands[1]));
+		}
+		else if ((commands[0] == "setspeed") && (stoi(commands[1]) >= 0))
+		{
+			SetSpeed(stoi(commands[1]));
+		}
+		else
+		{
+			cout << "Unknown command" << endl;
+		}
+	}	
 	else
 	{
 		cout << "Unknown command" << endl;
