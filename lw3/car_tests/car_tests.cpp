@@ -52,18 +52,9 @@ BOOST_FIXTURE_TEST_SUITE(Car, CarFixture)
 			}
 			{
 				ExpectFailure([](auto & car) { return car.SetGear(Gear::First); });
-				ExpectFailure(bind(&CCar::SetGear, _1, Gear::First));
-
-				auto clone(car);
-				BOOST_CHECK(!car.SetGear(Gear::First));
-				BOOST_CHECK(car.GetGear() == Gear::Neutral);
-				BOOST_CHECK(car == clone);
 			}
 			{
-				auto clone(car);
-				BOOST_CHECK(!car.SetGear(Gear::Reverse));
-				BOOST_CHECK(car.GetGear() == Gear::Neutral);
-				BOOST_CHECK(car == clone);
+				ExpectFailure([](auto & car) { return car.SetGear(Gear::Reverse); });
 			}
 		}
 	BOOST_AUTO_TEST_SUITE_END()
@@ -125,9 +116,7 @@ BOOST_FIXTURE_TEST_SUITE(Car, CarFixture)
 			}
 
 			{
-				auto clone(car);
-				BOOST_CHECK(!car.SetGear(Gear::Second));
-				BOOST_CHECK(car == clone);
+				ExpectFailure([](auto & car) { return car.SetGear(Gear::Second); });
 			}
 		}
 		// на первой передаче
@@ -159,11 +148,7 @@ BOOST_FIXTURE_TEST_SUITE(Car, CarFixture)
 			// нельзя выбрать скорость вне диапазона
 			BOOST_AUTO_TEST_CASE(you_can_not_select_the_speed_out_of_range)
 			{
-				{
-					auto clone(car);
-					BOOST_CHECK(!car.SetSpeed(31));
-					BOOST_CHECK(car == clone);;
-				}
+				ExpectFailure([](auto & car) { return car.SetSpeed(31); });
 			}
 			// нельзя без остановки переключится на заднюю передачу
 			BOOST_AUTO_TEST_CASE(it_can_not_be_non_stop_switches_to_reverse_gear)
@@ -173,7 +158,7 @@ BOOST_FIXTURE_TEST_SUITE(Car, CarFixture)
 					BOOST_CHECK(car.GetSpeed() == 15);
 					BOOST_CHECK(car.SetGear(Gear::Neutral));
 					BOOST_CHECK(car.GetGear() == Gear::Neutral);
-					BOOST_CHECK(!car.SetGear(Gear::Reverse));
+					ExpectFailure([](auto & car) { return car.SetGear(Gear::Reverse); });
 				}
 			}
 			// можно разогнаться до максимальной скорости
@@ -232,11 +217,7 @@ BOOST_FIXTURE_TEST_SUITE(Car, CarFixture)
 			// нельзя выбрать скорость вне диапазона
 			BOOST_AUTO_TEST_CASE(you_can_not_select_the_speed_out_of_range_in_reverse_gear)
 			{
-				{
-					auto clone(car);
-					BOOST_CHECK(!car.SetSpeed(21));
-					BOOST_CHECK(car == clone);;
-				}
+				ExpectFailure([](auto & car) { return car.SetSpeed(21); });
 			}
 			// можно включить нейтральную передачу и уменьшить скорость
 			BOOST_AUTO_TEST_CASE(you_can_include_neutral_and_reduce_speed)
@@ -254,9 +235,8 @@ BOOST_FIXTURE_TEST_SUITE(Car, CarFixture)
 		// на нейтральной передаче
 		struct on_neutral_ : when_engine_turned_on_
 		{
-				on_neutral_()
+			on_neutral_()
 			{
-
 				car.SetGear(Gear::Neutral);
 				car.SetSpeed(40);
 			}
@@ -265,11 +245,7 @@ BOOST_FIXTURE_TEST_SUITE(Car, CarFixture)
 			// нельзя увеличить скорость
 			BOOST_AUTO_TEST_CASE(it_is_impossible_to_increase_the_speed_in_neutral)
 			{
-				{
-					auto clone(car);
-					BOOST_CHECK(!car.SetSpeed(48));
-					BOOST_CHECK(car == clone);;
-				}
+				ExpectFailure([](auto & car) { return car.SetSpeed(41); });
 			}
 
 		BOOST_AUTO_TEST_SUITE_END()
