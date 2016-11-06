@@ -7,7 +7,7 @@ typedef std::multimap<std::string, std::string> Dictionary;
 
 void ReadDictionaryFromFile(std::ifstream & input, Dictionary & dictionary);
 
-void AddWordToDictionaryy(const std::string & word, const std::string & translationWord, Dictionary & dictionary);
+void AddWordToDictionaryy(const std::string & word, const std::string & translationWord, Dictionary & dictionary, bool & dictionaryChange);
 
 void SaveDictionaryToFile(std::ofstream & output, const Dictionary & dictionary);
 

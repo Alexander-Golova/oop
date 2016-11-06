@@ -35,9 +35,10 @@ void ReadDictionaryFromFile(ifstream & input, Dictionary & dictionary)
 		if (getline(input, translationWord))
 		{
 			auto foundWords = FindWordInDictionary(word, dictionary);
+			bool dictionaryChange = false;
 			if (foundWords.empty())
 			{
-				AddWordToDictionaryy(word, translationWord, dictionary);
+				AddWordToDictionaryy(word, translationWord, dictionary, dictionaryChange);
 			}
 		}		
 	}
@@ -109,9 +110,8 @@ void AddNewWord(const string & word, Dictionary & dictionary, bool & dictionaryC
 	getline(cin, translation);
 	if (!translation.empty())
 	{
-		AddWordToDictionaryy(word, translation, dictionary);
-		cout << "Слово \"" + word + "\" сохранено в словаре как \"" + translation + "\"." << endl;
-		dictionaryChange = true;
+		AddWordToDictionaryy(word, translation, dictionary, dictionaryChange);
+		cout << "Слово \"" + word + "\" сохранено в словаре как \"" + translation + "\"." << endl;		
 	}
 	else
 	{
@@ -119,10 +119,11 @@ void AddNewWord(const string & word, Dictionary & dictionary, bool & dictionaryC
 	}
 }
 
-void AddWordToDictionaryy(const string & word, const string & translationWord, Dictionary & dictionary)
+void AddWordToDictionaryy(const string & word, const string & translationWord, Dictionary & dictionary, bool & dictionaryChange)
 {
 	dictionary.insert({ word, translationWord });
 	dictionary.insert({ translationWord, word });
+	dictionaryChange = true;
 }
 
 void SaveDictionaryToFile(ofstream & output, const Dictionary & dictionary)
@@ -140,6 +141,3 @@ vector<string> FindWordInDictionary(const string & word, Dictionary  & dictionar
 	auto translations = dictionary.equal_range(word) | boost::adaptors::map_values;
 	return{ translations.begin(), translations.end() };
 }
-
-
-
