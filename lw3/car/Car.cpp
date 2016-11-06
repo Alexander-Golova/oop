@@ -45,11 +45,11 @@ bool IsSpeedInGearInterval(Gear gear, unsigned speed)
 
 	return ((gear == Gear::Neutral) ||
 		IsSpeedInRange(Gear::Reverse, 0, 20) ||
-		(IsInRange(speed, 0, 30) && (gear == Gear::First)) ||
-		(IsInRange(speed, 20, 50) && (gear == Gear::Second)) ||
-		(IsInRange(speed, 30, 60) && (gear == Gear::Third)) ||
-		(IsInRange(speed, 40, 90) && (gear == Gear::Fourth)) ||
-		(IsInRange(speed, 50, 150) && (gear == Gear::Fifth)));
+		IsSpeedInRange(Gear::First, 0, 30) ||
+		IsSpeedInRange(Gear::Second, 20, 50) ||
+		IsSpeedInRange(Gear::Third, 30, 60) ||
+		IsSpeedInRange(Gear::Fourth, 40, 90) ||
+		IsSpeedInRange(Gear::Fifth, 50, 150));
 }
 
 bool CCar::SetGear(Gear gear)
@@ -82,10 +82,13 @@ bool CCar::SetSpeed(unsigned speed)
 	{
 		if (speed <= static_cast<unsigned>(abs(m_speed)))
 		{
-			m_speed = speed;
 			if (GetDirection() == Direction::Back)
 			{
-				m_speed *= -1;
+				m_speed = -1*speed;
+			}
+			else
+			{
+				m_speed = speed;
 			}
 			return true;
 		}
