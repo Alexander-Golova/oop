@@ -104,17 +104,14 @@ BOOST_FIXTURE_TEST_SUITE(Car, CarFixture)
 				BOOST_CHECK(car.SetGear(Gear::Neutral));
 				BOOST_CHECK(car.GetGear() == Gear::Neutral);
 			}
-
 			{
 				BOOST_CHECK(car.SetGear(Gear::First));
 				BOOST_CHECK(car.GetGear() == Gear::First);
 			}
-
 			{
 				BOOST_CHECK(car.SetGear(Gear::Reverse));
 				BOOST_CHECK(car.GetGear() == Gear::Reverse);
 			}
-
 			{
 				ExpectFailure([](auto & car) { return car.SetGear(Gear::Second); });
 			}
@@ -145,6 +142,13 @@ BOOST_FIXTURE_TEST_SUITE(Car, CarFixture)
 					BOOST_CHECK(car.GetSpeed() == 10);
 				}
 			}
+			// на нейтральной передаче можно уменьшить скорость
+			BOOST_AUTO_TEST_CASE(in_neutral_you_can_reduce_the_speed)
+			{
+				BOOST_CHECK(car.SetGear(Gear::Neutral));
+				BOOST_CHECK(car.SetSpeed(10));
+				BOOST_CHECK(car.GetDirection() == Direction::Forward);
+			}
 			// нельзя выбрать скорость вне диапазона
 			BOOST_AUTO_TEST_CASE(you_can_not_select_the_speed_out_of_range)
 			{
@@ -153,39 +157,36 @@ BOOST_FIXTURE_TEST_SUITE(Car, CarFixture)
 			// нельзя без остановки переключится на заднюю передачу
 			BOOST_AUTO_TEST_CASE(it_can_not_be_non_stop_switches_to_reverse_gear)
 			{
-				{
-					BOOST_CHECK(car.SetSpeed(15));
-					BOOST_CHECK(car.GetSpeed() == 15);
-					BOOST_CHECK(car.SetGear(Gear::Neutral));
-					BOOST_CHECK(car.GetGear() == Gear::Neutral);
-					ExpectFailure([](auto & car) { return car.SetGear(Gear::Reverse); });
-				}
+				BOOST_CHECK(car.SetSpeed(15));
+				BOOST_CHECK(car.GetSpeed() == 15);
+				BOOST_CHECK(car.SetGear(Gear::Neutral));
+				BOOST_CHECK(car.GetGear() == Gear::Neutral);
+				ExpectFailure([](auto & car) { return car.SetGear(Gear::Reverse); });
 			}
 			// можно разогнаться до максимальной скорости
 			BOOST_AUTO_TEST_CASE(can_accelerate_to_maximum_speed)
 			{
-				{
-					BOOST_CHECK(car.SetSpeed(30));
-					BOOST_CHECK(car.GetSpeed() == 30);
-					BOOST_CHECK(car.SetGear(Gear::Second));
-					BOOST_CHECK(car.GetGear() == Gear::Second);
-					BOOST_CHECK(car.SetSpeed(50));
-					BOOST_CHECK(car.GetSpeed() == 50);
-					BOOST_CHECK(car.SetGear(Gear::Third));
-					BOOST_CHECK(car.GetGear() == Gear::Third);
-					BOOST_CHECK(car.SetSpeed(60));
-					BOOST_CHECK(car.GetSpeed() == 60);
-					BOOST_CHECK(car.SetGear(Gear::Fourth));
-					BOOST_CHECK(car.GetGear() == Gear::Fourth);
-					BOOST_CHECK(car.SetSpeed(90));
-					BOOST_CHECK(car.GetSpeed() == 90);
-					BOOST_CHECK(car.SetGear(Gear::Fifth));
-					BOOST_CHECK(car.GetGear() == Gear::Fifth);
-					BOOST_CHECK(car.SetSpeed(150));
-					BOOST_CHECK(car.GetSpeed() == 150);
-					BOOST_CHECK(!car.SetSpeed(151));
-				}
+				BOOST_CHECK(car.SetSpeed(30));
+				BOOST_CHECK(car.GetSpeed() == 30);
+				BOOST_CHECK(car.SetGear(Gear::Second));
+				BOOST_CHECK(car.GetGear() == Gear::Second);
+				BOOST_CHECK(car.SetSpeed(50));
+				BOOST_CHECK(car.GetSpeed() == 50);
+				BOOST_CHECK(car.SetGear(Gear::Third));
+				BOOST_CHECK(car.GetGear() == Gear::Third);
+				BOOST_CHECK(car.SetSpeed(60));
+				BOOST_CHECK(car.GetSpeed() == 60);
+				BOOST_CHECK(car.SetGear(Gear::Fourth));
+				BOOST_CHECK(car.GetGear() == Gear::Fourth);
+				BOOST_CHECK(car.SetSpeed(90));
+				BOOST_CHECK(car.GetSpeed() == 90);
+				BOOST_CHECK(car.SetGear(Gear::Fifth));
+				BOOST_CHECK(car.GetGear() == Gear::Fifth);
+				BOOST_CHECK(car.SetSpeed(150));
+				BOOST_CHECK(car.GetSpeed() == 150);
+				BOOST_CHECK(!car.SetSpeed(151));
 			}
+
 		BOOST_AUTO_TEST_SUITE_END()
 
 		// на задней передаче
@@ -222,12 +223,17 @@ BOOST_FIXTURE_TEST_SUITE(Car, CarFixture)
 			// можно включить нейтральную передачу и уменьшить скорость
 			BOOST_AUTO_TEST_CASE(you_can_include_neutral_and_reduce_speed)
 			{
-				{
-					BOOST_CHECK(car.SetGear(Gear::Neutral));
-					BOOST_CHECK(car.GetGear() == Gear::Neutral);
-					BOOST_CHECK(car.SetSpeed(8));
-					BOOST_CHECK(car.GetSpeed() == 8);
-				}
+				BOOST_CHECK(car.SetGear(Gear::Neutral));
+				BOOST_CHECK(car.GetGear() == Gear::Neutral);
+				BOOST_CHECK(car.SetSpeed(8));
+				BOOST_CHECK(car.GetSpeed() == 8);
+			}
+			// на нейтральной передаче можно уменьшить скорость
+			BOOST_AUTO_TEST_CASE(in_neutral_you_can_reduce_the_speed)
+			{
+				BOOST_CHECK(car.SetGear(Gear::Neutral));
+				BOOST_CHECK(car.SetSpeed(10));
+				BOOST_CHECK(car.GetDirection() == Direction::Back);
 			}
 
 		BOOST_AUTO_TEST_SUITE_END()
