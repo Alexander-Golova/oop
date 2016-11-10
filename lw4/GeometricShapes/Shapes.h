@@ -9,10 +9,13 @@ public:
 	double y;
 };
 
-class CTriangle
+class CTriangle final
 	:public ISolidShape
 {
 public:
-	
+	CTriangle(SPoint Vertex1, Vertex2, Vertex3);
+	double GetPerimetr();
+	double GetArea();
 private:
+	SPoint m_Vertex1, m_Vertex2, m_Vertex3;
 };
