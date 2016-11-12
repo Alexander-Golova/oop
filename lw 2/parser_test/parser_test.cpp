@@ -19,7 +19,7 @@ void ExpectCorrectURL(const string& url, Protocol expectedProtocol, const string
 // Функция ParseURL
 BOOST_AUTO_TEST_SUITE(Parse_URL_function)
 	// извлекает протокол, хост, порт и документ из URL-а
-	BOOST_AUTO_TEST_CASE(it_extracts_the_protocol_host_port_document_from_URL)
+	BOOST_AUTO_TEST_CASE(extracts_the_protocol_host_port_document_from_URL)
 	{
 		{
 			ExpectCorrectURL("http://hostname:87/doc.txt", Protocol::HTTP, "hostname", 87, "doc.txt");
@@ -32,7 +32,7 @@ BOOST_AUTO_TEST_SUITE(Parse_URL_function)
 		}
 	}
 	// если порт не указан, возвращает его в зависимости от протокола
-	BOOST_AUTO_TEST_CASE(if_the_port_is_not_specified_it_returns_depending_on_the_protocol)
+	BOOST_AUTO_TEST_CASE(determines_port_by_protocol_if_the_port_is_not_specified)
 	{
 		{
 			ExpectCorrectURL("http://www.mysite.com/doc.txt", Protocol::HTTP, "www.mysite.com", HTTP_PORT, "doc.txt");
@@ -61,7 +61,7 @@ BOOST_AUTO_TEST_SUITE(Parse_URL_function)
 	// возвращает ошибку если
 	BOOST_AUTO_TEST_SUITE(returns_an_error_if)
 		// номер порта вне диапазона 1-65535
-		BOOST_AUTO_TEST_CASE(port_number_out_of_range_1_65535)
+		BOOST_AUTO_TEST_CASE(port_number_is_out_of_range_1_65535)
 		{
 			{
 				Protocol protocol;
@@ -97,7 +97,7 @@ BOOST_AUTO_TEST_SUITE(Parse_URL_function)
 			BOOST_CHECK(!ParseURL("ftp://www.mysite.com:aa/doc.txt", protocol, port, host, document));
 		}
 		// URL не содержит известных протоколов
-		BOOST_AUTO_TEST_CASE(URL_it_does_not_contain_known_protocols)
+		BOOST_AUTO_TEST_CASE(protocol_is_unknown)
 		{
 			Protocol protocol;
 			int port;
