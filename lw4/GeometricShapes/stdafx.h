@@ -5,3 +5,4 @@
 #include <stdio.h>
 #include <tchar.h>
 #include <cmath>
+#include <vector>
