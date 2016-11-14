@@ -15,9 +15,10 @@ public:
 	CTriangle(SPoint const & Vertex1, SPoint const & Vertex2, SPoint const & Vertex3);
 
 	double GetPerimeter() const override;
-	//double GetArea();
+	double GetArea() const override;
 
 private:
+	std::tuple<double, double, double> GetSides() const;
 	SPoint m_Vertex1;
 	SPoint m_Vertex2;
 	SPoint m_Vertex3;

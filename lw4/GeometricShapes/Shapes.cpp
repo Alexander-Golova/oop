@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Shapes.h"
 
+using namespace std;
 
 CTriangle::CTriangle(SPoint const & Vertex1, SPoint const & Vertex2, SPoint const & Vertex3)
 	: m_Vertex1(Vertex1)
@@ -9,24 +10,31 @@ CTriangle::CTriangle(SPoint const & Vertex1, SPoint const & Vertex2, SPoint cons
 {
 }
 
+tuple<double, double, double> CTriangle::GetSides()const
+{
+	auto side1 = hypot(m_Vertex1.x - m_Vertex2.x, m_Vertex1.y - m_Vertex2.y);
+	auto side2 = hypot(m_Vertex1.x - m_Vertex3.x, m_Vertex1.y - m_Vertex3.y);
+	auto side3 = hypot(m_Vertex3.x - m_Vertex2.x, m_Vertex3.y - m_Vertex2.y);
+	return make_tuple(side1, side2, side3);
+}
+
 double CTriangle::GetPerimeter()const
 {
-	auto side0 = std::hypot(m_Vertex1.x - m_Vertex2.x, m_Vertex1.y - m_Vertex2.y);
-	double side1 = sqrt((m_Vertex1.x - m_Vertex2.x)*(m_Vertex1.x - m_Vertex2.x) + 
-		                 (m_Vertex1.y - m_Vertex2.y)*(m_Vertex1.y - m_Vertex2.y));
-	double side2 = sqrt((m_Vertex1.x - m_Vertex3.x)*(m_Vertex1.x - m_Vertex3.x) +
-		                 (m_Vertex1.y - m_Vertex3.y)*(m_Vertex1.y - m_Vertex3.y));
-	double side3 = sqrt((m_Vertex2.x - m_Vertex3.x)*(m_Vertex2.x - m_Vertex3.x) +
-		                 (m_Vertex2.y - m_Vertex3.y)*(m_Vertex2.y - m_Vertex3.y));
-
+	double side1;
+	double side2;
+	double side3;
+	tie(side1, side2, side3) = GetSides();
 	return side1 + side2 + side3;
 }
 
 
-/*
-double CTriangle::GetArea()
+double CTriangle::GetArea()const
 {
-	double semiperimeter = 0.5 * CTriangle::GetPerimetr();
-	double area = semiperimeter;
+	double side1;
+	double side2;
+	double side3;
+	tie(side1, side2, side3) = GetSides();
+
+	double perimeterHalf = CTriangle::GetPerimeter()*0.5;
+	return sqrtf(perimeterHalf*(perimeterHalf - side1)*(perimeterHalf - side2)*(perimeterHalf - side3));
 }
-*/
