@@ -66,3 +66,18 @@ string CTriangle::GetFillColor() const
 {
 	return m_fillColor;
 }
+
+string CTriangle::ToString() const
+{
+	ostringstream strm;
+	strm << fixed << setprecision(2);
+
+	strm << "Triangle: "
+	     << "Vertex1(" << m_Vertex1.x << ", " << m_Vertex1.y << "); "
+	     << "Vertex2(" << m_Vertex2.x << ", " << m_Vertex2.y << "); "
+	     << "Vertex3(" << m_Vertex3.x << ", " << m_Vertex3.y << "); "
+	     << "P = " << GetPerimeter() << "; "
+	     << "S = " << GetArea() << ".";
+
+	return strm.str();
+}
