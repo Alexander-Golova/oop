@@ -36,5 +36,21 @@ double CTriangle::GetArea()const
 	tie(side1, side2, side3) = GetSides();
 
 	double perimeterHalf = CTriangle::GetPerimeter()*0.5;
-	return sqrtf(perimeterHalf*(perimeterHalf - side1)*(perimeterHalf - side2)*(perimeterHalf - side3));
+	return sqrt(perimeterHalf*(perimeterHalf - side1)*(perimeterHalf - side2)*(perimeterHalf - side3));
+}
+
+
+SPoint CTriangle::GetVertex1() const
+{
+	return m_Vertex1;
+}
+
+SPoint CTriangle::GetVertex2() const
+{
+	return m_Vertex2;
+}
+
+SPoint CTriangle::GetVertex3() const
+{
+	return m_Vertex3;
 }

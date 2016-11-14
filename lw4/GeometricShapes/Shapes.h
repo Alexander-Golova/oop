@@ -17,6 +17,10 @@ public:
 	double GetPerimeter() const override;
 	double GetArea() const override;
 
+	SPoint GetVertex1() const;
+	SPoint GetVertex2() const;
+	SPoint GetVertex3() const;
+
 private:
 	std::tuple<double, double, double> GetSides() const;
 	SPoint m_Vertex1;
