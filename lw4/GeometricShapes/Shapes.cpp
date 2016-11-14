@@ -3,10 +3,12 @@
 
 using namespace std;
 
-CTriangle::CTriangle(SPoint const & Vertex1, SPoint const & Vertex2, SPoint const & Vertex3)
+CTriangle::CTriangle(SPoint const & Vertex1, SPoint const & Vertex2, SPoint const & Vertex3, string const & outlineColor, string const & fillColor)
 	: m_Vertex1(Vertex1)
 	, m_Vertex2(Vertex2)
 	, m_Vertex3(Vertex3)
+	, m_outlineColor(outlineColor)
+	, m_fillColor(fillColor)
 {
 }
 
@@ -53,4 +55,14 @@ SPoint CTriangle::GetVertex2() const
 SPoint CTriangle::GetVertex3() const
 {
 	return m_Vertex3;
+}
+
+string CTriangle::GetOutlineColor() const
+{
+	return m_outlineColor;
+}
+
+string CTriangle::GetFillColor() const
+{
+	return m_fillColor;
 }
