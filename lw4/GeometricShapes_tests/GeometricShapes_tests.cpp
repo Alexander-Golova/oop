@@ -4,7 +4,6 @@
 
 using namespace std;
 
-
 struct TriangleFixture_
 {
 	const SPoint Vertex1 = { 0, 0 };
@@ -22,9 +21,12 @@ BOOST_FIXTURE_TEST_SUITE(Triangle, TriangleFixture_)
 	// можно найти периметр
 	BOOST_AUTO_TEST_CASE(can_find_perimeter)
 	{
-		//BOOST_CHECK_EQUAL(static_cast<int>(GetPerimetr()), 12);
+		BOOST_CHECK_EQUAL(static_cast<int>(triangle.GetPerimeter()), 12);
 	}
 	// можно найти площадь
-
+	BOOST_AUTO_TEST_CASE(can_find_area)
+	{
+		BOOST_CHECK_EQUAL(static_cast<int>(triangle.GetArea()), 6);
+	}
 
 BOOST_AUTO_TEST_SUITE_END()
