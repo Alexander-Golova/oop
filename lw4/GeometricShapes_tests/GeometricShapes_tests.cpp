@@ -9,9 +9,12 @@ struct TriangleFixture_
 	const SPoint Vertex1 = { 0, 0 };
 	const SPoint Vertex2 = { 4, 0 };
 	const SPoint Vertex3 = { 0, 3 };
+	const string outlineColor = "ff0000";
+	const string fillColor = "00ff00";
+
 	const CTriangle triangle;
 	TriangleFixture_()
-		: triangle(Vertex1, Vertex2, Vertex3)
+		: triangle(Vertex1, Vertex2, Vertex3, outlineColor, fillColor)
 	{}
 };
 
@@ -45,6 +48,15 @@ BOOST_FIXTURE_TEST_SUITE(Triangle, TriangleFixture_)
 	{
 		BOOST_CHECK_EQUAL(static_cast<int>(triangle.GetArea()), 6);
 	}
-
+	// имеет цвет границы
+	BOOST_AUTO_TEST_CASE(triangle_has_a_line_color)
+	{
+		BOOST_CHECK_EQUAL(triangle.GetOutlineColor(), "ff0000");
+	}
+	// имеет цвет заливки
+	BOOST_AUTO_TEST_CASE(triangle_has_a_fill_color)
+	{
+		BOOST_CHECK_EQUAL(triangle.GetFillColor(), "00ff00");
+	}
 	
 BOOST_AUTO_TEST_SUITE_END()
