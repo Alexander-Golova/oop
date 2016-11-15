@@ -88,13 +88,13 @@ class CLineSegment final
 {
 public:
 	CLineSegment(SPoint const & startPoint, SPoint const & endPoint, std::string const & outlineColor);
-	double GetArea() const { return 0.0; }; //override;
-	double GetPerimeter() const { return 0.0; }; //override;
-	std::string ToString() const { return ""; }; //override;
-	std::string GetOutlineColor() const { return ""; } //override;
+	double GetArea() const override;
+	double GetPerimeter() const override;
+	std::string ToString() const override;
+	std::string GetOutlineColor() const override;
 
-	SPoint GetStartPoint() const  {};
-	SPoint GetEndPoint() const {};
+	SPoint GetStartPoint() const;
+	SPoint GetEndPoint() const;
 
 private:
 	SPoint m_startPoint;
