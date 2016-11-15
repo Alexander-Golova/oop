@@ -112,3 +112,8 @@ double CRectangle::GetPerimeter() const
 {
 	return 2 * (GetWidth() + GetHeight());
 }
+
+double CRectangle::GetArea() const
+{
+	return GetWidth() * GetHeight();
+}

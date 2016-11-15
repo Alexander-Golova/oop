@@ -41,7 +41,7 @@ class CRectangle final
 public:
 	CRectangle(SPoint const & LeftTop, SPoint const & RightBottom,
 		        std::string const & outlineColor, std::string const & fillColor);
-	double GetArea() const { return 0.0; };
+	double GetArea() const override;
 	double GetPerimeter() const override;
 	std::string ToString() const { return "x"; };
 	std::string GetOutlineColor() const { return "x"; };
