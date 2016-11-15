@@ -196,13 +196,49 @@ struct LineSegmentFixture_
 	const SPoint endPoint = { 3, 4 };
 	const string outlineColor = "ff0000";
 
-	const CLineSegment lineSegment;
+	const CLineSegment line;
 	LineSegmentFixture_()
-		: lineSegment(startPoint, endPoint, outlineColor)
+		: line(startPoint, endPoint, outlineColor)
 	{}
 };
 
 // у отрезка
 BOOST_FIXTURE_TEST_SUITE(LineSegment, LineSegmentFixture_)
+
+	// есть начало
+	BOOST_AUTO_TEST_CASE(has_a_start_point)
+	{
+		BOOST_CHECK_EQUAL(line.GetStartPoint().x, 0);
+		BOOST_CHECK_EQUAL(line.GetStartPoint().y, 0);
+	}
+	// есть конец
+	BOOST_AUTO_TEST_CASE(has_a_end_point)
+	{
+		BOOST_CHECK_EQUAL(line.GetEndPoint().x, 3);
+		BOOST_CHECK_EQUAL(line.GetEndPoint().y, 4);
+	}
+	// нулевая площадь
+	BOOST_AUTO_TEST_CASE(line_has_zero_area)
+	{
+		BOOST_CHECK_EQUAL(line.GetArea(), 0);
+	}
+	// есть периметр, равный длине отрезка
+	BOOST_AUTO_TEST_CASE(perimeter_is_equal_length_of_segment)
+	{
+		SPoint first = line.GetStartPoint();
+		SPoint second = line.GetEndPoint();
+		BOOST_CHECK_EQUAL(line.GetPerimeter(), hypot(first.x - second.x, first.y - second.y));
+	}
+	// имеет цвет границы
+	BOOST_AUTO_TEST_CASE(has_a_line_color)
+	{
+		BOOST_CHECK_EQUAL(line.GetOutlineColor(), "ff0000");
+	}
+	// имеет строковое представление
+	BOOST_AUTO_TEST_CASE(can_be_converted_to_string)
+	{
+		auto str = "LineSegment: startPoint(0.00, 0.00); endPoint(3.00, 4.00); P = 5.00.";
+		BOOST_CHECK_EQUAL(line.ToString(), str);
+	}
 
 BOOST_AUTO_TEST_SUITE_END()
