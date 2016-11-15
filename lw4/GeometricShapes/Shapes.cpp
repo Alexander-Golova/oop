@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "Shapes.h"
 
+#define _USE_MATH_DEFINES
+#include <math.h> 
+
 using namespace std;
 
 CTriangle::CTriangle(SPoint const & vertex1, SPoint const & vertex2, SPoint const & vertex3, string const & outlineColor, string const & fillColor)
@@ -143,10 +146,54 @@ string CRectangle::ToString() const
 }
 
 
-CCircle::CCircle(SPoint const & center, SPoint const & radius, std::string const & outlineColor, std::string const & fillColor)
+CCircle::CCircle(SPoint const & center, double const & radius, std::string const & outlineColor, std::string const & fillColor)
 	: m_center(center)
 	, m_radius(radius)
 	, m_outlineColor(outlineColor)
 	, m_fillColor(fillColor)
 {
+}
+
+SPoint CCircle::GetCenter() const
+{
+	return m_center;
+}
+
+double CCircle::GetRadius() const
+{
+	return m_radius;
+}
+
+double CCircle::GetArea() const
+{
+	return static_cast<double>(M_PI) * pow(m_radius, 2);
+}
+
+double CCircle::GetPerimeter() const
+{
+	return static_cast<double>(M_PI) * 2 * m_radius;
+}
+
+string CCircle::GetOutlineColor() const
+{
+	return m_outlineColor;
+}
+
+string CCircle::GetFillColor() const
+{
+	return m_fillColor;
+}
+
+string CCircle::ToString() const
+{
+	ostringstream strm;
+	strm << fixed << setprecision(2);
+
+	strm << "Circle: "
+		<< "Center(" << m_center.x << ", " << m_center.y << "); "
+		<< "Radius = " << m_radius << "; "
+		<< "P = " << GetPerimeter() << "; "
+		<< "S = " << GetArea() << ".";
+
+	return strm.str();
 }
