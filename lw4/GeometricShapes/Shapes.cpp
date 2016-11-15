@@ -87,3 +87,13 @@ CRectangle::CRectangle(SPoint const & LeftTop, SPoint const & RightBottom, std::
 	, m_fillColor(fillColor)
 {
 }
+
+SPoint CRectangle::GetLeftTop() const
+{
+	return m_LeftTop;
+}
+
+SPoint CRectangle::GetRightBottom() const
+{
+	return m_RightBottom;
+}

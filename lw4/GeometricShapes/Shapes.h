@@ -48,8 +48,8 @@ public:
 
 	std::string GetFillColor() const { return "x"; };
 
-	SPoint GetLeftTop() const { return{ 0.0 , 0.0}; };
-	SPoint GetRightBottom() const { return{ 0.0 , 0.0 }; };
+	SPoint GetLeftTop() const;
+	SPoint GetRightBottom() const;
 	double GetWidth() const { return 0.0; };
 	double GetHeight() const { return 0.0; };
 
