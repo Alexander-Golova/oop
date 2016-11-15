@@ -69,8 +69,8 @@ BOOST_AUTO_TEST_SUITE_END()
 
 struct RectangleFixture_
 {
-	const SPoint m_LeftTop = { 0, 0 };
-	const SPoint m_RightBottom = { 5, 6 };
+	const SPoint m_LeftTop = { 0, 6 };
+	const SPoint m_RightBottom = { 5, 0 };
 	const string outlineColor = "ff0000";
 	const string fillColor = "00ff00";
 
@@ -87,13 +87,18 @@ BOOST_FIXTURE_TEST_SUITE(Rectangle, RectangleFixture_)
 	BOOST_AUTO_TEST_CASE(left_top_vertex_has_a_position)
 	{
 		BOOST_CHECK_EQUAL(rectangle.GetLeftTop().x, 0);
-		BOOST_CHECK_EQUAL(rectangle.GetLeftTop().y, 0);
+		BOOST_CHECK_EQUAL(rectangle.GetLeftTop().y, 6);
 	}
 	// правая нижняя вершина имеет координаты
 	BOOST_AUTO_TEST_CASE(right_bottom_left_top_vertex_has_a_position)
 	{
 		BOOST_CHECK_EQUAL(rectangle.GetRightBottom().x, 5);
-		BOOST_CHECK_EQUAL(rectangle.GetRightBottom().y, 6);
+		BOOST_CHECK_EQUAL(rectangle.GetRightBottom().y, 0);
+	}
+	// есть ширина
+	BOOST_AUTO_TEST_CASE(has_a_width)
+	{
+		BOOST_CHECK_EQUAL(rectangle.GetWidth(), 5);
 	}
 
 BOOST_AUTO_TEST_SUITE_END()
