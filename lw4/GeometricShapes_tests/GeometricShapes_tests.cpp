@@ -49,12 +49,12 @@ BOOST_FIXTURE_TEST_SUITE(Triangle, TriangleFixture_)
 		BOOST_CHECK_EQUAL(static_cast<int>(triangle.GetArea()), 6);
 	}
 	// имеет цвет границы
-	BOOST_AUTO_TEST_CASE(triangle_has_a_line_color)
+	BOOST_AUTO_TEST_CASE(has_a_line_color)
 	{
 		BOOST_CHECK_EQUAL(triangle.GetOutlineColor(), "ff0000");
 	}
 	// имеет цвет заливки
-	BOOST_AUTO_TEST_CASE(triangle_has_a_fill_color)
+	BOOST_AUTO_TEST_CASE(has_a_fill_color)
 	{
 		BOOST_CHECK_EQUAL(triangle.GetFillColor(), "00ff00");
 	}
@@ -114,6 +114,16 @@ BOOST_FIXTURE_TEST_SUITE(Rectangle, RectangleFixture_)
 	BOOST_AUTO_TEST_CASE(can_find_area)
 	{
 		BOOST_CHECK_EQUAL(static_cast<int>(rectangle.GetArea()), 30);
+	}
+	// имеет цвет границы
+	BOOST_AUTO_TEST_CASE(has_a_line_color)
+	{
+		BOOST_CHECK_EQUAL(rectangle.GetOutlineColor(), "ff0000");
+	}
+	// имеет цвет заливки
+	BOOST_AUTO_TEST_CASE(has_a_fill_color)
+	{
+		BOOST_CHECK_EQUAL(rectangle.GetFillColor(), "00ff00");
 	}
 
 BOOST_AUTO_TEST_SUITE_END()
