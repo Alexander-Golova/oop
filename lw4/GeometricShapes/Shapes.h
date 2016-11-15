@@ -43,7 +43,7 @@ public:
 		        std::string const & outlineColor, std::string const & fillColor);
 	double GetArea() const override;
 	double GetPerimeter() const override;
-	std::string ToString() const { return "x"; };
+	std::string ToString() const override;
 	std::string GetOutlineColor() const override;
 
 	std::string GetFillColor() const override;

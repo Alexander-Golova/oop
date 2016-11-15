@@ -127,3 +127,17 @@ string CRectangle::GetFillColor() const
 {
 	return m_fillColor;
 }
+
+string CRectangle::ToString() const
+{
+	ostringstream strm;
+	strm << fixed << setprecision(2);
+
+	strm << "Rectangle: "
+		<< "LeftTop(" << m_LeftTop.x << ", " << m_LeftTop.y << "); "
+		<< "RightBottom(" << m_RightBottom.x << ", " << m_RightBottom.y << "); "
+		<< "P = " << GetPerimeter() << "; "
+		<< "S = " << GetArea() << ".";
+
+	return strm.str();
+}
