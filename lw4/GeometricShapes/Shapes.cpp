@@ -100,5 +100,15 @@ SPoint CRectangle::GetRightBottom() const
 
 double CRectangle::GetWidth() const
 {
+	return abs(m_LeftTop.y - m_RightBottom.y);
+}
+
+double CRectangle::GetHeight() const
+{
 	return abs(m_LeftTop.x - m_RightBottom.x);
+}
+
+double CRectangle::GetPerimeter() const
+{
+	return 2 * (GetWidth() + GetHeight());
 }

@@ -42,7 +42,7 @@ public:
 	CRectangle(SPoint const & LeftTop, SPoint const & RightBottom,
 		        std::string const & outlineColor, std::string const & fillColor);
 	double GetArea() const { return 0.0; };
-	double GetPerimeter() const { return 0.0; };
+	double GetPerimeter() const override;
 	std::string ToString() const { return "x"; };
 	std::string GetOutlineColor() const { return "x"; };
 
@@ -51,7 +51,7 @@ public:
 	SPoint GetLeftTop() const;
 	SPoint GetRightBottom() const;
 	double GetWidth() const;
-	double GetHeight() const { return 0.0; };
+	double GetHeight() const;
 
 private:
 	SPoint m_LeftTop;
