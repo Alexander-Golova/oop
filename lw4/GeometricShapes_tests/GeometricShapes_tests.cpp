@@ -66,3 +66,21 @@ BOOST_FIXTURE_TEST_SUITE(Triangle, TriangleFixture_)
 	}
 	
 BOOST_AUTO_TEST_SUITE_END()
+
+struct RectangleFixture_
+{
+	const SPoint m_LeftTop = { 0, 0 };
+	const SPoint m_RightBottom = { 5, 6 };
+	const string outlineColor = "ff0000";
+	const string fillColor = "00ff00";
+
+	const CRectangle rectangle;
+	RectangleFixture_()
+		: rectangle(m_LeftTop, m_RightBottom, outlineColor, fillColor)
+	{}
+};
+
+// у прямоугольника
+BOOST_FIXTURE_TEST_SUITE(Rectangle, RectangleFixture_)
+
+BOOST_AUTO_TEST_SUITE_END()
