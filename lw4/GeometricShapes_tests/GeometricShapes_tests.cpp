@@ -98,7 +98,17 @@ BOOST_FIXTURE_TEST_SUITE(Rectangle, RectangleFixture_)
 	// есть ширина
 	BOOST_AUTO_TEST_CASE(has_a_width)
 	{
-		BOOST_CHECK_EQUAL(rectangle.GetWidth(), 5);
+		BOOST_CHECK_EQUAL(rectangle.GetWidth(), 6);
+	}
+	// есть длина
+	BOOST_AUTO_TEST_CASE(has_a_height)
+	{
+		BOOST_CHECK_EQUAL(rectangle.GetHeight(), 5);
+	}
+	// можно найти периметр
+	BOOST_AUTO_TEST_CASE(can_find_perimeter)
+	{
+		BOOST_CHECK_EQUAL(static_cast<int>(rectangle.GetPerimeter()), 22);
 	}
 
 BOOST_AUTO_TEST_SUITE_END()
