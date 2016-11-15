@@ -12,13 +12,14 @@ class CTriangle final
 	:public ISolidShape
 {
 public:
-	CTriangle::CTriangle(SPoint const & Vertex1, SPoint const & Vertex2, SPoint const & Vertex3, std::string const & outlineColor, std::string const & fillColor);
+	CTriangle(SPoint const & Vertex1, SPoint const & Vertex2, SPoint const & Vertex3,
+	          std::string const & outlineColor, std::string const & fillColor);
 	
 	double GetArea() const override;
-	double GetPerimeter() const override;
-	
+	double GetPerimeter() const override;	
 	std::string ToString() const override;	
 	std::string GetOutlineColor() const override;
+
 	std::string GetFillColor() const override;
 
 	SPoint GetVertex1() const;
@@ -30,6 +31,31 @@ private:
 	SPoint m_Vertex1;
 	SPoint m_Vertex2;
 	SPoint m_Vertex3;
+	std::string m_outlineColor;
+	std::string m_fillColor;
+};
+
+class CRectangle final
+	: public ISolidShape
+{
+public:
+	CRectangle(SPoint const & LeftTop, SPoint const & RightBottom,
+		        std::string const & outlineColor, std::string const & fillColor);
+	double GetArea() const { return 0.0; };
+	double GetPerimeter() const { return 0.0; };
+	std::string ToString() const { return "x"; };
+	std::string GetOutlineColor() const { return "x"; };
+
+	std::string GetFillColor() const { return "x"; };
+
+	SPoint GetLeftTop() const { return{ 0.0 , 0.0}; };
+	SPoint GetRightBottom() const { return{ 0.0 , 0.0 }; };
+	double GetWidth() const { return 0.0; };
+	double GetHeight() const { return 0.0; };
+
+private:
+	SPoint m_LeftTop;
+	SPoint m_RightBottom;
 	std::string m_outlineColor;
 	std::string m_fillColor;
 };

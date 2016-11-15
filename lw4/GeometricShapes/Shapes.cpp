@@ -29,7 +29,6 @@ double CTriangle::GetPerimeter()const
 	return side1 + side2 + side3;
 }
 
-
 double CTriangle::GetArea()const
 {
 	double side1;
@@ -40,7 +39,6 @@ double CTriangle::GetArea()const
 	double perimeterHalf = CTriangle::GetPerimeter()*0.5;
 	return sqrt(perimeterHalf*(perimeterHalf - side1)*(perimeterHalf - side2)*(perimeterHalf - side3));
 }
-
 
 SPoint CTriangle::GetVertex1() const
 {
@@ -80,4 +78,12 @@ string CTriangle::ToString() const
 	     << "S = " << GetArea() << ".";
 
 	return strm.str();
+}
+
+CRectangle::CRectangle(SPoint const & LeftTop, SPoint const & RightBottom, std::string const & outlineColor, std::string const & fillColor)
+	: m_LeftTop(LeftTop)
+	, m_RightBottom(RightBottom)
+	, m_outlineColor(outlineColor)
+	, m_fillColor(fillColor)
+{
 }
