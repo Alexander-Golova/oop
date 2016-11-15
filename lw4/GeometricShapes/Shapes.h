@@ -50,7 +50,7 @@ public:
 
 	SPoint GetLeftTop() const;
 	SPoint GetRightBottom() const;
-	double GetWidth() const { return 0.0; };
+	double GetWidth() const;
 	double GetHeight() const { return 0.0; };
 
 private:

@@ -97,3 +97,8 @@ SPoint CRectangle::GetRightBottom() const
 {
 	return m_RightBottom;
 }
+
+double CRectangle::GetWidth() const
+{
+	return abs(m_LeftTop.x - m_RightBottom.x);
+}
