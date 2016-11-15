@@ -125,5 +125,11 @@ BOOST_FIXTURE_TEST_SUITE(Rectangle, RectangleFixture_)
 	{
 		BOOST_CHECK_EQUAL(rectangle.GetFillColor(), "00ff00");
 	}
+	// имеет строковое представление
+	BOOST_AUTO_TEST_CASE(can_be_converted_to_string)
+	{
+		auto str = "Rectangle: LeftTop(0.00, 6.00); RightBottom(5.00, 0.00); P = 22.00; S = 30.00.";
+		BOOST_CHECK_EQUAL(rectangle.ToString(), str);
+	}
 
 BOOST_AUTO_TEST_SUITE_END()
