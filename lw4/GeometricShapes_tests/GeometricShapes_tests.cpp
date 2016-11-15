@@ -138,7 +138,7 @@ BOOST_AUTO_TEST_SUITE_END()
 struct CircleFixture_
 {
 	const SPoint center = { 0, 0 };
-	const double radius = 4;
+	const double radius = 10;
 	const string outlineColor = "ff0000";
 	const string fillColor = "00ff00";
 
@@ -151,5 +151,41 @@ struct CircleFixture_
 // у круга
 BOOST_FIXTURE_TEST_SUITE(Circle, CircleFixture_)
 	// есть центр
+	BOOST_AUTO_TEST_CASE(has_a_center)
+	{
+		BOOST_CHECK_EQUAL(сircle.GetCenter().x, 0);
+		BOOST_CHECK_EQUAL(сircle.GetCenter().x, 0);
+	}
+	// есть радиус
+	BOOST_AUTO_TEST_CASE(has_a_radius)
+	{
+		BOOST_CHECK_EQUAL(сircle.GetRadius(), 10);
+	}
+	// можно найти площадь
+	BOOST_AUTO_TEST_CASE(can_find_area)
+	{
+		BOOST_CHECK_EQUAL(static_cast<int>(сircle.GetArea()), 314);
+	}
+	// можно найти периметр
+	BOOST_AUTO_TEST_CASE(can_find_perimeter)
+	{
+		BOOST_CHECK_EQUAL(static_cast<int>(сircle.GetPerimeter()), 62);
+	}
+	// имеет цвет границы
+	BOOST_AUTO_TEST_CASE(has_a_line_color)
+	{
+		BOOST_CHECK_EQUAL(сircle.GetOutlineColor(), "ff0000");
+	}
+	// имеет цвет заливки
+	BOOST_AUTO_TEST_CASE(has_a_fill_color)
+	{
+		BOOST_CHECK_EQUAL(сircle.GetFillColor(), "00ff00");
+	}
+	// имеет строковое представление
+	BOOST_AUTO_TEST_CASE(can_be_converted_to_string)
+	{
+		auto str = "Circle: Center(0.00, 0.00); Radius = 10.00; P = 62.83; S = 314.16.";
+		BOOST_CHECK_EQUAL(сircle.ToString(), str);
+	}
 
 BOOST_AUTO_TEST_SUITE_END()
