@@ -69,14 +69,14 @@ BOOST_AUTO_TEST_SUITE_END()
 
 struct RectangleFixture_
 {
-	const SPoint m_LeftTop = { 0, 6 };
-	const SPoint m_RightBottom = { 5, 0 };
+	const SPoint leftTop = { 0, 6 };
+	const SPoint rightBottom = { 5, 0 };
 	const string outlineColor = "ff0000";
 	const string fillColor = "00ff00";
 
 	const CRectangle rectangle;
 	RectangleFixture_()
-		: rectangle(m_LeftTop, m_RightBottom, outlineColor, fillColor)
+		: rectangle(leftTop, rightBottom, outlineColor, fillColor)
 	{}
 };
 
@@ -131,5 +131,25 @@ BOOST_FIXTURE_TEST_SUITE(Rectangle, RectangleFixture_)
 		auto str = "Rectangle: LeftTop(0.00, 6.00); RightBottom(5.00, 0.00); P = 22.00; S = 30.00.";
 		BOOST_CHECK_EQUAL(rectangle.ToString(), str);
 	}
+
+BOOST_AUTO_TEST_SUITE_END()
+
+
+struct CircleFixture_
+{
+	const SPoint center = { 0, 0 };
+	const double radius = 4;
+	const string outlineColor = "ff0000";
+	const string fillColor = "00ff00";
+
+	const CCircle сircle;
+	CircleFixture_()
+		: сircle(center, radius, outlineColor, fillColor)
+	{}
+};
+
+// у круга
+BOOST_FIXTURE_TEST_SUITE(Circle, CircleFixture_)
+	// есть центр
 
 BOOST_AUTO_TEST_SUITE_END()
