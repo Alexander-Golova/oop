@@ -189,3 +189,20 @@ BOOST_FIXTURE_TEST_SUITE(Circle, CircleFixture_)
 	}
 
 BOOST_AUTO_TEST_SUITE_END()
+
+struct LineSegmentFixture_
+{
+	const SPoint startPoint = { 0, 0 };
+	const SPoint endPoint = { 3, 4 };
+	const string outlineColor = "ff0000";
+
+	const CLineSegment lineSegment;
+	LineSegmentFixture_()
+		: lineSegment(startPoint, endPoint, outlineColor)
+	{}
+};
+
+// у отрезка
+BOOST_FIXTURE_TEST_SUITE(LineSegment, LineSegmentFixture_)
+
+BOOST_AUTO_TEST_SUITE_END()
