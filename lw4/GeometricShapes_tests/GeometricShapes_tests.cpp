@@ -110,5 +110,10 @@ BOOST_FIXTURE_TEST_SUITE(Rectangle, RectangleFixture_)
 	{
 		BOOST_CHECK_EQUAL(static_cast<int>(rectangle.GetPerimeter()), 22);
 	}
+	// можно найти площадь
+	BOOST_AUTO_TEST_CASE(can_find_area)
+	{
+		BOOST_CHECK_EQUAL(static_cast<int>(rectangle.GetArea()), 30);
+	}
 
 BOOST_AUTO_TEST_SUITE_END()
