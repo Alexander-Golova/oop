@@ -197,3 +197,11 @@ string CCircle::ToString() const
 
 	return strm.str();
 }
+
+CLineSegment::CLineSegment(SPoint const & startPoint, SPoint const & endPoint, std::string const & outlineColor)
+	: m_startPoint(startPoint)
+	, m_endPoint(endPoint)
+	, m_outlineColor(outlineColor)
+{
+}
+

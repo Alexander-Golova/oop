@@ -82,3 +82,22 @@ private:
 	std::string m_outlineColor;
 	std::string m_fillColor;
 };
+
+class CLineSegment final
+	: public IShape
+{
+public:
+	CLineSegment(SPoint const & startPoint, SPoint const & endPoint, std::string const & outlineColor);
+	double GetArea() const { return 0.0; }; //override;
+	double GetPerimeter() const { return 0.0; }; //override;
+	std::string ToString() const { return ""; }; //override;
+	std::string GetOutlineColor() const { return ""; } //override;
+
+	SPoint GetStartPoint() const  {};
+	SPoint GetEndPoint() const {};
+
+private:
+	SPoint m_startPoint;
+	SPoint m_endPoint;
+	std::string m_outlineColor;
+};
