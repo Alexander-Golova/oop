@@ -83,4 +83,17 @@ struct RectangleFixture_
 // у прямоугольника
 BOOST_FIXTURE_TEST_SUITE(Rectangle, RectangleFixture_)
 
+	// левая верхняя вершина имеет координаты
+	BOOST_AUTO_TEST_CASE(left_top_vertex_has_a_position)
+	{
+		BOOST_CHECK_EQUAL(rectangle.GetLeftTop().x, 0);
+		BOOST_CHECK_EQUAL(rectangle.GetLeftTop().y, 0);
+	}
+	// правая нижняя вершина имеет координаты
+	BOOST_AUTO_TEST_CASE(right_bottom_left_top_vertex_has_a_position)
+	{
+		BOOST_CHECK_EQUAL(rectangle.GetRightBottom().x, 5);
+		BOOST_CHECK_EQUAL(rectangle.GetRightBottom().y, 6);
+	}
+
 BOOST_AUTO_TEST_SUITE_END()
