@@ -117,3 +117,13 @@ double CRectangle::GetArea() const
 {
 	return GetWidth() * GetHeight();
 }
+
+string CRectangle::GetOutlineColor() const
+{
+	return m_outlineColor;
+}
+
+string CRectangle::GetFillColor() const
+{
+	return m_fillColor;
+}

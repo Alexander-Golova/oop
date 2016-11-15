@@ -44,9 +44,9 @@ public:
 	double GetArea() const override;
 	double GetPerimeter() const override;
 	std::string ToString() const { return "x"; };
-	std::string GetOutlineColor() const { return "x"; };
+	std::string GetOutlineColor() const override;
 
-	std::string GetFillColor() const { return "x"; };
+	std::string GetFillColor() const override;
 
 	SPoint GetLeftTop() const;
 	SPoint GetRightBottom() const;
