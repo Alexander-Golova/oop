@@ -61,7 +61,7 @@ BOOST_FIXTURE_TEST_SUITE(Triangle, TriangleFixture_)
 	// имеет строковое представление
 	BOOST_AUTO_TEST_CASE(can_be_converted_to_string)
 	{
-		auto str = "Triangle: Vertex1(0.00, 0.00); Vertex2(4.00, 0.00); Vertex3(0.00, 3.00); P = 12.00; S = 6.00.";
+		auto str = "Triangle: Vertex1(0.00, 0.00); Vertex2(4.00, 0.00); Vertex3(0.00, 3.00); P = 12.00; S = 6.00; Border Color = ff0000; Fill color = 00ff00.";
 		BOOST_CHECK_EQUAL(triangle.ToString(), str);
 	}
 	
@@ -128,7 +128,7 @@ BOOST_FIXTURE_TEST_SUITE(Rectangle, RectangleFixture_)
 	// имеет строковое представление
 	BOOST_AUTO_TEST_CASE(can_be_converted_to_string)
 	{
-		auto str = "Rectangle: LeftTop(0.00, 6.00); RightBottom(5.00, 0.00); P = 22.00; S = 30.00.";
+		auto str = "Rectangle: LeftTop(0.00, 6.00); RightBottom(5.00, 0.00); P = 22.00; S = 30.00; Border Color = ff0000; Fill color = 00ff00.";
 		BOOST_CHECK_EQUAL(rectangle.ToString(), str);
 	}
 
@@ -184,7 +184,7 @@ BOOST_FIXTURE_TEST_SUITE(Circle, CircleFixture_)
 	// имеет строковое представление
 	BOOST_AUTO_TEST_CASE(can_be_converted_to_string)
 	{
-		auto str = "Circle: Center(0.00, 0.00); Radius = 10.00; P = 62.83; S = 314.16.";
+		auto str = "Circle: Center(0.00, 0.00); Radius = 10.00; P = 62.83; S = 314.16; Border Color = ff0000; Fill color = 00ff00.";
 		BOOST_CHECK_EQUAL(сircle.ToString(), str);
 	}
 
@@ -237,7 +237,7 @@ BOOST_FIXTURE_TEST_SUITE(LineSegment, LineSegmentFixture_)
 	// имеет строковое представление
 	BOOST_AUTO_TEST_CASE(can_be_converted_to_string)
 	{
-		auto str = "LineSegment: startPoint(0.00, 0.00); endPoint(3.00, 4.00); P = 5.00.";
+		auto str = "LineSegment: startPoint(0.00, 0.00); endPoint(3.00, 4.00); P = 5.00; Border Color = ff0000.";
 		BOOST_CHECK_EQUAL(line.ToString(), str);
 	}
 
