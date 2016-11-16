@@ -74,11 +74,13 @@ string CTriangle::ToString() const
 	strm << fixed << setprecision(2);
 
 	strm << "Triangle: "
-	     << "Vertex1(" << m_vertex1.x << ", " << m_vertex1.y << "); "
-	     << "Vertex2(" << m_vertex2.x << ", " << m_vertex2.y << "); "
-	     << "Vertex3(" << m_vertex3.x << ", " << m_vertex3.y << "); "
-	     << "P = " << GetPerimeter() << "; "
-	     << "S = " << GetArea() << ".";
+		<< "Vertex1(" << m_vertex1.x << ", " << m_vertex1.y << "); "
+		<< "Vertex2(" << m_vertex2.x << ", " << m_vertex2.y << "); "
+		<< "Vertex3(" << m_vertex3.x << ", " << m_vertex3.y << "); "
+		<< "P = " << GetPerimeter() << "; "
+		<< "S = " << GetArea() << "; "
+		<< "Border Color = " << GetOutlineColor() << "; "
+		<< "Fill color = " << GetFillColor() << ".";
 
 	return strm.str();
 }
@@ -140,7 +142,9 @@ string CRectangle::ToString() const
 		<< "LeftTop(" << m_leftTop.x << ", " << m_leftTop.y << "); "
 		<< "RightBottom(" << m_rightBottom.x << ", " << m_rightBottom.y << "); "
 		<< "P = " << GetPerimeter() << "; "
-		<< "S = " << GetArea() << ".";
+		<< "S = " << GetArea() << "; "
+		<< "Border Color = " << GetOutlineColor() << "; "
+		<< "Fill color = " << GetFillColor() << ".";
 
 	return strm.str();
 }
@@ -193,7 +197,9 @@ string CCircle::ToString() const
 		<< "Center(" << m_center.x << ", " << m_center.y << "); "
 		<< "Radius = " << m_radius << "; "
 		<< "P = " << GetPerimeter() << "; "
-		<< "S = " << GetArea() << ".";
+		<< "S = " << GetArea() << "; "
+		<< "Border Color = " << GetOutlineColor() << "; "
+		<< "Fill color = " << GetFillColor() << ".";
 
 	return strm.str();
 }
@@ -241,7 +247,8 @@ string CLineSegment::ToString() const
 	strm << "LineSegment: "
 		<< "startPoint(" << m_startPoint.x << ", " << m_startPoint.y << "); "
 		<< "endPoint(" << m_endPoint.x << ", " << m_endPoint.y << "); "
-		<< "P = " << GetPerimeter() << ".";
+		<< "P = " << GetPerimeter() << "; "
+		<< "Border Color = " << GetOutlineColor() << ".";
 
 	return strm.str();
 }
