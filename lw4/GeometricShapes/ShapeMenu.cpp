@@ -36,6 +36,14 @@ void CShapeMenu::CheckArgumentsCircle(const std::vector<std::string> & listParam
 	}
 }
 
+void CShapeMenu::CheckArgumentsLineSegment(const std::vector<std::string> & listParameters)
+{
+	if ((listParameters.size() != 4 && listParameters.size() != 5))
+	{
+		throw invalid_argument("Incorrect amount arguments! Must will be 4 or 5!");
+	}
+}
+
 void CShapeMenu::AddTriangle(const vector<string> & listParameters)
 {
 	CheckArgumentsTriangle(listParameters);
@@ -82,14 +90,31 @@ void CShapeMenu::AddCircle(const std::vector<std::string> & listParameters)
 	string outlineColor = "000000";
 	string fillColor = "ffffff";
 
-	if (listParameters.size() == 6)
+	if (listParameters.size() == 5)
 	{
-		outlineColor = listParameters[5];
-		fillColor = listParameters[6];
+		outlineColor = listParameters[4];
+		fillColor = listParameters[5];
 	}
 	shared_ptr<CCircle> addCircle(new CCircle(center, radius, outlineColor, fillColor));
 	m_shapesList.push_back(addCircle);
 }
+
+void CShapeMenu::AddLineSegment(const std::vector<std::string> & listParameters)
+{
+	CheckArgumentsLineSegment(listParameters);
+
+	SPoint startPoint = { stod(listParameters[1]), stod(listParameters[2]) };
+	SPoint endPoint = { stod(listParameters[3]), stod(listParameters[4]) };
+	string outlineColor = "000000";
+
+	if (listParameters.size() == 5)
+	{
+		outlineColor = listParameters[5];
+	}
+	shared_ptr<CLineSegment> addLineSegment(new CLineSegment(startPoint, endPoint, outlineColor));
+	m_shapesList.push_back(addLineSegment);
+}
+
 
 void CShapeMenu::ReadShape(string shape)
 {
@@ -103,5 +128,17 @@ void CShapeMenu::ReadShape(string shape)
 	else if (listParameters[0] == "rectangle")
 	{
 		AddRectangle(listParameters);
+	}
+	else if (listParameters[0] == "circle")
+	{
+		AddCircle(listParameters);
+	}
+	else if (listParameters[0] == "linesegment")
+	{
+		AddLineSegment(listParameters);
+	}
+	else
+	{
+		throw invalid_argument("Incorrect command.");
 	}
 }
