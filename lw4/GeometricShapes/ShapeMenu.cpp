@@ -28,6 +28,13 @@ void CShapeMenu::CheckArgumentsRectangle(const std::vector<std::string> & listPa
 	}
 }
 
+void CShapeMenu::CheckArgumentsCircle(const std::vector<std::string> & listParameters)
+{
+	if ((listParameters.size() != 4 && listParameters.size() != 6))
+	{
+		throw invalid_argument("Incorrect amount arguments! Must will be 4 or 6!");
+	}
+}
 
 void CShapeMenu::AddTriangle(const vector<string> & listParameters)
 {
@@ -66,7 +73,23 @@ void CShapeMenu::AddRectangle(const std::vector<std::string> & listParameters)
 	m_shapesList.push_back(addRectangle);
 }
 
+void CShapeMenu::AddCircle(const std::vector<std::string> & listParameters)
+{
+	CheckArgumentsCircle(listParameters);
 
+	SPoint center = { stod(listParameters[1]), stod(listParameters[2]) };
+	double radius = stod(listParameters[3]);
+	string outlineColor = "000000";
+	string fillColor = "ffffff";
+
+	if (listParameters.size() == 6)
+	{
+		outlineColor = listParameters[5];
+		fillColor = listParameters[6];
+	}
+	shared_ptr<CCircle> addCircle(new CCircle(center, radius, outlineColor, fillColor));
+	m_shapesList.push_back(addCircle);
+}
 
 void CShapeMenu::ReadShape(string shape)
 {
