@@ -12,11 +12,15 @@ public:
 	CShapeMenu(const std::string & shape);
 	~CShapeMenu() = default;
 
-	void ReadShapes(std::string shape);
+	void ReadShape(std::string shape);
 
 private:
-	bool CheckArgumentsTriangle(const std::vector<std::string> & shapes);
-	void AddTriangle(const std::vector<std::string> & shapes);
+	void CheckArgumentsTriangle(const std::vector<std::string> & listParameters);
+	void CheckArgumentsRectangle(const std::vector<std::string> & listParameters);
+
+	void AddTriangle(const std::vector<std::string> & listParameters);	
+	void AddRectangle(const std::vector<std::string> & listParameters);
+
 
 
 	std::vector<std::shared_ptr<IShape>> m_shapesList;

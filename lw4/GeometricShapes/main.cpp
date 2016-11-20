@@ -15,6 +15,8 @@ void PrintListShapes(const shapesList & listShapes, ostream & strm)
 	}
 }
 
+
+
 */
 int main()
 {
