@@ -30,6 +30,9 @@
     <ClInclude Include="IShape.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ShapeMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -39,6 +42,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Shapes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
