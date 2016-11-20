@@ -161,6 +161,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\GeometricShapes\ShapeMenu.cpp" />
     <ClCompile Include="..\GeometricShapes\Shapes.cpp" />
     <ClCompile Include="GeometricShapes_tests.cpp" />
     <ClCompile Include="main.cpp" />

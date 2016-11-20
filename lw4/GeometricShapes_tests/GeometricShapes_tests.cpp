@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 
 #include "../GeometricShapes/Shapes.h"
+#include "../GeometricShapes/ShapeMenu.h"
 
 using namespace std;
 
@@ -239,6 +240,33 @@ BOOST_FIXTURE_TEST_SUITE(LineSegment, LineSegmentFixture_)
 	{
 		auto str = "LineSegment: startPoint(0.00, 0.00); endPoint(3.00, 4.00); P = 5.00; Border Color = ff0000.";
 		BOOST_CHECK_EQUAL(line.ToString(), str);
+	}
+
+BOOST_AUTO_TEST_SUITE_END()
+
+struct Menu_
+{
+	const int amountShapes = 1;
+	const int indexTriangle = 0;
+
+	const CShapeMenu menu;
+	Menu_()
+		: menu("triangle 0 0 4 0 0 3 ff0000 00ff00")
+	{
+		//menu.ReadShape("triangle 0 0 4 0 0 3 ff0000 00ff00");
+	}
+};
+
+BOOST_FIXTURE_TEST_SUITE(Menu, Menu_)
+	// можно добавить треугольник
+	BOOST_AUTO_TEST_CASE(can_add_a_triangle)
+	{
+		const SPoint Vertex1 = { 0, 0 };
+		const SPoint Vertex2 = { 4, 0 };
+		const SPoint Vertex3 = { 0, 3 };
+		const string outlineColor = "ff0000";
+		const string fillColor = "00ff00";
+
 	}
 
 BOOST_AUTO_TEST_SUITE_END()
