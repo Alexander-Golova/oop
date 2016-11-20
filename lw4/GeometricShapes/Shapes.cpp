@@ -170,12 +170,12 @@ double CCircle::GetRadius() const
 
 double CCircle::GetArea() const
 {
-	return static_cast<double>(M_PI) * pow(m_radius, 2);
+	return M_PI * pow(m_radius, 2);
 }
 
 double CCircle::GetPerimeter() const
 {
-	return static_cast<double>(M_PI) * 2 * m_radius;
+	return M_PI * 2 * m_radius;
 }
 
 string CCircle::GetOutlineColor() const
