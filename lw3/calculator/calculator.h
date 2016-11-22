@@ -38,15 +38,22 @@ public:
 	CCalculator() = default;
 	~CCalculator() = default;
 
-	bool SetVar(const std::string & var);
+	bool SetVar(const std::string & variable);
 	const std::map<std::string, double> & GetVars() const;
-	double GetValue(const std::string & var) const;
+	double GetValue(const std::string & variable) const;
 	bool CCalculator::LetVarValue(const std::string & firstVar, const std::string & secondValue);
+
+	const std::map<std::string, SFunctionData> & GetFunctions() const;
+	bool SetFunction(const std::string & varFunction, const std::string & variable);
+	bool SetFunction(const std::string & varFunction, const std::string &firstIdentifier,
+		             Operator operatorFunction, const std::string &secondIdentifier);
 
 private:
 	bool IsNameCorrect(const std::string & id) const;
-	bool IsVarExist(const std::string & var) const;
+	bool IsVarExist(const std::string & variable) const;
 	bool IsFunctionExist(const std::string & nameFunction) const;
+	void CalculateFunctionValue(const std::string & function);
+	void CalculateTwoOperandsFunction(SFunctionData & functionInfo);
 
 	std::map<std::string, SFunctionData> m_functions;
 	std::map<std::string, double> m_variables;

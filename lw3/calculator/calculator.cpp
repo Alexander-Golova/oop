@@ -16,13 +16,13 @@ namespace
 	}
 }
 
-bool CCalculator::SetVar(const string & var)
+bool CCalculator::SetVar(const string & variable)
 {
-	if (!IsNameCorrect(var) || IsFunctionExist(var) || IsVarExist(var))
+	if (!IsNameCorrect(variable) || IsFunctionExist(variable) || IsVarExist(variable))
 	{
 		return false;
 	}
-	m_variables.insert({ var, numeric_limits<double>::quiet_NaN() });
+	m_variables.insert({ variable, numeric_limits<double>::quiet_NaN() });
 	return true;
 }
 
@@ -31,11 +31,11 @@ const map<string, double> & CCalculator::GetVars() const
 	return m_variables;
 }
 
-double CCalculator::GetValue(const string & var) const
+double CCalculator::GetValue(const string & variable) const
 {
-	if (IsVarExist(var))
+	if (IsVarExist(variable))
 	{
-		return m_variables.at(var);
+		return m_variables.at(variable);
 	}
 	return numeric_limits<double>::quiet_NaN();
 }
@@ -81,4 +81,100 @@ bool CCalculator::IsVarExist(const string & id) const
 bool CCalculator::IsFunctionExist(const string & id) const
 {
 	return m_functions.find(id) != m_functions.end();
+}
+
+const map<string, SFunctionData> & CCalculator::GetFunctions() const
+{
+	return m_functions;
+}
+
+bool CCalculator::SetFunction(const string & varFunction, const string & variable)
+{
+	if (IsVarExist(varFunction) || IsFunctionExist(varFunction) || !IsNameCorrect(varFunction))
+	{
+		return false;
+	}
+	if (!IsVarExist(variable) && !IsFunctionExist(variable))
+	{
+		return false;
+	}
+
+	SFunctionData functionInfo;
+	functionInfo.firstOperand = variable;
+	m_functions.insert(make_pair(varFunction, functionInfo));
+	CalculateFunctionValue(varFunction);
+	return true;
+}
+
+bool CCalculator::SetFunction(const std::string & varFunction, const std::string &firstIdentifier,
+	                          Operator operatorFunction, const std::string &secondIdentifier)
+{
+	if (IsVarExist(varFunction) || IsFunctionExist(varFunction) || !IsNameCorrect(varFunction))
+	{
+		return false;
+	}
+	if (!IsVarExist(firstIdentifier) && !IsFunctionExist(firstIdentifier))
+	{
+		return false;
+	}
+	if (!IsVarExist(secondIdentifier) && !IsFunctionExist(secondIdentifier))
+	{
+		return false;
+	}
+	if (operatorFunction == Operator::None)
+	{
+		return false;
+	}
+
+	SFunctionData functionInfo;
+	functionInfo.firstOperand = firstIdentifier;
+	functionInfo.secondOperand = secondIdentifier;
+	functionInfo.operatorType = operatorFunction;
+
+	m_functions.insert({ varFunction, functionInfo });
+	CalculateFunctionValue(varFunction);
+	return true;
+}
+
+void CCalculator::CalculateFunctionValue(const string & functionName)
+{
+	if (IsFunctionExist(functionName))
+	{
+		auto & function = m_functions.at(functionName);
+		if (!(function.operatorType == Operator::None))
+		{
+			CalculateTwoOperandsFunction(function);
+		}
+		else
+		{
+			function.value = GetValue(function.firstOperand);
+		}
+	}
+}
+
+void CCalculator::CalculateTwoOperandsFunction(SFunctionData & functionInfo)
+{
+	double firstOperand = GetValue(functionInfo.firstOperand);
+	double secondOperand = GetValue(functionInfo.secondOperand);
+
+	if (!IsNan(firstOperand) && !IsNan(secondOperand))
+	{
+		double result = numeric_limits<double>::quiet_NaN();
+		switch (functionInfo.operatorType)
+		{
+		case Operator::Plus:
+			result = firstOperand + secondOperand;
+			break;
+		case Operator::Division:
+			result = firstOperand / secondOperand;
+			break;
+		case Operator::Multiplication:
+			result = firstOperand * secondOperand;
+			break;
+		case Operator::Minus:
+			result = firstOperand - secondOperand;
+			break;
+		}
+		functionInfo.value = result;
+	}
 }
