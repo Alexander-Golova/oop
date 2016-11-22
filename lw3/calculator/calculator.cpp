@@ -3,6 +3,18 @@
 
 using namespace std;
 
+namespace
+{
+	bool IsNan(const double & numeric)
+	{
+		return numeric != numeric;
+	}
+
+	bool IsCharCorrect(char ch)
+	{
+		return std::isalnum(ch) || ch == '_';
+	}
+}
 
 bool CCalculator::SetVar(const string & var)
 {
@@ -19,10 +31,42 @@ const map<string, double> & CCalculator::GetVars() const
 	return m_variables;
 }
 
+double CCalculator::GetValue(const string & var) const
+{
+	if (IsVarExist(var))
+	{
+		return m_variables.at(var);
+	}
+	return numeric_limits<double>::quiet_NaN();
+}
+
+bool CCalculator::LetVarValue(const string & firstVar, const string & secondValue)
+{
+	if (secondValue.empty() || IsFunctionExist(firstVar))
+	{
+		return false;
+	}
+	if (!IsVarExist(firstVar))
+	{
+		if (!SetVar(firstVar))
+		{
+			return false;
+		}
+	}
+	if (IsVarExist(secondValue))
+	{
+		m_variables[firstVar] = GetValue(secondValue);
+	}
+	else
+	{
+		m_variables[firstVar] = stod(secondValue);
+	}
+	return true;
+}
 
 bool CCalculator::IsNameCorrect(const string & id) const
 {
-	if (id.empty())
+	if (id.empty() || isdigit(*id.begin()) || !all_of(id.begin(), id.end(), IsCharCorrect))
 	{
 		return false;
 	}

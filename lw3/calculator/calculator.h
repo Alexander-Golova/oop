@@ -40,6 +40,8 @@ public:
 
 	bool SetVar(const std::string & var);
 	const std::map<std::string, double> & GetVars() const;
+	double GetValue(const std::string & var) const;
+	bool CCalculator::LetVarValue(const std::string & firstVar, const std::string & secondValue);
 
 private:
 	bool IsNameCorrect(const std::string & id) const;
@@ -49,4 +51,5 @@ private:
 	std::map<std::string, SFunctionData> m_functions;
 	std::map<std::string, double> m_variables;
 	std::map<std::string, std::vector<std::string>> m_usedFunctions;
+	std::map<std::string, std::vector<std::string>> m_usedVariable;
 };
