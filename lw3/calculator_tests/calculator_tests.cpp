@@ -5,13 +5,6 @@
 
 using namespace std;
 
-
-
-struct CalculatorFixture
-{
-	CCalculator calc;
-};
-
 namespace
 {
 	bool IsNan(const double & numeric)
@@ -19,6 +12,11 @@ namespace
 		return numeric != numeric;
 	}
 }
+
+struct CalculatorFixture
+{
+	CCalculator calc;
+};
 
 // калькулятор
 BOOST_FIXTURE_TEST_SUITE(Calculator_, CalculatorFixture)
@@ -59,11 +57,29 @@ BOOST_FIXTURE_TEST_SUITE(Calculator_, CalculatorFixture)
 		BOOST_CHECK_EQUAL(calc.GetValue("y"), 579);
 	}
 	// имя переменной не может начинаться с цифры и быть пустым
-	BOOST_AUTO_TEST_CASE(name_of_var_cant_be_empty_or_start_from_digit)
+	BOOST_AUTO_TEST_CASE(name_of_variable_cant_be_empty_or_start_from_digit)
 	{
 		BOOST_CHECK(calc.GetVars().empty());
 		BOOST_CHECK(!calc.SetVar(""));
 		BOOST_CHECK(!calc.SetVar("12qww"));
+	}
+	// можно объявить функцию с ранее необъявленным идентификатором
+	BOOST_AUTO_TEST_CASE(can_declare_function_with_non_existent_var)
+	{
+		BOOST_CHECK(calc.GetFunctions().empty());
+		BOOST_CHECK(calc.LetVarValue("x", "5"));
+		BOOST_CHECK(calc.LetVarValue("y", "7"));
+		BOOST_CHECK(calc.SetFunction("f", "x", Operator::Plus, "y"));
+		BOOST_CHECK(IsNan(calc.GetValue("fuction")));
+	}
+	// Имя функции не может быть пустым
+	BOOST_AUTO_TEST_CASE(function_name_can_not_be_empty)
+	{
+		BOOST_CHECK(calc.GetFunctions().empty());
+		BOOST_CHECK(calc.LetVarValue("x", "5"));
+		BOOST_CHECK(calc.LetVarValue("y", "7"));
+		BOOST_CHECK(!calc.SetFunction("", "x", Operator::Minus, "y"));
+		BOOST_CHECK(calc.GetFunctions().empty());
 	}
 
 BOOST_AUTO_TEST_SUITE_END()
