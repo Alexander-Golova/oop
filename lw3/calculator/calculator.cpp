@@ -12,7 +12,7 @@ namespace
 
 	bool IsCharCorrect(char ch)
 	{
-		return std::isalnum(ch) || ch == '_';
+		return isalnum(ch) || ch == '_';
 	}
 }
 
@@ -37,6 +37,11 @@ double CCalculator::GetValue(const string & variable) const
 	{
 		return m_variables.at(variable);
 	}
+	if (IsFunctionExist(variable))
+	{
+		return m_functions.at(variable).value;;
+	}
+	
 	return numeric_limits<double>::quiet_NaN();
 }
 
@@ -60,6 +65,11 @@ bool CCalculator::LetVarValue(const string & firstVar, const string & secondValu
 	else
 	{
 		m_variables[firstVar] = stod(secondValue);
+	}
+
+	for (const auto functionName : m_usedFunctions[firstVar])
+	{
+		CalculateFunctionValue(functionName);
 	}
 	return true;
 }
@@ -99,6 +109,20 @@ bool CCalculator::SetFunction(const string & varFunction, const string & variabl
 		return false;
 	}
 
+	if (IsVarExist(variable))
+	{
+		m_usedVariables[varFunction].insert(variable);
+	}
+	else
+	{
+		m_usedVariables[varFunction] = m_usedVariables[variable];
+	}
+	for (const auto & element : m_usedVariables[varFunction])
+	{
+		m_usedFunctions[element].push_back(varFunction);
+	}
+
+
 	SFunctionData functionInfo;
 	functionInfo.firstOperand = variable;
 	m_functions.insert(make_pair(varFunction, functionInfo));
@@ -106,8 +130,8 @@ bool CCalculator::SetFunction(const string & varFunction, const string & variabl
 	return true;
 }
 
-bool CCalculator::SetFunction(const std::string & varFunction, const std::string &firstIdentifier,
-	                          Operator operatorFunction, const std::string &secondIdentifier)
+bool CCalculator::SetFunction(const string & varFunction, const string &firstIdentifier,
+	                          Operator operatorFunction, const string &secondIdentifier)
 {
 	if (IsVarExist(varFunction) || IsFunctionExist(varFunction) || !IsNameCorrect(varFunction))
 	{
@@ -126,6 +150,28 @@ bool CCalculator::SetFunction(const std::string & varFunction, const std::string
 		return false;
 	}
 
+	if (IsVarExist(firstIdentifier))
+	{
+		m_usedVariables[varFunction].insert(firstIdentifier);
+	}
+	else
+	{
+		m_usedVariables[varFunction] = m_usedVariables[firstIdentifier];
+	}
+	if (IsVarExist(secondIdentifier))
+	{
+		m_usedVariables[varFunction].insert(secondIdentifier);
+	}
+	else
+	{
+		m_usedVariables[varFunction] = m_usedVariables[secondIdentifier];
+	}
+	for (const auto & element : m_usedVariables[varFunction])
+	{
+		m_usedFunctions[element].push_back(varFunction);
+	}
+
+	// TODO: use class-constructor
 	SFunctionData functionInfo;
 	functionInfo.firstOperand = firstIdentifier;
 	functionInfo.secondOperand = secondIdentifier;
@@ -133,6 +179,9 @@ bool CCalculator::SetFunction(const std::string & varFunction, const std::string
 
 	m_functions.insert({ varFunction, functionInfo });
 	CalculateFunctionValue(varFunction);
+
+
+
 	return true;
 }
 

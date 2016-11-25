@@ -22,7 +22,6 @@ struct SFunctionData
 	Operator operatorType;
 };
 
-
 static const std::map<std::string, Operator> SYMBOLS_OPERATORS
 {
 	{ "+", Operator::Plus },
@@ -41,7 +40,7 @@ public:
 	bool SetVar(const std::string & variable);
 	const std::map<std::string, double> & GetVars() const;
 	double GetValue(const std::string & variable) const;
-	bool CCalculator::LetVarValue(const std::string & firstVar, const std::string & secondValue);
+	bool LetVarValue(const std::string & firstVar, const std::string & secondValue);
 
 	const std::map<std::string, SFunctionData> & GetFunctions() const;
 	bool SetFunction(const std::string & varFunction, const std::string & variable);
@@ -58,5 +57,5 @@ private:
 	std::map<std::string, SFunctionData> m_functions;
 	std::map<std::string, double> m_variables;
 	std::map<std::string, std::vector<std::string>> m_usedFunctions;
-	std::map<std::string, std::vector<std::string>> m_usedVariable;
+	std::map<std::string, std::set<std::string>> m_usedVariables;
 };
