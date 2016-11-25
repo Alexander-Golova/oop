@@ -119,4 +119,28 @@ BOOST_FIXTURE_TEST_SUITE(Calculator_, CalculatorFixture)
 
 	BOOST_AUTO_TEST_SUITE_END()
 
+	// переменные
+	struct variables_ : CalculatorFixture
+	{
+		variables_()
+		{
+			calc.LetVarValue("a", "2");
+			calc.LetVarValue("b", "3");
+			calc.LetVarValue("c", "4");
+		}
+	};
+	BOOST_FIXTURE_TEST_SUITE(variables, variables_)
+		// наследуются 
+		BOOST_AUTO_TEST_CASE(inherited)
+		{
+			BOOST_CHECK(calc.SetFunction("f", "a", Operator::Plus, "b"));
+			BOOST_CHECK(calc.SetFunction("g", "f", Operator::Plus, "c"));
+			BOOST_CHECK(calc.SetFunction("u", "f", Operator::Plus, "g"));
+			BOOST_CHECK_EQUAL(calc.GetValue("u"), 14);
+			BOOST_CHECK(calc.LetVarValue("a", "100"));
+			BOOST_CHECK_EQUAL(calc.GetValue("u"), 210);
+		}
+
+	BOOST_AUTO_TEST_SUITE_END()
+
 BOOST_AUTO_TEST_SUITE_END()
