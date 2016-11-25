@@ -11,7 +11,6 @@ int main()
 
 	while ((!cin.eof()) && (!cin.fail()))
 	{
-		cout << ">";
 		if (!control—alculator.RunCommand())
 		{
 			cout << "Unknown command!" << endl;

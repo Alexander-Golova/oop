@@ -79,7 +79,7 @@ void CCalcMenu::SetFunction(istream & args)
 	string firstValue, secondValue, operand, thirdValue;
 	Operator expressionOperator;
 
-	if ((ParseStrToValue(expression, firstValue, secondValue) || !m_calculator.SetFunction(firstValue, secondValue))
+	if ((!ParseStrToValue(expression, firstValue, secondValue) || !m_calculator.SetFunction(firstValue, secondValue))
 		&& (!ParseStrToAriphOperation(secondValue, expression, expressionOperator, thirdValue)
 		   || !m_calculator.SetFunction(firstValue, expression, expressionOperator, thirdValue)))
 	{
@@ -122,7 +122,7 @@ void CCalcMenu::PrintVariables()
 {
 	for (auto it : m_calculator.GetVars())
 	{
-		cout << it.first << ":" << setprecision(2) << it.second << endl;
+		cout << it.first << ":" << setprecision(2) << fixed << it.second << endl;
 	}
 }
 
@@ -130,6 +130,6 @@ void CCalcMenu::PrintFunctions()
 {
 	for (auto it : m_calculator.GetFunctions())
 	{
-		cout << it.first << ":" << setprecision(2) << m_calculator.GetValue(it.first) << endl;
+		cout << it.first << ":" << setprecision(2) << fixed << m_calculator.GetValue(it.first) << endl;
 	}
 }

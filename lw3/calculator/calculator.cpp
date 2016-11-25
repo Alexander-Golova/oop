@@ -58,6 +58,7 @@ bool CCalculator::LetVarValue(const string & firstValue, const string & secondVa
 			return false;
 		}
 	}
+
 	if (IsVarExist(secondValue))
 	{
 		m_variables[firstValue] = GetValue(secondValue);
@@ -109,6 +110,11 @@ bool CCalculator::SetFunction(const string & varFunction, const string & variabl
 		return false;
 	}
 
+	SFunctionData functionInfo;
+	functionInfo.firstOperand = variable;
+	m_functions.insert(make_pair(varFunction, functionInfo));
+	CalculateFunctionValue(varFunction);
+	
 	if (IsVarExist(variable))
 	{
 		m_usedVariables[varFunction].insert(variable);
@@ -122,11 +128,6 @@ bool CCalculator::SetFunction(const string & varFunction, const string & variabl
 		m_usedFunctions[element].push_back(varFunction);
 	}
 
-
-	SFunctionData functionInfo;
-	functionInfo.firstOperand = variable;
-	m_functions.insert(make_pair(varFunction, functionInfo));
-	CalculateFunctionValue(varFunction);
 	return true;
 }
 
@@ -150,28 +151,6 @@ bool CCalculator::SetFunction(const string & varFunction, const string &firstIde
 		return false;
 	}
 
-	if (IsVarExist(firstIdentifier))
-	{
-		m_usedVariables[varFunction].insert(firstIdentifier);
-	}
-	else
-	{
-		m_usedVariables[varFunction] = m_usedVariables[firstIdentifier];
-	}
-	if (IsVarExist(secondIdentifier))
-	{
-		m_usedVariables[varFunction].insert(secondIdentifier);
-	}
-	else
-	{
-		m_usedVariables[varFunction] = m_usedVariables[secondIdentifier];
-	}
-	for (const auto & element : m_usedVariables[varFunction])
-	{
-		m_usedFunctions[element].push_back(varFunction);
-	}
-
-	// TODO: use class-constructor
 	SFunctionData functionInfo;
 	functionInfo.firstOperand = firstIdentifier;
 	functionInfo.secondOperand = secondIdentifier;
@@ -180,7 +159,28 @@ bool CCalculator::SetFunction(const string & varFunction, const string &firstIde
 	m_functions.insert({ varFunction, functionInfo });
 	CalculateFunctionValue(varFunction);
 
+	if (IsVarExist(firstIdentifier))
+	{
+		m_usedVariables[varFunction].insert(firstIdentifier);
+	}
+	else
+	{
+		m_usedVariables[varFunction] = m_usedVariables[firstIdentifier];
+	}
 
+	if (IsVarExist(secondIdentifier))
+	{
+		m_usedVariables[varFunction].insert(secondIdentifier);
+	}
+	else
+	{
+		m_usedVariables[varFunction] = m_usedVariables[secondIdentifier];
+	}
+
+	for (const auto & element : m_usedVariables[varFunction])
+	{
+		m_usedFunctions[element].push_back(varFunction);
+	}
 
 	return true;
 }
