@@ -45,29 +45,29 @@ double CCalculator::GetValue(const string & variable) const
 	return numeric_limits<double>::quiet_NaN();
 }
 
-bool CCalculator::LetVarValue(const string & firstVar, const string & secondValue)
+bool CCalculator::LetVarValue(const string & firstValue, const string & secondValue)
 {
-	if (secondValue.empty() || IsFunctionExist(firstVar))
+	if (secondValue.empty() || IsFunctionExist(firstValue))
 	{
 		return false;
 	}
-	if (!IsVarExist(firstVar))
+	if (!IsVarExist(firstValue))
 	{
-		if (!SetVar(firstVar))
+		if (!SetVar(firstValue))
 		{
 			return false;
 		}
 	}
 	if (IsVarExist(secondValue))
 	{
-		m_variables[firstVar] = GetValue(secondValue);
+		m_variables[firstValue] = GetValue(secondValue);
 	}
 	else
 	{
-		m_variables[firstVar] = stod(secondValue);
+		m_variables[firstValue] = stod(secondValue);
 	}
 
-	for (const auto functionName : m_usedFunctions[firstVar])
+	for (const auto functionName : m_usedFunctions[firstValue])
 	{
 		CalculateFunctionValue(functionName);
 	}

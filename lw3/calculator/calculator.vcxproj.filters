@@ -27,6 +27,9 @@
     <ClInclude Include="calculator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CalcMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -36,6 +39,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="calculator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CalcMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
