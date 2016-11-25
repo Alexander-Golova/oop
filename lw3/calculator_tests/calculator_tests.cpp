@@ -82,4 +82,41 @@ BOOST_FIXTURE_TEST_SUITE(Calculator_, CalculatorFixture)
 		BOOST_CHECK(calc.GetFunctions().empty());
 	}
 
+	// для переменных можно объявить функции
+	struct for_the_variables_can_declare_the_functions_ : CalculatorFixture
+	{
+		for_the_variables_can_declare_the_functions_()
+		{
+			calc.LetVarValue("x", "2");
+			calc.LetVarValue("y", "3");
+		}
+	};
+	BOOST_FIXTURE_TEST_SUITE(for_the_variables_can_declare_the_functions, for_the_variables_can_declare_the_functions_)
+		// сложения
+		BOOST_AUTO_TEST_CASE(addition)
+		{
+			BOOST_CHECK(calc.SetFunction("f", "x", Operator::Plus, "y"));
+			BOOST_CHECK_EQUAL(calc.GetValue("f"), 5);
+		}
+		// вычитания
+		BOOST_AUTO_TEST_CASE(subtraction)
+		{
+			BOOST_CHECK(calc.SetFunction("f", "x", Operator::Minus, "y"));
+			BOOST_CHECK_EQUAL(calc.GetValue("f"), -1);
+		}
+		// умножения
+		BOOST_AUTO_TEST_CASE(multiplication)
+		{
+			BOOST_CHECK(calc.SetFunction("f", "x", Operator::Multiplication, "y"));
+			BOOST_CHECK_EQUAL(calc.GetValue("f"), 6);
+		}
+		// деления
+		BOOST_AUTO_TEST_CASE(division)
+		{
+			BOOST_CHECK(calc.SetFunction("f", "y", Operator::Division, "x"));
+			BOOST_CHECK_EQUAL(calc.GetValue("f"), 1.5);
+		}
+
+	BOOST_AUTO_TEST_SUITE_END()
+
 BOOST_AUTO_TEST_SUITE_END()
