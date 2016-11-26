@@ -14,6 +14,14 @@ namespace
 	{
 		return isalnum(ch) || ch == '_';
 	}
+
+	void UnionSets(set<string> & lhs, const set<string> & rhs)
+	{
+		for (const auto value : rhs)
+		{
+			lhs.insert(value);
+		}
+	}
 }
 
 bool CCalculator::SetVar(const string & variable)
@@ -45,30 +53,30 @@ double CCalculator::GetValue(const string & variable) const
 	return numeric_limits<double>::quiet_NaN();
 }
 
-bool CCalculator::LetVarValue(const string & firstValue, const string & secondValue)
+bool CCalculator::LetVarValue(const string & lhs, const string & rhs)
 {
-	if (secondValue.empty() || IsFunctionExist(firstValue))
+	if (rhs.empty() || IsFunctionExist(lhs))
 	{
 		return false;
 	}
-	if (!IsVarExist(firstValue))
+	if (!IsVarExist(lhs))
 	{
-		if (!SetVar(firstValue))
+		if (!SetVar(lhs))
 		{
 			return false;
 		}
 	}
 
-	if (IsVarExist(secondValue))
+	if (IsVarExist(rhs))
 	{
-		m_variables[firstValue] = GetValue(secondValue);
+		m_variables[lhs] = GetValue(rhs);
 	}
 	else
 	{
-		m_variables[firstValue] = stod(secondValue);
+		m_variables[lhs] = stod(rhs);
 	}
 
-	for (const auto functionName : m_usedFunctions[firstValue])
+	for (const auto & functionName : m_usedFunctions[lhs])
 	{
 		CalculateFunctionValue(functionName);
 	}
@@ -123,6 +131,7 @@ bool CCalculator::SetFunction(const string & varFunction, const string & variabl
 	{
 		m_usedVariables[varFunction] = m_usedVariables[variable];
 	}
+
 	for (const auto & element : m_usedVariables[varFunction])
 	{
 		m_usedFunctions[element].push_back(varFunction);
@@ -165,7 +174,8 @@ bool CCalculator::SetFunction(const string & varFunction, const string &firstIde
 	}
 	else
 	{
-		m_usedVariables[varFunction] = m_usedVariables[firstIdentifier];
+		//m_usedVariables[varFunction] = m_usedVariables[firstIdentifier];
+		UnionSets(m_usedVariables[varFunction], m_usedVariables[firstIdentifier]);
 	}
 
 	if (IsVarExist(secondIdentifier))
@@ -174,7 +184,8 @@ bool CCalculator::SetFunction(const string & varFunction, const string &firstIde
 	}
 	else
 	{
-		m_usedVariables[varFunction] = m_usedVariables[secondIdentifier];
+		//m_usedVariables[varFunction] = m_usedVariables[secondIdentifier];
+		UnionSets(m_usedVariables[varFunction], m_usedVariables[secondIdentifier]);
 	}
 
 	for (const auto & element : m_usedVariables[varFunction])

@@ -40,7 +40,7 @@ public:
 	bool SetVar(const std::string & variable);
 	const std::map<std::string, double> & GetVars() const;
 	double GetValue(const std::string & variable) const;
-	bool LetVarValue(const std::string & firstValue, const std::string & secondValue);
+	bool LetVarValue(const std::string & lhs, const std::string & rhs);
 
 	const std::map<std::string, SFunctionData> & GetFunctions() const;
 	bool SetFunction(const std::string & varFunction, const std::string & variable);
