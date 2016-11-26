@@ -140,7 +140,35 @@ BOOST_FIXTURE_TEST_SUITE(Calculator_, CalculatorFixture)
 			BOOST_CHECK(calc.LetVarValue("a", "100"));
 			BOOST_CHECK_EQUAL(calc.GetValue("u"), 210);
 		}
+		
 
 	BOOST_AUTO_TEST_SUITE_END()
-
+	// тестирование чисел Фиббоначии
+	BOOST_AUTO_TEST_CASE(fibonacci_numbers)
+	{
+		BOOST_CHECK(calc.LetVarValue("v0", "0"));
+		BOOST_CHECK(calc.LetVarValue("v1", "1"));
+		BOOST_CHECK(calc.SetFunction("fib0", "v0"));
+		BOOST_CHECK(calc.SetFunction("fib1", "v1"));
+		BOOST_CHECK(calc.SetFunction("fib2", "fib1", Operator::Plus, "fib0"));
+		BOOST_CHECK(calc.SetFunction("fib3", "fib2", Operator::Plus, "fib1"));
+		BOOST_CHECK(calc.SetFunction("fib4", "fib3", Operator::Plus, "fib2"));
+		BOOST_CHECK(calc.SetFunction("fib5", "fib4", Operator::Plus, "fib3"));
+		BOOST_CHECK(calc.SetFunction("fib6", "fib5", Operator::Plus, "fib4"));
+		BOOST_CHECK_EQUAL(calc.GetValue("fib0"), 0);
+		BOOST_CHECK_EQUAL(calc.GetValue("fib1"), 1);
+		BOOST_CHECK_EQUAL(calc.GetValue("fib2"), 1);
+		BOOST_CHECK_EQUAL(calc.GetValue("fib3"), 2);
+		BOOST_CHECK_EQUAL(calc.GetValue("fib4"), 3);
+		BOOST_CHECK_EQUAL(calc.GetValue("fib5"), 5);
+		BOOST_CHECK_EQUAL(calc.GetValue("fib6"), 8);
+		BOOST_CHECK(calc.LetVarValue("v0", "1"));
+		BOOST_CHECK_EQUAL(calc.GetValue("fib0"), 1);
+		BOOST_CHECK_EQUAL(calc.GetValue("fib1"), 1);
+		BOOST_CHECK_EQUAL(calc.GetValue("fib2"), 2);
+		BOOST_CHECK_EQUAL(calc.GetValue("fib3"), 3);
+		BOOST_CHECK_EQUAL(calc.GetValue("fib4"), 5);
+		BOOST_CHECK_EQUAL(calc.GetValue("fib5"), 8);
+		BOOST_CHECK_EQUAL(calc.GetValue("fib6"), 13);
+	}
 BOOST_AUTO_TEST_SUITE_END()
