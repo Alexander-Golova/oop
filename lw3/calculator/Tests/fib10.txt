@@ -1,0 +1,18 @@
+let v0=0
+let v1=1
+printvars
+fn fib00=v0
+fn fib01=v1
+fn fib02=fib01+fib00
+fn fib03=fib02+fib01
+fn fib04=fib03+fib02
+fn fib05=fib04+fib03
+fn fib06=fib05+fib04
+fn fib07=fib06+fib05
+fn fib08=fib07+fib06
+fn fib09=fib08+fib07
+fn fib10=fib09+fib08
+printfns
+let v0=1
+printvars
+printfns
