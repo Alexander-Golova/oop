@@ -115,7 +115,7 @@ void CCalcMenu::PrintIdentifierValue(istream & args)
 {
 	string identifier;
 	args >> identifier;
-	cout << setprecision(2) << m_calculator.GetValue(identifier) << endl;
+	cout << setprecision(2) << fixed << m_calculator.GetValue(identifier) << endl;
 }
 
 void CCalcMenu::PrintVariables()
