@@ -47,6 +47,19 @@ BOOST_FIXTURE_TEST_SUITE(Calculator_, CalculatorFixture)
 		BOOST_CHECK(calc.LetVarValue("x", "579"));
 		BOOST_CHECK_EQUAL(calc.GetValue("x"), 579);
 	}
+	// переменной нельзя задать пустое значение
+	BOOST_AUTO_TEST_CASE(can_not_set_a_null_value)
+	{
+		BOOST_CHECK(calc.GetVars().empty());
+		BOOST_CHECK(IsNan(calc.GetValue("x")));
+		BOOST_CHECK(!calc.LetVarValue("x", ""));
+	}
+	// можно задать значение переменной, если её можно определить
+	BOOST_AUTO_TEST_CASE(can_set_the_value_of_the_variable_if_it_is_possible_to_determine)
+	{
+		BOOST_CHECK(calc.GetVars().empty());
+		BOOST_CHECK(!calc.LetVarValue("5x", "5"));
+	}
 	// переменной можно передать значение другой переменной
 	BOOST_AUTO_TEST_CASE(variable_can_pass_the_value_of_another_variable)
 	{
@@ -72,13 +85,24 @@ BOOST_FIXTURE_TEST_SUITE(Calculator_, CalculatorFixture)
 		BOOST_CHECK(calc.SetFunction("f", "x", Operator::Plus, "y"));
 		BOOST_CHECK(IsNan(calc.GetValue("fuction")));
 	}
-	// Имя функции не может быть пустым
+	// имя функции не может быть пустым
 	BOOST_AUTO_TEST_CASE(function_name_can_not_be_empty)
 	{
 		BOOST_CHECK(calc.GetFunctions().empty());
 		BOOST_CHECK(calc.LetVarValue("x", "5"));
 		BOOST_CHECK(calc.LetVarValue("y", "7"));
 		BOOST_CHECK(!calc.SetFunction("", "x", Operator::Minus, "y"));
+		BOOST_CHECK(calc.GetFunctions().empty());
+	}
+	// имя функций должно быть валидным
+	BOOST_AUTO_TEST_CASE(name_of_the_function_must_be_valid)
+	{
+		BOOST_CHECK(calc.GetFunctions().empty());
+		BOOST_CHECK(calc.LetVarValue("x", "5"));
+		BOOST_CHECK(calc.LetVarValue("y", "7"));
+		BOOST_CHECK(!calc.SetFunction("123z", "x", Operator::Minus, "y"));
+		BOOST_CHECK(!calc.SetFunction("123z", "x"));
+		BOOST_CHECK(!calc.SetFunction("z", "r"));
 		BOOST_CHECK(calc.GetFunctions().empty());
 	}
 
@@ -116,6 +140,13 @@ BOOST_FIXTURE_TEST_SUITE(Calculator_, CalculatorFixture)
 			BOOST_CHECK(calc.SetFunction("f", "y", Operator::Division, "x"));
 			BOOST_CHECK_EQUAL(calc.GetValue("f"), 1.5);
 		}
+		// через ранее определенные переменные
+		BOOST_AUTO_TEST_CASE(through_previously_defined_variables)
+		{
+			BOOST_CHECK(!calc.SetFunction("f", "z", Operator::Division, "x"));
+			BOOST_CHECK(!calc.SetFunction("f", "y", Operator::Division, "z"));
+			BOOST_CHECK(!calc.SetFunction("f", "x", Operator::None, "y"));
+		}
 
 	BOOST_AUTO_TEST_SUITE_END()
 
@@ -134,13 +165,14 @@ BOOST_FIXTURE_TEST_SUITE(Calculator_, CalculatorFixture)
 		BOOST_AUTO_TEST_CASE(inherited)
 		{
 			BOOST_CHECK(calc.SetFunction("f", "a", Operator::Plus, "b"));
+			BOOST_CHECK(calc.SetFunction("f1", "f"));
+			BOOST_CHECK_EQUAL(calc.GetValue("f"), 5);
 			BOOST_CHECK(calc.SetFunction("g", "f", Operator::Plus, "c"));
 			BOOST_CHECK(calc.SetFunction("u", "f", Operator::Plus, "g"));
 			BOOST_CHECK_EQUAL(calc.GetValue("u"), 14);
 			BOOST_CHECK(calc.LetVarValue("a", "100"));
 			BOOST_CHECK_EQUAL(calc.GetValue("u"), 210);
-		}
-		
+		}		
 
 	BOOST_AUTO_TEST_SUITE_END()
 	// тестирование чисел Фиббоначии
