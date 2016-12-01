@@ -39,17 +39,16 @@ const map<string, double> & CCalculator::GetVars() const
 	return m_variables;
 }
 
-double CCalculator::GetValue(const string & variable) const
+double CCalculator::GetValue(const string & identifier) const
 {
-	if (IsVarExist(variable))
+	if (IsVarExist(identifier))
 	{
-		return m_variables.at(variable);
+		return m_variables.at(identifier);
 	}
-	if (IsFunctionExist(variable))
+	if (IsFunctionExist(identifier))
 	{
-		return m_functions.at(variable).value;;
-	}
-	
+		return m_functions.at(identifier).value;;
+	}	
 	return numeric_limits<double>::quiet_NaN();
 }
 
@@ -80,6 +79,7 @@ bool CCalculator::LetVarValue(const string & lhs, const string & rhs)
 	{
 		CalculateFunctionValue(functionName);
 	}
+	
 	return true;
 }
 
@@ -102,18 +102,14 @@ bool CCalculator::IsFunctionExist(const string & id) const
 	return m_functions.find(id) != m_functions.end();
 }
 
-const map<string, SFunctionData> & CCalculator::GetFunctions() const
-{
+const map<string, SFunctionData> & CCalculator::GetFunctions()
+{	
 	return m_functions;
 }
 
 bool CCalculator::SetFunction(const string & varFunction, const string & variable)
 {
-	if (IsVarExist(varFunction) || IsFunctionExist(varFunction) || !IsNameCorrect(varFunction))
-	{
-		return false;
-	}
-	if (!IsVarExist(variable) && !IsFunctionExist(variable))
+	if (HasIdentifier(varFunction) || !IsNameCorrect(varFunction) || !HasIdentifier(variable))
 	{
 		return false;
 	}
@@ -140,52 +136,40 @@ bool CCalculator::SetFunction(const string & varFunction, const string & variabl
 	return true;
 }
 
-bool CCalculator::SetFunction(const string & varFunction, const string &firstIdentifier,
-	                          Operator operatorFunction, const string &secondIdentifier)
+bool CCalculator::SetFunction(const string & varFunction, const string & firstId,
+	                          Operator operatorFunction, const string & secondId)
 {
-	if (IsVarExist(varFunction) || IsFunctionExist(varFunction) || !IsNameCorrect(varFunction))
-	{
-		return false;
-	}
-	if (!IsVarExist(firstIdentifier) && !IsFunctionExist(firstIdentifier))
-	{
-		return false;
-	}
-	if (!IsVarExist(secondIdentifier) && !IsFunctionExist(secondIdentifier))
-	{
-		return false;
-	}
-	if (operatorFunction == Operator::None)
+	if (HasIdentifier(varFunction) || !IsNameCorrect(varFunction) ||
+	   !HasIdentifier(firstId) || !HasIdentifier(secondId) ||
+	    operatorFunction == Operator::None)
 	{
 		return false;
 	}
 
 	SFunctionData functionInfo;
-	functionInfo.firstOperand = firstIdentifier;
-	functionInfo.secondOperand = secondIdentifier;
+	functionInfo.firstOperand = firstId;
+	functionInfo.secondOperand = secondId;
 	functionInfo.operatorType = operatorFunction;
 
 	m_functions.insert({ varFunction, functionInfo });
 	CalculateFunctionValue(varFunction);
 
-	if (IsVarExist(firstIdentifier))
+	if (IsVarExist(firstId))
 	{
-		m_usedVariables[varFunction].insert(firstIdentifier);
+		m_usedVariables[varFunction].insert(firstId);
 	}
 	else
 	{
-		//m_usedVariables[varFunction] = m_usedVariables[firstIdentifier];
-		UnionSets(m_usedVariables[varFunction], m_usedVariables[firstIdentifier]);
+		UnionSets(m_usedVariables[varFunction], m_usedVariables[firstId]);
 	}
 
-	if (IsVarExist(secondIdentifier))
+	if (IsVarExist(secondId))
 	{
-		m_usedVariables[varFunction].insert(secondIdentifier);
+		m_usedVariables[varFunction].insert(secondId);
 	}
 	else
 	{
-		//m_usedVariables[varFunction] = m_usedVariables[secondIdentifier];
-		UnionSets(m_usedVariables[varFunction], m_usedVariables[secondIdentifier]);
+		UnionSets(m_usedVariables[varFunction], m_usedVariables[secondId]);
 	}
 
 	for (const auto & element : m_usedVariables[varFunction])
@@ -194,6 +178,11 @@ bool CCalculator::SetFunction(const string & varFunction, const string &firstIde
 	}
 
 	return true;
+}
+
+bool CCalculator::HasIdentifier(const std::string & id) const
+{
+	return IsFunctionExist(id) || IsVarExist(id);
 }
 
 void CCalculator::CalculateFunctionValue(const string & functionName)

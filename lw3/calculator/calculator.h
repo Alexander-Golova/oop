@@ -39,13 +39,15 @@ public:
 
 	bool SetVar(const std::string & variable);
 	const std::map<std::string, double> & GetVars() const;
-	double GetValue(const std::string & variable) const;
+	double GetValue(const std::string & identifier) const;
 	bool LetVarValue(const std::string & lhs, const std::string & rhs);
 
-	const std::map<std::string, SFunctionData> & GetFunctions() const;
+	const std::map<std::string, SFunctionData> & GetFunctions();
 	bool SetFunction(const std::string & varFunction, const std::string & variable);
 	bool SetFunction(const std::string & varFunction, const std::string & firstIdentifier,
 		             Operator operatorFunction, const std::string & secondIdentifier);
+
+	bool HasIdentifier(const std::string & id) const;
 
 private:
 	bool IsNameCorrect(const std::string & id) const;

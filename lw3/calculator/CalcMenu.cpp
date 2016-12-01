@@ -53,7 +53,8 @@ void CCalcMenu::LetVarValue(istream & args)
 	args >> expression;
 	string firstValue;
 	string secondValue;
-	if (!ParseStrToValue(expression, firstValue, secondValue) || !m_calculator.LetVarValue(firstValue, secondValue))
+	if (!ParseStrToValue(expression, firstValue, secondValue) ||
+		!m_calculator.LetVarValue(firstValue, secondValue))
 	{
 		cout << "Invalid expression!" << endl;
 	}
@@ -79,9 +80,10 @@ void CCalcMenu::SetFunction(istream & args)
 	string firstValue, secondValue, operand, thirdValue;
 	Operator expressionOperator;
 
-	if ((!ParseStrToValue(expression, firstValue, secondValue) || !m_calculator.SetFunction(firstValue, secondValue))
-		&& (!ParseStrToAriphOperation(secondValue, expression, expressionOperator, thirdValue)
-		   || !m_calculator.SetFunction(firstValue, expression, expressionOperator, thirdValue)))
+	if ((!ParseStrToValue(expression, firstValue, secondValue) ||
+		 !m_calculator.SetFunction(firstValue, secondValue)) && 
+		(!ParseStrToAriphOperation(secondValue, expression, expressionOperator, thirdValue) ||
+		!m_calculator.SetFunction(firstValue, expression, expressionOperator, thirdValue)))
 	{
 		cout << "Invalid expression!" << endl;
 	}
@@ -115,7 +117,14 @@ void CCalcMenu::PrintIdentifierValue(istream & args)
 {
 	string identifier;
 	args >> identifier;
-	cout << setprecision(2) << fixed << m_calculator.GetValue(identifier) << endl;
+	if (m_calculator.HasIdentifier(identifier))
+	{
+		cout << setprecision(2) << fixed << m_calculator.GetValue(identifier) << endl;
+	}
+	else
+	{
+		cout << "Identifier " << identifier << " does not exist" << endl;
+	}
 }
 
 void CCalcMenu::PrintVariables()
