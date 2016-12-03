@@ -18,7 +18,8 @@ public:
 	~CShapeMenu() = default;
 
 	void ReadShape(std::string shape);
-	//CShape GetShapeMaximumPerimeter();
+	std::shared_ptr<CShape> GetShapeMinPerimeter();
+	std::shared_ptr<CShape> GetMaxAreaShape();
 
 private:
 	void CheckArgumentsTriangle(const std::vector<std::string> & listParameters);

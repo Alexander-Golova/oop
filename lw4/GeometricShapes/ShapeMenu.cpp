@@ -2,14 +2,24 @@
 
 #include "stdafx.h"
 #include "ShapeMenu.h"
-#include "Shapes.h"
+#include "Shape.h"
 
 using namespace std;
 
-
-CShapeMenu::CShapeMenu(const string & shape)
+shared_ptr<CShape> CShapeMenu::GetShapeMinPerimeter()
 {
-	ReadShape(shape);
+	auto minPerimeter = min_element(m_shapesList.cbegin(), m_shapesList.cend(), [](const auto & arg1, const auto & arg2) {
+		return arg1->GetPerimeter() < arg2->GetPerimeter();
+	});
+	return *minPerimeter;
+}
+
+std::shared_ptr<CShape> CShapeMenu::GetMaxAreaShape()
+{
+	auto maxArea = max_element(m_shapesList.cbegin(), m_shapesList.cend(), [](const auto & arg1, const auto & arg2) {
+		return arg1->GetArea() < arg2->GetArea();
+	});
+	return *maxArea;
 }
 
 void CShapeMenu::CheckArgumentsTriangle(const vector<string> & listParameters)
@@ -142,3 +152,5 @@ void CShapeMenu::ReadShape(string shape)
 		throw invalid_argument("Incorrect command.");
 	}
 }
+
+
