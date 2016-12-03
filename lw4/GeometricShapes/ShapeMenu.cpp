@@ -3,38 +3,47 @@
 #include "stdafx.h"
 #include "ShapeMenu.h"
 #include "Shape.h"
+#include "IShape.h"
 
 using namespace std;
 
-shared_ptr<CShape> CShapeMenu::GetShapeMinPerimeter()
+void CShapeMenu::PrintShapeMinPerimeter()
 {
-	auto minPerimeter = min_element(m_shapesList.cbegin(), m_shapesList.cend(), [](const auto & arg1, const auto & arg2) {
-		return arg1->GetPerimeter() < arg2->GetPerimeter();
+	if (m_shapesList.empty())
+	{
+		return;
+	}
+	auto shapeMinPerimeter = min_element(m_shapesList.cbegin(), m_shapesList.cend(), [](const auto & arg1, const auto & arg2) {
+		 return arg1->GetPerimeter() < arg2->GetPerimeter();
 	});
-	return *minPerimeter;
+	cout << "Shape with small perimetr: " << (*shapeMinPerimeter)->ToString() << endl;
 }
 
-std::shared_ptr<CShape> CShapeMenu::GetMaxAreaShape()
+void CShapeMenu::PrintShapeMaxAreaShape()
 {
-	auto maxArea = max_element(m_shapesList.cbegin(), m_shapesList.cend(), [](const auto & arg1, const auto & arg2) {
-		return arg1->GetArea() < arg2->GetArea();
+	if (m_shapesList.empty())
+	{
+		return;
+	}
+	auto shapeMaxArea = max_element(m_shapesList.cbegin(), m_shapesList.cend(), [](const auto & arg1, const auto & arg2) {
+		 return arg1->GetArea() < arg2->GetArea();
 	});
-	return *maxArea;
+	cout << "Shape with large area: " << (*shapeMaxArea)->ToString() << endl;
 }
 
 void CShapeMenu::CheckArgumentsTriangle(const vector<string> & listParameters)
 {
-	if ((listParameters.size() != 6 && listParameters.size() != 8))
+	if ((listParameters.size() != 7 && listParameters.size() != 9))
 	{
-		throw invalid_argument("Incorrect amount arguments! Must will be 6 or 8!");
+		throw invalid_argument("Incorrect amount arguments! Must will be 7 or 9!");
 	}
 }
 
 void CShapeMenu::CheckArgumentsRectangle(const std::vector<std::string> & listParameters)
 {
-	if ((listParameters.size() != 4 && listParameters.size() != 6))
+	if ((listParameters.size() != 5 && listParameters.size() != 7))
 	{
-		throw invalid_argument("Incorrect amount arguments! Must will be 4 or 6!");
+		throw invalid_argument("Incorrect amount arguments! Must will be 5 or 7!");
 	}
 }
 
@@ -48,9 +57,9 @@ void CShapeMenu::CheckArgumentsCircle(const std::vector<std::string> & listParam
 
 void CShapeMenu::CheckArgumentsLineSegment(const std::vector<std::string> & listParameters)
 {
-	if ((listParameters.size() != 4 && listParameters.size() != 5))
+	if ((listParameters.size() != 5 && listParameters.size() != 6))
 	{
-		throw invalid_argument("Incorrect amount arguments! Must will be 4 or 5!");
+		throw invalid_argument("Incorrect amount arguments! Must will be 5 or 6!");
 	}
 }
 
@@ -64,7 +73,7 @@ void CShapeMenu::AddTriangle(const vector<string> & listParameters)
 	string outlineColor = "000000";
 	string fillColor = "ffffff";
 
-	if (listParameters.size() == 8)
+	if (listParameters.size() == 9)
 	{
 		outlineColor = listParameters[7];
 		fillColor = listParameters[8];
@@ -82,7 +91,7 @@ void CShapeMenu::AddRectangle(const std::vector<std::string> & listParameters)
 	string outlineColor = "000000";
 	string fillColor = "ffffff";
 
-	if (listParameters.size() == 6)
+	if (listParameters.size() == 7)
 	{
 		outlineColor = listParameters[5];
 		fillColor = listParameters[6];
@@ -100,7 +109,7 @@ void CShapeMenu::AddCircle(const std::vector<std::string> & listParameters)
 	string outlineColor = "000000";
 	string fillColor = "ffffff";
 
-	if (listParameters.size() == 5)
+	if (listParameters.size() == 6)
 	{
 		outlineColor = listParameters[4];
 		fillColor = listParameters[5];
@@ -117,7 +126,7 @@ void CShapeMenu::AddLineSegment(const std::vector<std::string> & listParameters)
 	SPoint endPoint = { stod(listParameters[3]), stod(listParameters[4]) };
 	string outlineColor = "000000";
 
-	if (listParameters.size() == 5)
+	if (listParameters.size() == 6)
 	{
 		outlineColor = listParameters[5];
 	}
@@ -152,5 +161,3 @@ void CShapeMenu::ReadShape(string shape)
 		throw invalid_argument("Incorrect command.");
 	}
 }
-
-

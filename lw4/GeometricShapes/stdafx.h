@@ -13,5 +13,7 @@
 #include <sstream>
 #include <vector>
 #include <memory>
+#include <iostream>
+#include <fstream>
 
 #include <boost/algorithm/string.hpp>

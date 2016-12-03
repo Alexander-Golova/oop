@@ -1,24 +1,34 @@
 #include "stdafx.h"
-#include "Shapes.h"
+
+#include "IShape.h"
 #include "ShapeMenu.h"
 
 using namespace std;
 
-
-
-/*
-void PrintListShapes(const shapesList & listShapes, ostream & strm)
+int main(int argc, char * argv[])
 {
-	for (const auto & shape : listShapes)
+	if (argc != 2)
 	{
-		strm << shape->ToString();
+		cout << "Invalid arguments count" << endl
+             << "Usage: Shapes.exe <file with commands>" << endl;
+		return 1;
 	}
-}
-
-
-
-*/
-int main()
-{
+	CShapeMenu menu;
+	string shape;
+	ifstream input(argv[1]);
+	try
+	{
+		while (!input.eof() && !input.fail())
+		{
+			getline(input, shape);
+			menu.ReadShape(shape);
+		}
+		menu.PrintShapeMinPerimeter();
+		menu.PrintShapeMaxAreaShape();
+	}	
+	catch (const exception & e)
+	{
+		cout << e.what() << endl;
+	}
     return 0;
 }
