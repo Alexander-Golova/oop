@@ -1,15 +1,15 @@
 #pragma once
 
+#include <memory>
+#include <boost/algorithm/string.hpp>
+#include <vector>
+
 #include "Shape.h"
 #include "SolidShape.h"
 #include "Circle.h"
 #include "LineSegment.h"
 #include "Rectangle.h"
 #include "Triangle.h"
-
-#include <memory>
-#include <boost/algorithm/string.hpp>
-#include <vector>
 
 class CShapeMenu
 {

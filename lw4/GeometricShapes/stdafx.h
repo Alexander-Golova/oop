@@ -17,3 +17,6 @@
 #include <fstream>
 
 #include <boost/algorithm/string.hpp>
+
+#define _USE_MATH_DEFINES
+#include <math.h> 
