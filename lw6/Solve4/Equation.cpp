@@ -12,7 +12,7 @@ pair<boost::optional<double>, boost::optional<double>> Solve2(double a, double b
 	}
 	else if (D > 0)
 	{
-		return{ (-b + sqrt(D)) / (2 * a) , boost::none };
+		return{ (-b + sqrt(D)) / (2 * a) , (-b - sqrt(D)) / (2 * a) };
 	}
 	return{ boost::none, boost::none };
 }
@@ -20,8 +20,8 @@ pair<boost::optional<double>, boost::optional<double>> Solve2(double a, double b
 double Solve3(double a, double b, double c)
 {
 	double roots[3];
-	double q = ( a * a - 3.0 * b) / 9.0;
-	double r = (2.0 * a * a * a - 9.0 * a * b + 27.0 * c) / 54.0;
+	double q = ( pow(a, 2) - 3.0 * b) / 9.0;
+	double r = (2.0 * pow(a, 3) - 9.0 * a * b + 27.0 * c) / 54.0;
 	double s = pow(q, 3) - pow(r, 2);
 	if (s > 0)
 	{
@@ -39,18 +39,18 @@ double Solve3(double a, double b, double c)
 		}
 		if (q < 0)
 		{
-			double t = acosh(abs(r) / sqrt(pow(abs(q), 3))) / 3.0;
-			roots[0] = -2 * ((r > 0) ? 1 : ((r < 0) ? -1 : 0)) * sqrt(q) * sinh(t) - a / 3.0;
+			double t = asinh(abs(r) / sqrt(pow(abs(q), 3))) / 3.0;
+			roots[0] = -2 * ((r > 0) ? 1 : ((r < 0) ? -1 : 0)) * sqrt(abs(q)) * sinh(t) - a / 3.0;
 		}
-		if (q = 0)
+		if (q == 0)
 		{
 			roots[0] = -pow((c - pow(a, 3) / 27), 1 / 3.0) - a / 3.0;
 		}
 	}
 	else
 	{
-		roots[0] = -2 * pow(r, 1 / 3.0) - a / 3.0;
-		roots[1] = pow(r, 1 / 3.0) - a / 3.0;
+		roots[0] = -2 * ((r > 0) ? 1 : ((r < 0) ? -1 : 0)) * sqrt(q) - a / 3.0;
+		roots[1] = ((r > 0) ? 1 : ((r < 0) ? -1 : 0)) * sqrt(q) - a / 3.0;
 	}
 	sort(rbegin(roots), rend(roots));
 	return roots[0];
@@ -70,7 +70,7 @@ EquationRoot4 Solve4(double a, double b, double c, double d, double e)
 	c = d / inv;
 	d = e / inv;
 
-	double y = Solve3(-b, -a * c + 4 * d, -a * a * d + 4 * b * d - c * c);
+	double y = Solve3(-b, a * c - 4 * d, 4 * b * d - a * a * d - c * c);
 	double alpha = sqrt(a * a / 4 - b + y);
 	double beta = sqrt(y * y / 4 - d);
 	if ((a * y / 2 - c) < 0)
