@@ -20,7 +20,7 @@ pair<boost::optional<double>, boost::optional<double>> Solve2(double a, double b
 double Solve3(double a, double b, double c)
 {
 	double roots[3];
-	double q = ( pow(a, 2) - 3.0 * b) / 9.0;
+	double q = (pow(a, 2) - 3.0 * b) / 9.0;
 	double r = (2.0 * pow(a, 3) - 9.0 * a * b + 27.0 * c) / 54.0;
 	double s = pow(q, 3) - pow(r, 2);
 	if (s > 0)
