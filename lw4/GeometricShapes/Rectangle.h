@@ -10,19 +10,15 @@ public:
 		       std::string const & outlineColor, std::string const & fillColor);
 	double GetArea() const override;
 	double GetPerimeter() const override;
-	std::string ToString() const override;
-	std::string GetOutlineColor() const override;
-
-	std::string GetFillColor() const override;
 
 	SPoint GetLeftTop() const;
 	SPoint GetRightBottom() const;
 	double GetWidth() const;
 	double GetHeight() const;
 
+	void AppendProperties(std::ostream & strm) const override;
+
 private:
 	SPoint m_leftTop;
 	SPoint m_rightBottom;
-	std::string m_outlineColor;
-	std::string m_fillColor;
 };

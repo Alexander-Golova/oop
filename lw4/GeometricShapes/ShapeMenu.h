@@ -1,7 +1,6 @@
 #pragma once
 
 #include <memory>
-#include <boost/algorithm/string.hpp>
 #include <vector>
 
 #include "Shape.h"
@@ -20,18 +19,18 @@ public:
 	void ReadShape(std::string shape);
 	void PrintShapeMinPerimeter();
 	void PrintShapeMaxAreaShape();
+	void PrintInfo() const;
 
 private:
 	void CheckArgumentsTriangle(const std::vector<std::string> & listParameters);
 	void CheckArgumentsRectangle(const std::vector<std::string> & listParameters);
 	void CheckArgumentsCircle(const std::vector<std::string> & listParameters);
 	void CheckArgumentsLineSegment(const std::vector<std::string> & listParameters);
-	
 
 	void AddTriangle(const std::vector<std::string> & listParameters);	
 	void AddRectangle(const std::vector<std::string> & listParameters);
 	void AddCircle(const std::vector<std::string> & listParameters);
 	void AddLineSegment(const std::vector<std::string> & listParameters);
-		
-	std::vector<std::shared_ptr<CShape>> m_shapesList;
+
+	std::vector<std::shared_ptr<IShape>> m_shapesList;
 };

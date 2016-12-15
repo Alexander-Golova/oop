@@ -20,3 +20,9 @@
 
 #define _USE_MATH_DEFINES
 #include <math.h> 
+
+#include <iomanip>
+#include <algorithm>
+#include <iterator>
+#include <map>
+#include <functional>

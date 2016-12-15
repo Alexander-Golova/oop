@@ -68,7 +68,14 @@ BOOST_FIXTURE_TEST_SUITE(Triangle, TriangleFixture_)
 	// имеет строковое представление
 	BOOST_AUTO_TEST_CASE(can_be_converted_to_string)
 	{
-		auto str = "Triangle: Vertex1(0.00, 0.00); Vertex2(4.00, 0.00); Vertex3(0.00, 3.00); P = 12.00; S = 6.00; Border Color = ff0000; Fill color = 00ff00.";
+		auto str = "Triangle:\n"
+		           "\tarea = 6.00\n"
+		           "\tperimeter = 12.00\n"
+		           "\toutline color = #ff0000\n"
+		           "\tfill color = #00ff00\n"
+		           "\tVertex1 = (0.00, 0.00)\n"
+		           "\tVertex2 = (4.00, 0.00)\n"
+		           "\tVertex3 = (0.00, 3.00)\n";
 		BOOST_CHECK_EQUAL(triangle.ToString(), str);
 	}
 	
@@ -135,7 +142,13 @@ BOOST_FIXTURE_TEST_SUITE(Rectangle, RectangleFixture_)
 	// имеет строковое представление
 	BOOST_AUTO_TEST_CASE(can_be_converted_to_string)
 	{
-		auto str = "Rectangle: LeftTop(0.00, 6.00); RightBottom(5.00, 0.00); P = 22.00; S = 30.00; Border Color = ff0000; Fill color = 00ff00.";
+		auto str = "Rectangle:\n"
+			"\tarea = 30.00\n"
+			"\tperimeter = 22.00\n"
+			"\toutline color = #ff0000\n"
+			"\tfill color = #00ff00\n"
+			"\tLeftTop(0.00, 6.00)\n"
+			"\tRightBottom(5.00, 0.00)\n";
 		BOOST_CHECK_EQUAL(rectangle.ToString(), str);
 	}
 
@@ -191,7 +204,13 @@ BOOST_FIXTURE_TEST_SUITE(Circle, CircleFixture_)
 	// имеет строковое представление
 	BOOST_AUTO_TEST_CASE(can_be_converted_to_string)
 	{
-		auto str = "Circle: Center(0.00, 0.00); Radius = 10.00; P = 62.83; S = 314.16; Border Color = ff0000; Fill color = 00ff00.";
+		auto str = "Circle:\n"
+			"\tarea = 314.16\n"
+			"\tperimeter = 62.83\n"
+			"\toutline color = #ff0000\n"
+			"\tfill color = #00ff00\n"
+			"\tCenter(0.00, 0.00)\n"
+			"\tRadius = 10.00\n";
 		BOOST_CHECK_EQUAL(сircle.ToString(), str);
 	}
 
@@ -244,7 +263,11 @@ BOOST_FIXTURE_TEST_SUITE(LineSegment, LineSegmentFixture_)
 	// имеет строковое представление
 	BOOST_AUTO_TEST_CASE(can_be_converted_to_string)
 	{
-		auto str = "LineSegment: startPoint(0.00, 0.00); endPoint(3.00, 4.00); P = 5.00; Border Color = ff0000.";
+		auto str = "LineSegment:\n"
+		           "\tstartPoint(0.00, 0.00)\n"
+		           "\tendPoint(3.00, 4.00)\n"
+		           "\tP = 5.00\n"
+		           "\tBorder Color = ff0000\n";
 		BOOST_CHECK_EQUAL(line.ToString(), str);
 	}
 

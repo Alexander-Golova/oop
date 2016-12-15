@@ -5,30 +5,23 @@
 
 using namespace std;
 
-int main(int argc, char * argv[])
+int main(int, char * [])
 {
-	if (argc != 2)
-	{
-		cout << "Invalid arguments count" << endl
-             << "Usage: Shapes.exe <file with commands>" << endl;
-		return 1;
-	}
 	CShapeMenu menu;
-	string shape;
-	ifstream input(argv[1]);
+	string command;
 	try
 	{
-		while (!input.eof() && !input.fail())
+		while (getline(cin, command))
 		{
-			getline(input, shape);
-			menu.ReadShape(shape);
+			menu.ReadShape(command);
 		}
 		menu.PrintShapeMinPerimeter();
 		menu.PrintShapeMaxAreaShape();
+		menu.PrintInfo();
 	}	
 	catch (const exception & e)
 	{
-		cout << e.what() << endl;
+		cerr << e.what() << endl;
 	}
     return 0;
 }

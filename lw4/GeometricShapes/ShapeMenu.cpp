@@ -1,10 +1,7 @@
-#pragma 
-
 #include "stdafx.h"
-#include "ShapeMenu.h"
-#include "Shape.h"
-#include "IShape.h"
 
+#include "ShapeMenu.h"
+#include <boost/algorithm/string.hpp>
 
 using namespace std;
 
@@ -79,8 +76,8 @@ void CShapeMenu::AddTriangle(const vector<string> & listParameters)
 		outlineColor = listParameters[7];
 		fillColor = listParameters[8];
 	}
-	shared_ptr<CTriangle> addTriangle(new CTriangle(vertex1, vertex2, vertex3, outlineColor, fillColor));
-	m_shapesList.push_back(addTriangle);
+	auto triangle = make_shared<CTriangle>(vertex1, vertex2, vertex3, outlineColor, fillColor);
+	m_shapesList.push_back(triangle);
 }
 
 void CShapeMenu::AddRectangle(const std::vector<std::string> & listParameters)
@@ -97,8 +94,8 @@ void CShapeMenu::AddRectangle(const std::vector<std::string> & listParameters)
 		outlineColor = listParameters[5];
 		fillColor = listParameters[6];
 	}
-	shared_ptr<CRectangle> addRectangle(new CRectangle(leftTop, rightBottom, outlineColor, fillColor));
-	m_shapesList.push_back(addRectangle);
+	auto rectangle = make_shared<CRectangle>(leftTop, rightBottom, outlineColor, fillColor);
+	m_shapesList.push_back(rectangle);
 }
 
 void CShapeMenu::AddCircle(const std::vector<std::string> & listParameters)
@@ -115,8 +112,8 @@ void CShapeMenu::AddCircle(const std::vector<std::string> & listParameters)
 		outlineColor = listParameters[4];
 		fillColor = listParameters[5];
 	}
-	shared_ptr<CCircle> addCircle(new CCircle(center, radius, outlineColor, fillColor));
-	m_shapesList.push_back(addCircle);
+	auto circle = make_shared<CCircle>(center, radius, outlineColor, fillColor);
+	m_shapesList.push_back(circle);
 }
 
 void CShapeMenu::AddLineSegment(const std::vector<std::string> & listParameters)
@@ -131,8 +128,16 @@ void CShapeMenu::AddLineSegment(const std::vector<std::string> & listParameters)
 	{
 		outlineColor = listParameters[5];
 	}
-	shared_ptr<CLineSegment> addLineSegment(new CLineSegment(startPoint, endPoint, outlineColor));
-	m_shapesList.push_back(addLineSegment);
+	auto lineSegment = make_shared<CLineSegment>(startPoint, endPoint, outlineColor);
+	m_shapesList.push_back(lineSegment);
+}
+
+void CShapeMenu::PrintInfo() const
+{
+	for (const auto shape : m_shapesList)
+	{
+		cout << shape->ToString() << endl;
+	}
 }
 
 
@@ -156,6 +161,10 @@ void CShapeMenu::ReadShape(string shape)
 	else if (listParameters[0] == "linesegment")
 	{
 		AddLineSegment(listParameters);
+	}
+	else if (listParameters[0] == "info")
+	{
+		PrintInfo();
 	}
 	else
 	{

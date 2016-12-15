@@ -10,7 +10,6 @@ public:
 	double GetArea() const override;
 	double GetPerimeter() const override;
 	std::string ToString() const override;
-	std::string GetOutlineColor() const override;
 
 	SPoint GetStartPoint() const;
 	SPoint GetEndPoint() const;
@@ -18,5 +17,4 @@ public:
 private:
 	SPoint m_startPoint;
 	SPoint m_endPoint;
-	std::string m_outlineColor;
 };

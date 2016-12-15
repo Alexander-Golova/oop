@@ -3,18 +3,16 @@
 #include "SolidShape.h"
 
 class CTriangle final
-	:public CSolidShape
+	: public CSolidShape
 {
 public:
 	CTriangle(SPoint const & vertex1, SPoint const & vertex2, SPoint const & vertex3,
-		std::string const & outlineColor, std::string const & fillColor);
+		      std::string const & outlineColor, std::string const & fillColor);
 
 	double GetArea() const override;
 	double GetPerimeter() const override;
-	std::string ToString() const override;
-	std::string GetOutlineColor() const override;
 
-	std::string GetFillColor() const override;
+	void AppendProperties(std::ostream & strm) const override;
 
 	SPoint GetVertex1() const;
 	SPoint GetVertex2() const;
@@ -25,6 +23,4 @@ private:
 	SPoint m_vertex1;
 	SPoint m_vertex2;
 	SPoint m_vertex3;
-	std::string m_outlineColor;
-	std::string m_fillColor;
 };

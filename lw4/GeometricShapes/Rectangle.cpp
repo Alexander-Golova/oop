@@ -8,8 +8,7 @@ CRectangle::CRectangle(SPoint const & leftTop, SPoint const & rightBottom,
 	string const & outlineColor, string const & fillColor)
 	: m_leftTop(leftTop)
 	, m_rightBottom(rightBottom)
-	, m_outlineColor(outlineColor)
-	, m_fillColor(fillColor)
+	, CSolidShape("Rectangle", outlineColor, fillColor)
 {
 }
 
@@ -33,6 +32,14 @@ double CRectangle::GetHeight() const
 	return abs(m_leftTop.x - m_rightBottom.x);
 }
 
+void CRectangle::AppendProperties(std::ostream & strm) const
+{
+	strm << fixed << setprecision(2);
+
+	strm << "\tLeftTop(" << m_leftTop.x << ", " << m_leftTop.y << ")" << endl
+	     << "\tRightBottom(" << m_rightBottom.x << ", " << m_rightBottom.y << ")" << endl;
+}
+
 double CRectangle::GetPerimeter() const
 {
 	return 2 * (GetWidth() + GetHeight());
@@ -41,30 +48,4 @@ double CRectangle::GetPerimeter() const
 double CRectangle::GetArea() const
 {
 	return GetWidth() * GetHeight();
-}
-
-string CRectangle::GetOutlineColor() const
-{
-	return m_outlineColor;
-}
-
-string CRectangle::GetFillColor() const
-{
-	return m_fillColor;
-}
-
-string CRectangle::ToString() const
-{
-	ostringstream strm;
-	strm << fixed << setprecision(2);
-
-	strm << "Rectangle: "
-		<< "LeftTop(" << m_leftTop.x << ", " << m_leftTop.y << "); "
-		<< "RightBottom(" << m_rightBottom.x << ", " << m_rightBottom.y << "); "
-		<< "P = " << GetPerimeter() << "; "
-		<< "S = " << GetArea() << "; "
-		<< "Border Color = " << GetOutlineColor() << "; "
-		<< "Fill color = " << GetFillColor() << ".";
-
-	return strm.str();
 }

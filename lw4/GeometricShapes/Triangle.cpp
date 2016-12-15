@@ -9,9 +9,9 @@ CTriangle::CTriangle(SPoint const & vertex1, SPoint const & vertex2, SPoint cons
 	: m_vertex1(vertex1)
 	, m_vertex2(vertex2)
 	, m_vertex3(vertex3)
-	, m_outlineColor(outlineColor)
-	, m_fillColor(fillColor)
+	, CSolidShape("Triangle", outlineColor, fillColor)
 {
+
 }
 
 tuple<double, double, double> CTriangle::GetSides()const
@@ -57,29 +57,11 @@ SPoint CTriangle::GetVertex3() const
 	return m_vertex3;
 }
 
-string CTriangle::GetOutlineColor() const
+void CTriangle::AppendProperties(std::ostream & strm) const
 {
-	return m_outlineColor;
-}
-
-string CTriangle::GetFillColor() const
-{
-	return m_fillColor;
-}
-
-string CTriangle::ToString() const
-{
-	ostringstream strm;
 	strm << fixed << setprecision(2);
 
-	strm << "Triangle: "
-		<< "Vertex1(" << m_vertex1.x << ", " << m_vertex1.y << "); "
-		<< "Vertex2(" << m_vertex2.x << ", " << m_vertex2.y << "); "
-		<< "Vertex3(" << m_vertex3.x << ", " << m_vertex3.y << "); "
-		<< "P = " << GetPerimeter() << "; "
-		<< "S = " << GetArea() << "; "
-		<< "Border Color = " << GetOutlineColor() << "; "
-		<< "Fill color = " << GetFillColor() << ".";
-
-	return strm.str();
+	strm << "\tVertex1 = (" << m_vertex1.x << ", " << m_vertex1.y << ")" << endl
+	     << "\tVertex2 = (" << m_vertex2.x << ", " << m_vertex2.y << ")" << endl
+	     << "\tVertex3 = (" << m_vertex3.x << ", " << m_vertex3.y << ")" << endl;
 }
