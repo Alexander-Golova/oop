@@ -40,22 +40,18 @@ void ExpectResultFailure(double a, double b, double c, double d, double e, const
 	}, expectedDescription);
 }
 
-bool IsRootsEqual(const double roots[4], const double expectedRoots[4], size_t numbRoots)
+void IsRootsEqual(const double roots[4], const double expectedRoots[4], size_t numbRoots)
 {
 	for (size_t i = 0; i < numbRoots; ++i)
 	{
-		if (ceil(roots[i] * 10000) / 10000.0 != (ceil(expectedRoots[i] * 10000) / 10000.0))
-		{
-			return false;
-		}
+		BOOST_CHECK_CLOSE_FRACTION(roots[i], expectedRoots[i], epsilon);
 	}
-	return true;
 }
 
 void CheckRoots(EquationRoot4 const& result, unsigned expectedNumberRoots, const double expectedRoots[4])
 {
 	BOOST_CHECK_EQUAL(result.numRoots, expectedNumberRoots);
-	BOOST_CHECK(IsRootsEqual(result.roots, expectedRoots, expectedNumberRoots));
+	IsRootsEqual(result.roots, expectedRoots, expectedNumberRoots);
 }
 
 // максимальный действительный корень уравнения третьей степени
