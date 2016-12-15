@@ -156,12 +156,17 @@ CRational & CRational::operator *=(const CRational & rhs)
 
 CRational & CRational::operator/=(const CRational & rhs)
 {
-	m_numerator *= rhs.GetDenominator();
-	m_denominator *= rhs.GetNumerator();
-	if (m_denominator == 0)
+	if (*this == rhs)
+	{
+		m_numerator = m_denominator = 1;
+		return *this;
+	}
+	if (rhs.GetNumerator() == 0)
 	{
 		throw std::invalid_argument("Denominator must not be equal to zero");
 	}
+	m_numerator *= rhs.GetDenominator();
+	m_denominator *= rhs.GetNumerator();
 	Normalize();
 	return *this;
 }
@@ -220,15 +225,16 @@ std::ostream & operator<<(std::ostream & strm, const CRational & rhs)
 
 std::istream & operator>>(std::istream & strm, CRational & rhs)
 {
-	std::streamoff startPos = strm.tellg();
 	int numerator;
 	int denominator;
 	if ((strm >> numerator) && (strm.get() == '/') && (strm >> denominator))
 	{
 		rhs = CRational(numerator, denominator);
-		return strm;
 	}
-	strm.seekg(startPos);
+	else
+	{
+		strm.setstate(std::ios_base::failbit);
+	}
 	return strm;
 }
 
@@ -237,5 +243,5 @@ std::pair<int, CRational> CRational::ToCompoundFraction()const
 {
 	int integer = static_cast<int>(ToDouble());
 	int numerator = m_numerator - m_denominator * integer;
-	return std::make_pair<int, CRational>(std::move(integer), CRational(numerator, m_denominator));
+	return std::make_pair(std::move(integer), CRational(numerator, m_denominator));
 }
