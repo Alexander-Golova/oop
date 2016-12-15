@@ -18,8 +18,11 @@ void ShowRoots(EquationRoot4 const & roots)
 
 int main()
 {
-	vector<double> coof(istream_iterator<double>(cin), (istream_iterator<double>()));
-	EquationRoot4 roots = Solve4(coof[0], coof[1], coof[2], coof[3], coof[4]);
-	ShowRoots(roots);
+	double a, b, c, d, e;
+	while ((std::cin >> a) && (std::cin >> b) && (std::cin >> c) && (std::cin >> d) && (std::cin >> e))
+	{
+		ShowRoots(Solve4(a, b, c, d, e));
+		cout << endl;
+	}
 	return 0;
 }
