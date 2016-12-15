@@ -1,25 +1,27 @@
 #include "stdafx.h"
+
 #include "Equation.h"
+#include <array>
 
 using namespace std;
 
-pair<boost::optional<double>, boost::optional<double>> Solve2(double a, double b, double c)
+boost::optional<pair<double, double>> Solve2(double a, double b, double c)
 {
 	double D = b * b - 4 * a * c;
 	if (D == 0)
 	{
-		return{ -b / (2 * a) , -b / (2 * a) };
+		return make_pair(-b / (2 * a), -b / (2 * a));
 	}
 	else if (D > 0)
 	{
-		return{ (-b + sqrt(D)) / (2 * a) , (-b - sqrt(D)) / (2 * a) };
+		return make_pair((-b + sqrt(D)) / (2 * a), (-b - sqrt(D)) / (2 * a));
 	}
-	return{ boost::none, boost::none };
+	return boost::none;
 }
 
 double Solve3(double a, double b, double c)
 {
-	double roots[3];
+	array<double, 3> roots;
 	double q = (pow(a, 2) - 3.0 * b) / 9.0;
 	double r = (2.0 * pow(a, 3) - 9.0 * a * b + 27.0 * c) / 54.0;
 	double s = pow(q, 3) - pow(r, 2);
@@ -52,8 +54,7 @@ double Solve3(double a, double b, double c)
 		roots[0] = -2 * ((r > 0) ? 1 : ((r < 0) ? -1 : 0)) * sqrt(q) - a / 3.0;
 		roots[1] = ((r > 0) ? 1 : ((r < 0) ? -1 : 0)) * sqrt(q) - a / 3.0;
 	}
-	sort(rbegin(roots), rend(roots));
-	return roots[0];
+	return *max_element(roots.begin(), roots.end());
 }
 
 EquationRoot4 Solve4(double a, double b, double c, double d, double e)
@@ -88,23 +89,18 @@ EquationRoot4 Solve4(double a, double b, double c, double d, double e)
 			throw domain_error("Equation does not have of real roots");
 		}
 	}
-	catch (domain_error)
+	catch (const domain_error & ex)
 	{
-		cout << "Equation does not have of real roots" << endl;
+		cout << ex.what() << endl;
 	}
 	return result;
 }
 
-void AddNewPairOfRoots(EquationRoot4 & equation, std::pair<boost::optional<double>, boost::optional<double>> const & roots)
+void AddNewPairOfRoots(EquationRoot4 & equation, boost::optional<pair<double, double>> const & roots)
 {
-	if (roots.first)
+	if (roots != boost::none)
 	{
-		equation.roots[equation.numRoots] = roots.first.get();
-		++equation.numRoots;
-	}
-	if (roots.second)
-	{
-		equation.roots[equation.numRoots] = roots.second.get();
-		++equation.numRoots;
+		equation.roots[equation.numRoots++] = roots.get().first;
+		equation.roots[equation.numRoots++] = roots.get().second;
 	}
 }
