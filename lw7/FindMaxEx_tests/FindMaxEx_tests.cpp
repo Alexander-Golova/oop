@@ -32,7 +32,7 @@ bool LessHeight(Athlete const & lhs, Athlete const & rhs)
 }
 
 
-void checkAthleteEqual(Athlete const & lhs, Athlete const & rhs)
+void IsAthleteEqual(Athlete const & lhs, Athlete const & rhs)
 {
 	BOOST_CHECK((lhs.name == rhs.name) && (lhs.height == rhs.height) && (lhs.weight == rhs.weight));
 }
@@ -45,25 +45,25 @@ BOOST_AUTO_TEST_SUITE(findmaxEx_function_)
 		{
 			Athlete lessAthlete = Tigress;
 			BOOST_CHECK(!FindMaxEx(emptyAthleteVector, lessAthlete, LessWeight));
-			checkAthleteEqual(lessAthlete, Tigress);
+			IsAthleteEqual(lessAthlete, Tigress);
 		}
 		{
 			Athlete lessAthlete = Tigress;
 			BOOST_CHECK(!FindMaxEx(emptyAthleteVector, lessAthlete, LessHeight));
-			checkAthleteEqual(lessAthlete, Tigress);
+			IsAthleteEqual(lessAthlete, Tigress);
 		}
 	}
-	BOOST_AUTO_TEST_CASE(can_find_expected_item_in_nonempty_array)
+	BOOST_AUTO_TEST_CASE(return_max_element_in_nonempty_vector)
 	{
 		{
 			Athlete lessAthlete = Tigress;
 			BOOST_CHECK(FindMaxEx(athleteVector, lessAthlete, LessWeight));
-			checkAthleteEqual(lessAthlete, Po);
+			IsAthleteEqual(lessAthlete, Po);
 		}
 		{
 			Athlete lessAthlete = Tigress;
 			BOOST_CHECK(FindMaxEx(athleteVector, lessAthlete, LessHeight));
-			checkAthleteEqual(lessAthlete, Viper);
+			IsAthleteEqual(lessAthlete, Viper);
 		}
 	}
 
