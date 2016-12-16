@@ -16,6 +16,7 @@ public:
 	double GetWidth() const;
 	double GetHeight() const;
 
+protected:
 	void AppendProperties(std::ostream & strm) const override;
 
 private:

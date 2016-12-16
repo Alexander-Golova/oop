@@ -22,15 +22,15 @@ public:
 	void PrintInfo() const;
 
 private:
-	void CheckArgumentsTriangle(const std::vector<std::string> & listParameters);
-	void CheckArgumentsRectangle(const std::vector<std::string> & listParameters);
-	void CheckArgumentsCircle(const std::vector<std::string> & listParameters);
-	void CheckArgumentsLineSegment(const std::vector<std::string> & listParameters);
+	void CheckTriangleArguments(const std::vector<std::string> & parametersList);
+	void CheckRectangleArguments(const std::vector<std::string> & parametersList);
+	void CheckCircleArguments(const std::vector<std::string> & parametersList);
+	void CheckLineSegmentArguments(const std::vector<std::string> & parametersList);
 
-	void AddTriangle(const std::vector<std::string> & listParameters);	
-	void AddRectangle(const std::vector<std::string> & listParameters);
-	void AddCircle(const std::vector<std::string> & listParameters);
-	void AddLineSegment(const std::vector<std::string> & listParameters);
+	void AddTriangle(const std::vector<std::string> & parametersList);	
+	void AddRectangle(const std::vector<std::string> & parametersList);
+	void AddCircle(const std::vector<std::string> & parametersList);
+	void AddLineSegment(const std::vector<std::string> & parametersList);
 
 	std::vector<std::shared_ptr<IShape>> m_shapesList;
 };

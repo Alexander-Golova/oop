@@ -12,11 +12,12 @@ public:
 	double GetArea() const override;
 	double GetPerimeter() const override;
 
-	void AppendProperties(std::ostream & strm) const override;
-
 	SPoint GetVertex1() const;
 	SPoint GetVertex2() const;
 	SPoint GetVertex3() const;
+
+protected:
+	void AppendProperties(std::ostream & strm) const override;
 
 private:
 	std::tuple<double, double, double> GetSides() const;

@@ -13,6 +13,7 @@ public:
 	SPoint GetCenter() const;
 	double GetRadius() const;
 
+protected:
 	void AppendProperties(std::ostream & strm) const override;
 
 private:

@@ -29,104 +29,104 @@ void CShapeMenu::PrintShapeMaxAreaShape()
 	cout << "Shape with large area: " << (*shapeMaxArea)->ToString() << endl;
 }
 
-void CShapeMenu::CheckArgumentsTriangle(const vector<string> & listParameters)
+void CShapeMenu::CheckTriangleArguments(const vector<string> & parametersList)
 {
-	if ((listParameters.size() != 7 && listParameters.size() != 9))
+	if ((parametersList.size() != 7 && parametersList.size() != 9))
 	{
 		throw invalid_argument("Incorrect amount arguments! Must will be 7 or 9!");
 	}
 }
 
-void CShapeMenu::CheckArgumentsRectangle(const std::vector<std::string> & listParameters)
+void CShapeMenu::CheckRectangleArguments(const std::vector<std::string> & parametersList)
 {
-	if ((listParameters.size() != 5 && listParameters.size() != 7))
+	if ((parametersList.size() != 5 && parametersList.size() != 7))
 	{
 		throw invalid_argument("Incorrect amount arguments! Must will be 5 or 7!");
 	}
 }
 
-void CShapeMenu::CheckArgumentsCircle(const std::vector<std::string> & listParameters)
+void CShapeMenu::CheckCircleArguments(const std::vector<std::string> & parametersList)
 {
-	if ((listParameters.size() != 4 && listParameters.size() != 6))
+	if ((parametersList.size() != 4 && parametersList.size() != 6))
 	{
 		throw invalid_argument("Incorrect amount arguments! Must will be 4 or 6!");
 	}
 }
 
-void CShapeMenu::CheckArgumentsLineSegment(const std::vector<std::string> & listParameters)
+void CShapeMenu::CheckLineSegmentArguments(const std::vector<std::string> & parametersList)
 {
-	if ((listParameters.size() != 5 && listParameters.size() != 6))
+	if ((parametersList.size() != 5 && parametersList.size() != 6))
 	{
 		throw invalid_argument("Incorrect amount arguments! Must will be 5 or 6!");
 	}
 }
 
-void CShapeMenu::AddTriangle(const vector<string> & listParameters)
+void CShapeMenu::AddTriangle(const vector<string> & parametersList)
 {
-	CheckArgumentsTriangle(listParameters);
+	CheckTriangleArguments(parametersList);
 
-	SPoint vertex1 = { stod(listParameters[1]), stod(listParameters[2]) };
-	SPoint vertex2 = { stod(listParameters[3]), stod(listParameters[4]) };
-	SPoint vertex3 = { stod(listParameters[5]), stod(listParameters[6]) };
+	SPoint vertex1 = { stod(parametersList[1]), stod(parametersList[2]) };
+	SPoint vertex2 = { stod(parametersList[3]), stod(parametersList[4]) };
+	SPoint vertex3 = { stod(parametersList[5]), stod(parametersList[6]) };
 	string outlineColor = "000000";
 	string fillColor = "ffffff";
 
-	if (listParameters.size() == 9)
+	if (parametersList.size() == 9)
 	{
-		outlineColor = listParameters[7];
-		fillColor = listParameters[8];
+		outlineColor = parametersList[7];
+		fillColor = parametersList[8];
 	}
 	auto triangle = make_shared<CTriangle>(vertex1, vertex2, vertex3, outlineColor, fillColor);
 	m_shapesList.push_back(triangle);
 }
 
-void CShapeMenu::AddRectangle(const std::vector<std::string> & listParameters)
+void CShapeMenu::AddRectangle(const std::vector<std::string> & parametersList)
 {
-	CheckArgumentsRectangle(listParameters);
+	CheckRectangleArguments(parametersList);
 
-	SPoint leftTop = { stod(listParameters[1]), stod(listParameters[2]) };
-	SPoint rightBottom = { stod(listParameters[3]), stod(listParameters[4]) };
+	SPoint leftTop = { stod(parametersList[1]), stod(parametersList[2]) };
+	SPoint rightBottom = { stod(parametersList[3]), stod(parametersList[4]) };
 	string outlineColor = "000000";
 	string fillColor = "ffffff";
 
-	if (listParameters.size() == 7)
+	if (parametersList.size() == 7)
 	{
-		outlineColor = listParameters[5];
-		fillColor = listParameters[6];
+		outlineColor = parametersList[5];
+		fillColor = parametersList[6];
 	}
 	auto rectangle = make_shared<CRectangle>(leftTop, rightBottom, outlineColor, fillColor);
 	m_shapesList.push_back(rectangle);
 }
 
-void CShapeMenu::AddCircle(const std::vector<std::string> & listParameters)
+void CShapeMenu::AddCircle(const std::vector<std::string> & parametersList)
 {
-	CheckArgumentsCircle(listParameters);
+	CheckCircleArguments(parametersList);
 
-	SPoint center = { stod(listParameters[1]), stod(listParameters[2]) };
-	double radius = stod(listParameters[3]);
+	SPoint center = { stod(parametersList[1]), stod(parametersList[2]) };
+	double radius = stod(parametersList[3]);
 	string outlineColor = "000000";
 	string fillColor = "ffffff";
 
-	if (listParameters.size() == 6)
+	if (parametersList.size() == 6)
 	{
-		outlineColor = listParameters[4];
-		fillColor = listParameters[5];
+		outlineColor = parametersList[4];
+		fillColor = parametersList[5];
 	}
 	auto circle = make_shared<CCircle>(center, radius, outlineColor, fillColor);
 	m_shapesList.push_back(circle);
 }
 
-void CShapeMenu::AddLineSegment(const std::vector<std::string> & listParameters)
+void CShapeMenu::AddLineSegment(const std::vector<std::string> & parametersList)
 {
-	CheckArgumentsLineSegment(listParameters);
+	CheckLineSegmentArguments(parametersList);
 
-	SPoint startPoint = { stod(listParameters[1]), stod(listParameters[2]) };
-	SPoint endPoint = { stod(listParameters[3]), stod(listParameters[4]) };
+	SPoint startPoint = { stod(parametersList[1]), stod(parametersList[2]) };
+	SPoint endPoint = { stod(parametersList[3]), stod(parametersList[4]) };
 	string outlineColor = "000000";
 
-	if (listParameters.size() == 6)
+	if (parametersList.size() == 6)
 	{
-		outlineColor = listParameters[5];
+		outlineColor = parametersList[5];
 	}
 	auto lineSegment = make_shared<CLineSegment>(startPoint, endPoint, outlineColor);
 	m_shapesList.push_back(lineSegment);
@@ -144,25 +144,25 @@ void CShapeMenu::PrintInfo() const
 void CShapeMenu::ReadShape(string shape)
 {
 	boost::to_lower(shape);
-	vector<string> listParameters;
-	boost::split(listParameters, shape, boost::is_any_of(" "));
-	if (listParameters[0] == "triangle")
+	vector<string> parametersList;
+	boost::split(parametersList, shape, boost::is_any_of(" "));
+	if (parametersList[0] == "triangle")
 	{
-		AddTriangle(listParameters);
+		AddTriangle(parametersList);
 	}
-	else if (listParameters[0] == "rectangle")
+	else if (parametersList[0] == "rectangle")
 	{
-		AddRectangle(listParameters);
+		AddRectangle(parametersList);
 	}
-	else if (listParameters[0] == "circle")
+	else if (parametersList[0] == "circle")
 	{
-		AddCircle(listParameters);
+		AddCircle(parametersList);
 	}
-	else if (listParameters[0] == "linesegment")
+	else if (parametersList[0] == "linesegment")
 	{
-		AddLineSegment(listParameters);
+		AddLineSegment(parametersList);
 	}
-	else if (listParameters[0] == "info")
+	else if (parametersList[0] == "info")
 	{
 		PrintInfo();
 	}
