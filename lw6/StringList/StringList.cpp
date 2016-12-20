@@ -4,6 +4,41 @@
 
 using namespace std;
 
+CStringList::~CStringList()
+{
+	Clear();
+}
+
+void CStringList::Erase(const CIterator & it)
+{
+	if (m_size == 1)
+	{
+		Clear();
+		return;
+	}
+
+	if (it == begin())
+	{
+		it->next->prev = nullptr;
+		m_firstNode = move(it->next);
+	}
+	else if (it.m_node == m_lastNode)
+	{
+		m_lastNode = move(it->prev);
+		it->prev->next = nullptr;		
+	}
+	else
+	{
+		it->next->prev = move(it->prev);
+		it->prev->next = move(it->next);
+	}
+
+	if (m_size > 0)
+	{
+		--m_size;
+	}
+}
+
 void CStringList::Insert(const CIterator & it, const string & data)
 {
 	if (it == begin())
@@ -106,7 +141,7 @@ CStringList::CIterator CStringList::begin()
 
 CStringList::CIterator CStringList::end()
 {
-	return CIterator(m_lastNode);
+	return CIterator(m_lastNode->next.get());
 }
 
 CStringList::CIterator const CStringList::cbegin() const
@@ -116,7 +151,7 @@ CStringList::CIterator const CStringList::cbegin() const
 
 CStringList::CIterator const CStringList::cend() const
 {
-	return CIterator(m_lastNode);
+	return CIterator(m_lastNode->next.get());
 }
 
 bool CStringList::CIterator::operator==(const CIterator & other)const
@@ -148,4 +183,24 @@ CStringList::CIterator & CStringList::CIterator::operator++()
 CStringList::Node * CStringList::CIterator::operator->() const
 {
 	return m_node;
+}
+
+CStringList::CIterator CStringList::rbegin()
+{
+	return CIterator(m_lastNode);
+}
+
+CStringList::CIterator CStringList::rend()
+{
+	return CIterator(m_firstNode->prev);
+}
+
+CStringList::CIterator const CStringList::crbegin() const
+{
+	return CIterator(m_lastNode);
+}
+
+CStringList::CIterator const CStringList::crend() const
+{
+	return CIterator(m_firstNode->prev);
 }

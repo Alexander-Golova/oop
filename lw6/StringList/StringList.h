@@ -14,7 +14,11 @@ class CStringList
 		Node *prev;
 		std::unique_ptr<Node> next;
 	};
+
 public:
+	CStringList() = default;
+	~CStringList();
+
 	void Append(const std::string & data);
 	void PushFront(const std::string & data);
 
@@ -34,12 +38,13 @@ public:
 		Node * operator->()const;
 
 		bool operator==(CIterator const & other) const;
-		bool operator!=(CIterator const& other) const;
+		bool operator!=(CIterator const & other) const;
 	private:
 		Node *m_node = nullptr;
 	};
 
 	void Insert(const CIterator & it, const std::string & data);
+	void Erase(const CIterator & it);
 
 	CIterator begin();
 	CIterator end();
@@ -50,6 +55,11 @@ public:
 	std::string const& GetBackElement()const;
 	std::string & GetFrontElement();
 	std::string const& GetFrontElement()const;
+
+	CIterator rbegin();
+	CIterator rend();
+	CIterator const crbegin() const;
+	CIterator const crend() const;
 private:
 	size_t m_size = 0;
 	std::unique_ptr<Node> m_firstNode;

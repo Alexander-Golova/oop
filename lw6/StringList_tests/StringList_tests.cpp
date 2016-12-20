@@ -86,26 +86,59 @@ BOOST_FIXTURE_TEST_SUITE(String_list, EmptyStringList)
 			list.Clear();
 			BOOST_CHECK(list.IsEmpty());
 		}
-	BOOST_AUTO_TEST_CASE(can_insert_element_at_iterator_pos)
-	{
-		auto it = ++list.begin();
-		list.Insert(it, "2");
-		BOOST_CHECK_EQUAL(*++list.begin(), "2");
-
-		list.Insert(list.begin(), "1");
-		BOOST_CHECK_EQUAL(*list.begin(), "1");
-
-		list.Insert(list.end(), "6");
-
-		std::vector<std::string> expectedStrings = { "1", "first", "2", "second", "third", "6" };
-		size_t i = 0;
-		for (auto str : list)
+		BOOST_AUTO_TEST_CASE(can_insert_element_at_iterator_pos)
 		{
-			BOOST_CHECK_EQUAL(str, expectedStrings[i]);
-			i++;
-		}
-	}
+			auto it = ++list.begin();
+			list.Insert(it, "2");
+			BOOST_CHECK_EQUAL(*++list.begin(), "2");
 
+			list.Insert(list.begin(), "1");
+			BOOST_CHECK_EQUAL(*list.begin(), "1");
+
+			list.Insert(list.end(), "6");
+
+			std::vector<std::string> expectedStrings = { "1", "first", "2", "second", "third", "6" };
+			size_t i = 0;
+			for (auto str : list)
+			{
+				BOOST_CHECK_EQUAL(str, expectedStrings[i]);
+				i++;
+			}
+		}
+
+		BOOST_AUTO_TEST_CASE(can_erase_element_at_iterator_pos)
+		{
+			auto it = ++list.begin();
+			BOOST_CHECK_EQUAL(*it, "second");
+			list.Erase(it);
+			BOOST_CHECK_EQUAL(*++list.begin(), "third");
+
+			it = list.begin();
+			list.Insert(it, "1");
+			++it;
+			BOOST_CHECK_EQUAL(*it, "third");
+			list.Erase(it);
+			list.Erase(list.begin());
+			list.Erase(list.begin());
+			BOOST_CHECK(list.IsEmpty());
+		}
+		BOOST_AUTO_TEST_CASE(have_iterators_and_const_iterators)
+		{
+			size_t counter = 0;
+			for (auto it = list.begin(); it != list.end(); ++it)
+			{
+				BOOST_CHECK_EQUAL(*it, expectedStrings[counter]);
+				counter++;
+			}
+
+			counter = 0;
+			for (auto it = list.cbegin(); it != list.cend(); ++it)
+			{
+				BOOST_CHECK_EQUAL(*it, expectedStrings[counter]);
+				counter++;
+			}
+		}
+		
 	BOOST_AUTO_TEST_SUITE_END()
 
 	BOOST_AUTO_TEST_SUITE(iterator)
