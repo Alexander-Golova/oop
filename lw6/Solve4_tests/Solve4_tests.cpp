@@ -79,12 +79,11 @@ BOOST_AUTO_TEST_SUITE(Equation)
 
 	BOOST_AUTO_TEST_CASE(not_have_highest_coefficient_of_zero)
 	{
-		ExpectResultFailure<invalid_argument>(0, 1, 1, 1, 1, "Argument 'a' can not be 0.");
+		ExpectResultFailure<invalid_argument>(0, 1, 1, 1, 1, "Argument 'a' can not be 0");
 	}
 	BOOST_AUTO_TEST_CASE(can_have_no_roots)
 	{
-		double expectedRoots[4];
-		CheckRoots(Solve4(1, 4, 6, 4, 2), 0, expectedRoots);
+		ExpectResultFailure<domain_error>(1, 4, 6, 4, 2, "Equation does not have of real roots");
 	}
 	BOOST_AUTO_TEST_CASE(has_four_equal_real_roots)
 	{

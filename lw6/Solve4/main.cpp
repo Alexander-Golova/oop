@@ -21,8 +21,14 @@ int main()
 	double a, b, c, d, e;
 	while ((std::cin >> a) && (std::cin >> b) && (std::cin >> c) && (std::cin >> d) && (std::cin >> e))
 	{
-		ShowRoots(Solve4(a, b, c, d, e));
-		cout << endl;
+		try
+		{
+			ShowRoots(Solve4(a, b, c, d, e));
+		}
+		catch (const exception & ex)
+		{
+			cout << ex.what() << endl;
+		}
 	}
 	return 0;
 }

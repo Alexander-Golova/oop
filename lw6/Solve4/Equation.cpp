@@ -61,7 +61,7 @@ EquationRoot4 Solve4(double a, double b, double c, double d, double e)
 {
 	if (a == 0)
 	{
-		throw invalid_argument("Argument 'a' can not be 0.");
+		throw invalid_argument("Argument 'a' can not be 0");
 	}
 	EquationRoot4 result;
 	
@@ -81,18 +81,11 @@ EquationRoot4 Solve4(double a, double b, double c, double d, double e)
 	AddNewPairOfRoots(result, Solve2(1, a / 2 + alpha, y / 2 + beta));
 	AddNewPairOfRoots(result, Solve2(1, a / 2 - alpha, y / 2 - beta));
 
+	if (result.numRoots == 0)
+	{
+		throw domain_error("Equation does not have of real roots");
+	}
 	sort(begin(result.roots), begin(result.roots) + result.numRoots);
-	try
-	{
-		if (result.numRoots == 0)
-		{
-			throw domain_error("Equation does not have of real roots");
-		}
-	}
-	catch (const domain_error & ex)
-	{
-		cout << ex.what() << endl;
-	}
 	return result;
 }
 
