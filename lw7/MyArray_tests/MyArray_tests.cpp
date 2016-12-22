@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "../MyArray/MyArray.h"
 
 using namespace std;
@@ -70,4 +70,45 @@ BOOST_FIXTURE_TEST_SUITE(MyArray, EmptyStringArray)
 			BOOST_CHECK_EQUAL(copy.GetCapacity(), arr.GetSize());
 		}
 	BOOST_AUTO_TEST_SUITE_END()
+
+	struct IntMyArray_
+	{
+		CMyArray<int> arr;
+	};
+
+	struct IntMyArray_filled_ : IntMyArray_
+	{
+		IntMyArray_filled_()
+		{
+			arr.Append(1);
+			arr.Append(2);
+			arr.Append(3);
+		}
+	};
+	// при заполнении элементов
+	BOOST_FIXTURE_TEST_SUITE(when_filled_with_elements, IntMyArray_filled_)
+		// имеет размер, равный количеству элементов
+		BOOST_AUTO_TEST_CASE(has_size_equal_number_of_elements)
+		{
+			BOOST_CHECK_EQUAL(arr.GetSize(), 3);
+		}
+		// не позволяет получить доступ к элементам вне диапазона
+		BOOST_AUTO_TEST_CASE(does_not_allow_to_acess_to_elements_out_of_range)
+		{
+			BOOST_CHECK_THROW(arr[3], std::out_of_range);
+		}
+		// позволяет получить доступ к данным из диапазона
+		BOOST_AUTO_TEST_CASE(allows_to_change_elements_using_index_access_operator)
+		{
+			BOOST_CHECK_EQUAL(arr[0], 1);
+			BOOST_CHECK_EQUAL(arr[1], 2);
+
+			arr[0] = 10;
+			arr[1] = 11;
+
+			BOOST_CHECK_EQUAL(arr[0], 10);
+			BOOST_CHECK_EQUAL(arr[1], 11);
+		}
+	BOOST_AUTO_TEST_SUITE_END()
+
 BOOST_AUTO_TEST_SUITE_END()
