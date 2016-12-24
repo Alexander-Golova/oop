@@ -10,14 +10,14 @@ bool FindMaxEx(std::vector<T> const & arr, T& maxValue, Less const & less)
 		return false;
 	}
 
-	const T &max = arr[0];
+	const T *max = &arr[0];
 	for (auto & item : arr)
 	{
-		if (less(max, item))
+		if (less(*max, item))
 		{
-			const_cast<T&>(max) = item;
+		max = &item;
 		}
 	}
-	maxValue = max;
+	maxValue = *max;
 	return true;
 }
