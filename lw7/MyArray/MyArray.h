@@ -83,6 +83,7 @@ public:
 	{
 		return m_endOfCapacity - m_begin;
 	}
+
 	~CMyArray()
 	{
 		DeleteItems(m_begin, m_end);
@@ -96,7 +97,8 @@ public:
 		}
 		return m_begin[position];
 	}
-	T& operator[](size_t position) const
+
+	const T& operator[](size_t position) const
 	{
 		if (position >= GetSize())
 		{
@@ -104,6 +106,117 @@ public:
 		}
 		return m_begin[position];
 	}
+
+	void Resize(size_t newSize)
+	{
+		size_t currentSize = GetSize();
+
+		if (newSize < currentSize)
+		{
+			for (size_t i = 0; i < currentSize - newSize; ++i)
+			{
+				m_end[-1].~T();
+				--m_end;
+			}
+		}
+		else if (newSize > currentSize)
+		{
+			for (size_t i = 0; i < newSize - currentSize; ++i)
+			{
+				Append(T());
+			}
+		}
+	}
+
+	void Clear()
+	{
+		DeleteItems(m_begin, m_end);
+		m_begin = nullptr;
+		m_end = nullptr;
+		m_endOfCapacity = nullptr;
+	}
+
+	CMyArray& operator = (CMyArray const & rhs)
+	{
+		if (& rhs != this)
+		{
+			CMyArray newArray(rhs);
+
+			std::swap(m_begin, newArray.m_begin);
+			std::swap(m_end, newArray.m_end);
+			std::swap(m_endOfCapacity, newArray.m_endOfCapacity);
+		}
+		return *this;
+	}
+
+	CMyArray& operator = (CMyArray && rhs)
+	{
+		if (& rhs != this)
+		{
+			Clear();
+			m_begin = rhs.m_begin;
+			m_end = rhs.m_end;
+			m_endOfCapacity = rhs.m_endOfCapacity;
+
+			rhs.m_begin = nullptr;
+			rhs.m_end = nullptr;
+			rhs.m_endOfCapacity = nullptr;
+		}
+		return *this;
+	}
+
+	template<typename T>
+	class CMyIterator : public std::iterator<std::bidirectional_iterator_tag, T>
+	{
+		template <typename> friend class CMyArray;
+		CMyIterator(T* p)
+			: m_pointer(p)
+		{}
+	public:
+
+		CMyIterator() = default;
+
+		T & CMyIterator<T>::operator*() const
+		{
+			return *m_pointer;
+		}
+
+		CMyIterator<T> &CMyIterator<T>::operator++()
+		{
+			++m_pointer;
+			return *this;
+		}
+
+		CMyIterator<T> &CMyIterator<T>::operator--()
+		{
+			--m_pointer;
+			return *this;
+		}
+
+		bool CMyIterator<T>::operator==(CMyIterator const& rhs) const
+		{
+			return m_pointer == rhs.m_pointer;
+		}
+
+		bool CMyIterator<T>::operator!=(CMyIterator const& rhs) const
+		{
+			return m_pointer != rhs.m_pointer;
+		}
+
+	private:
+		T* m_pointer;
+	};
+
+	CMyIterator<T> begin()
+	{
+		return CMyIterator<T>(m_begin);
+	}
+
+	CMyIterator<T> end()
+	{
+		return CMyIterator<T>(m_end);
+	}
+
 
 private:
 	static void DeleteItems(T *begin, T *end)

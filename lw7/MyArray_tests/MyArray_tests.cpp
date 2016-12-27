@@ -56,6 +56,7 @@ BOOST_FIXTURE_TEST_SUITE(MyArray, EmptyStringArray)
 			BOOST_CHECK_EQUAL(arr.GetBack().value, 4);
 		}
 	BOOST_AUTO_TEST_SUITE_END()
+
 	BOOST_AUTO_TEST_SUITE(after_copy_construction)
 		BOOST_AUTO_TEST_CASE(has_size_capacity_equal_to_size_of_original_array)
 		{
@@ -108,6 +109,56 @@ BOOST_FIXTURE_TEST_SUITE(MyArray, EmptyStringArray)
 
 			BOOST_CHECK_EQUAL(arr[0], 10);
 			BOOST_CHECK_EQUAL(arr[1], 11);
+		}
+		// можут быть изменен с меньшим размером
+		BOOST_AUTO_TEST_CASE(can_be_resized_to_smaller)
+		{
+			arr.Resize(2);
+			BOOST_CHECK_EQUAL(arr.GetSize(), 2);
+			BOOST_CHECK_EQUAL(arr[0], 1);
+			BOOST_CHECK_EQUAL(arr[1], 2);
+			BOOST_CHECK_THROW(arr[2], std::out_of_range);
+		}
+		// может быть изменен с большим размером
+		BOOST_AUTO_TEST_CASE(can_be_resized_to_bigger)
+		{
+			arr.Resize(5);
+			BOOST_CHECK_EQUAL(arr.GetSize(), 5);
+			BOOST_CHECK_EQUAL(arr[2], 3);
+			BOOST_CHECK_EQUAL(arr[3], 0);
+			BOOST_CHECK_EQUAL(arr[4], 0);
+			BOOST_CHECK_THROW(arr[5], std::out_of_range);
+		}
+		// может быть очищен
+		BOOST_AUTO_TEST_CASE(can_be_cleared)
+		{
+			arr.Clear();
+			BOOST_CHECK_EQUAL(arr.GetSize(), 0);
+			BOOST_CHECK_THROW(arr[0], std::out_of_range);
+			BOOST_CHECK_THROW(int x = arr[0], std::out_of_range);
+		}
+		// может быть скопирован
+		BOOST_AUTO_TEST_CASE(can_be_copied)
+		{
+			CMyArray<int> newArray;
+			newArray = arr;
+
+			BOOST_CHECK_EQUAL(newArray.GetSize(), arr.GetSize());
+			BOOST_CHECK_EQUAL(newArray[0], arr[0]);
+			BOOST_CHECK_EQUAL(newArray[1], arr[1]);
+			BOOST_CHECK_EQUAL(newArray[2], arr[2]);
+			BOOST_CHECK_THROW(newArray[3] = 0, std::out_of_range);
+
+			newArray.Clear();
+			BOOST_CHECK_EQUAL(newArray.GetSize(), 0);
+			BOOST_CHECK_EQUAL(arr.GetSize(), 3);
+		}
+		// имеет итератор для начала
+		BOOST_AUTO_TEST_CASE(has_iterators_to_begin)
+		{
+			auto it = arr.begin();
+			BOOST_CHECK_EQUAL(*it, 1);
+			//CMyArray<int> newArray = { 1, 2, 3 };
 		}
 	BOOST_AUTO_TEST_SUITE_END()
 
