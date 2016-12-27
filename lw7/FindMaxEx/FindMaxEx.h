@@ -3,7 +3,7 @@
 #include <vector>
 
 template < typename T, typename Less = std::less<T>>
-bool FindMaxEx(std::vector<T> const & arr, T& maxValue, Less const & less)
+bool FindMaxEx(std::vector<T> const & arr, T& maxValue, Less const & less = Less())
 {
 	if (arr.empty())
 	{
