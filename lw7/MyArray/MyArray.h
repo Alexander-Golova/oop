@@ -28,6 +28,16 @@ public:
 		}
 	}
 
+	CMyArray(CMyArray && arr)
+		:m_begin(arr.m_begin)
+		, m_end(arr.m_end)
+		, m_endOfCapacity(arr.m_endOfCapacity)
+	{
+		arr.m_begin = nullptr;
+		arr.m_end = nullptr;
+		arr.m_endOfCapacity = nullptr;
+	}
+
 	void Append(const T & value)
 	{
 		if (m_end == m_endOfCapacity) // no free space
@@ -84,11 +94,6 @@ public:
 		return m_endOfCapacity - m_begin;
 	}
 
-	~CMyArray()
-	{
-		DeleteItems(m_begin, m_end);
-	}
-
 	T& operator[](size_t position)
 	{
 		if (position >= GetSize())
@@ -130,15 +135,13 @@ public:
 
 	void Clear()
 	{
-		DeleteItems(m_begin, m_end);
-		m_begin = nullptr;
-		m_end = nullptr;
-		m_endOfCapacity = nullptr;
+		DestroyItems(m_begin, m_end);
+		m_end = m_begin;
 	}
 
 	CMyArray& operator = (CMyArray const & rhs)
 	{
-		if (& rhs != this)
+		if (std::addressof(*this) != std::addressof(rhs))
 		{
 			CMyArray newArray(rhs);
 
@@ -151,7 +154,7 @@ public:
 
 	CMyArray& operator = (CMyArray && rhs)
 	{
-		if (& rhs != this)
+		if (std::addressof(*this) != std::addressof(rhs))
 		{
 			Clear();
 			m_begin = rhs.m_begin;
@@ -217,6 +220,10 @@ public:
 		return CMyIterator<T>(m_end);
 	}
 
+	~CMyArray()
+	{
+		DeleteItems(m_begin, m_end);
+	}
 
 private:
 	static void DeleteItems(T *begin, T *end)

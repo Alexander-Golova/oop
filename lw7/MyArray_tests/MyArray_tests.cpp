@@ -113,11 +113,13 @@ BOOST_FIXTURE_TEST_SUITE(MyArray, EmptyStringArray)
 		// можут быть изменен с меньшим размером
 		BOOST_AUTO_TEST_CASE(can_be_resized_to_smaller)
 		{
+			BOOST_CHECK_EQUAL(arr.GetCapacity(), 4u);
 			arr.Resize(2);
-			BOOST_CHECK_EQUAL(arr.GetSize(), 2);
+			BOOST_CHECK_EQUAL(arr.GetSize(), 2u);
 			BOOST_CHECK_EQUAL(arr[0], 1);
 			BOOST_CHECK_EQUAL(arr[1], 2);
 			BOOST_CHECK_THROW(arr[2], std::out_of_range);
+			BOOST_CHECK_EQUAL(arr.GetCapacity(), 4u);
 		}
 		// может быть изменен с большим размером
 		BOOST_AUTO_TEST_CASE(can_be_resized_to_bigger)
@@ -128,6 +130,7 @@ BOOST_FIXTURE_TEST_SUITE(MyArray, EmptyStringArray)
 			BOOST_CHECK_EQUAL(arr[3], 0);
 			BOOST_CHECK_EQUAL(arr[4], 0);
 			BOOST_CHECK_THROW(arr[5], std::out_of_range);
+			BOOST_CHECK_EQUAL(arr.GetCapacity(), 8u);
 		}
 		// может быть очищен
 		BOOST_AUTO_TEST_CASE(can_be_cleared)
@@ -136,6 +139,7 @@ BOOST_FIXTURE_TEST_SUITE(MyArray, EmptyStringArray)
 			BOOST_CHECK_EQUAL(arr.GetSize(), 0);
 			BOOST_CHECK_THROW(arr[0], std::out_of_range);
 			BOOST_CHECK_THROW(int x = arr[0], std::out_of_range);
+			BOOST_CHECK_EQUAL(arr.GetCapacity(), 4u);
 		}
 		// может быть скопирован
 		BOOST_AUTO_TEST_CASE(can_be_copied)
@@ -153,12 +157,59 @@ BOOST_FIXTURE_TEST_SUITE(MyArray, EmptyStringArray)
 			BOOST_CHECK_EQUAL(newArray.GetSize(), 0);
 			BOOST_CHECK_EQUAL(arr.GetSize(), 3);
 		}
+		// имеет конструктор перемещения
+		BOOST_AUTO_TEST_CASE(has_moves_constructor)
+		{
+			CMyArray<int> arr1;
+			arr1.Append(1);
+			arr1.Append(2);
+			arr1.Append(3);
+			arr1.Append(4);
+			arr1.Append(5);
+			arr1.Append(6);
+			CMyArray<int> arr2(std::move(arr1));
+			BOOST_CHECK_EQUAL(arr1.GetSize(), 0u);
+			BOOST_CHECK_EQUAL(arr2.GetSize(), 6u);
+			BOOST_CHECK_EQUAL(arr2[0], 1);
+			BOOST_CHECK_EQUAL(arr2[5], 6);
+		}
 		// имеет итератор для начала
 		BOOST_AUTO_TEST_CASE(has_iterators_to_begin)
 		{
 			auto it = arr.begin();
 			BOOST_CHECK_EQUAL(*it, 1);
-			//CMyArray<int> newArray = { 1, 2, 3 };
+			++it;
+			BOOST_CHECK_EQUAL(*it, 2);
+			++it;
+			BOOST_CHECK_EQUAL(*it, 3);
+			--it;
+			BOOST_CHECK_EQUAL(*it, 2);
+
+			CMyArray<int> expectedArray;
+			expectedArray.Append(1);
+			expectedArray.Append(2);
+			expectedArray.Append(3);
+			size_t i = 0;
+			for (auto number : arr)
+			{
+				BOOST_CHECK_EQUAL(number, expectedArray[i]);
+				i++;
+			}
+		}
+		// имеет итератор для конца
+		BOOST_AUTO_TEST_CASE(has_iterators_to_end)
+		{
+			auto it = arr.end();
+			BOOST_CHECK(it != arr.begin());
+			BOOST_CHECK(!(it == arr.begin()));
+			--it;
+			BOOST_CHECK_EQUAL(*it, 3);
+			--it;
+			BOOST_CHECK_EQUAL(*it, 2);
+			--it;
+			BOOST_CHECK_EQUAL(*it, 1);
+			++it;
+			BOOST_CHECK_EQUAL(*it, 2);
 		}
 	BOOST_AUTO_TEST_SUITE_END()
 
