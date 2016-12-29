@@ -125,12 +125,12 @@ BOOST_FIXTURE_TEST_SUITE(MyArray, EmptyStringArray)
 		BOOST_AUTO_TEST_CASE(can_be_resized_to_bigger)
 		{
 			arr.Resize(5);
-			BOOST_CHECK_EQUAL(arr.GetSize(), 5);
+			BOOST_CHECK_EQUAL(arr.GetSize(), 5u);
 			BOOST_CHECK_EQUAL(arr[2], 3);
 			BOOST_CHECK_EQUAL(arr[3], 0);
 			BOOST_CHECK_EQUAL(arr[4], 0);
 			BOOST_CHECK_THROW(arr[5], std::out_of_range);
-			BOOST_CHECK_EQUAL(arr.GetCapacity(), 8u);
+			BOOST_CHECK_EQUAL(arr.GetCapacity(), 5u);
 		}
 		// может быть очищен
 		BOOST_AUTO_TEST_CASE(can_be_cleared)

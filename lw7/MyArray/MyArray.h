@@ -118,15 +118,35 @@ public:
 
 		if (newSize < currentSize)
 		{
-			for (size_t i = 0; i < currentSize - newSize; ++i)
-			{
-				m_end[-1].~T();
-				--m_end;
-			}
+			DestroyItems(m_begin + newSize, m_end);
+			m_end -= (currentSize - newSize);
 		}
-		else if (newSize > currentSize)
+		else if (newSize > currentSize && newSize <= GetCapacity())
 		{
 			for (size_t i = 0; i < newSize - currentSize; ++i)
+			{
+				Append(T());
+			}
+		}
+		else if (newSize > GetCapacity())
+		{
+			auto newBegin = RawAlloc(newSize);
+			T *newEnd = newBegin;
+			try
+			{
+				CopyItems(m_begin, m_end, newBegin, newEnd);
+			}
+			catch (...)
+			{
+				DeleteItems(newBegin, newEnd);
+				throw;
+			}
+			DeleteItems(m_begin, m_end);
+
+			m_begin = newBegin;
+			m_end = newEnd;
+			m_endOfCapacity = m_begin + newSize;
+			for (size_t i = GetSize(); i < GetCapacity(); ++i)
 			{
 				Append(T());
 			}
