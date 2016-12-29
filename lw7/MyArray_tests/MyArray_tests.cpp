@@ -131,6 +131,12 @@ BOOST_FIXTURE_TEST_SUITE(MyArray, EmptyStringArray)
 			BOOST_CHECK_EQUAL(arr[4], 0);
 			BOOST_CHECK_THROW(arr[5], std::out_of_range);
 			BOOST_CHECK_EQUAL(arr.GetCapacity(), 5u);
+			arr.Resize(2);
+			BOOST_CHECK_EQUAL(arr.GetSize(), 2u);
+			arr.Resize(4);
+			BOOST_CHECK_EQUAL(arr.GetSize(), 4u);
+			BOOST_CHECK_EQUAL(arr[3], 0);
+			BOOST_CHECK_THROW(arr[4], std::out_of_range);
 		}
 		// может быть очищен
 		BOOST_AUTO_TEST_CASE(can_be_cleared)
@@ -154,8 +160,17 @@ BOOST_FIXTURE_TEST_SUITE(MyArray, EmptyStringArray)
 			BOOST_CHECK_THROW(newArray[3] = 0, std::out_of_range);
 
 			newArray.Clear();
-			BOOST_CHECK_EQUAL(newArray.GetSize(), 0);
-			BOOST_CHECK_EQUAL(arr.GetSize(), 3);
+			BOOST_CHECK_EQUAL(newArray.GetSize(), 0u);
+			BOOST_CHECK_EQUAL(arr.GetSize(), 3u);
+
+			CMyArray<int> newArray2;
+			newArray2 = std::move(arr);
+
+			BOOST_CHECK_EQUAL(arr.GetSize(), 0u);
+			BOOST_CHECK_EQUAL(newArray2.GetSize(), 3u);
+			BOOST_CHECK_EQUAL(arr.GetCapacity(), 0u);
+			BOOST_CHECK_EQUAL(newArray2.GetCapacity(), 4u);
+
 		}
 		// имеет конструктор перемещения
 		BOOST_AUTO_TEST_CASE(has_moves_constructor)
