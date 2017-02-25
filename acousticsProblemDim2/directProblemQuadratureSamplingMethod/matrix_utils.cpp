@@ -60,7 +60,7 @@ void SolveSlauGaussa(const vector<vector<complex<float>>> & matrix, const vector
 }
 
 void AdditionOfSquareMatrices(const size_t dim, vector<vector<complex<float>>> & matrix,
-	const vector<vector<complex<float>>> rhs)
+	const vector<vector<complex<float>>> & rhs)
 {
 	for (size_t col = 0; col < dim; ++col)
 	{
@@ -72,8 +72,8 @@ void AdditionOfSquareMatrices(const size_t dim, vector<vector<complex<float>>> &
 }
 
 void MultiplicationMatrixBlock(const size_t dimMatrix_1, const size_t dimMatrix_2, const size_t dimMatrix_3,
-	const std::vector<std::vector<std::complex<float>>> lhs, const std::vector<std::vector<std::complex<float>>> rhs,
-	std::vector<std::vector<std::complex<float>>> & result)
+	const vector<vector<complex<float>>> & lhs, const vector<vector<complex<float>>> & rhs,
+	vector<vector<complex<float>>> & result)
 {
 	for (size_t i = 0; i < dimMatrix_1; ++i)
 	{
@@ -104,8 +104,8 @@ void MultiplicationMatrixBlock(const size_t dimMatrix_1, const size_t dimMatrix_
 }
 
 void MultiplicationTransposedMatrix(const size_t dimMatrix_1, const size_t dimMatrix_2, const size_t dimMatrix_3,
-	const std::vector<std::vector<std::complex<float>>> lhs, const std::vector<std::vector<std::complex<float>>> rhs,
-	std::vector<std::vector<std::complex<float>>> & result)
+	const vector<vector<complex<float>>> & lhs, const vector<vector<complex<float>>> & rhs,
+	vector<vector<complex<float>>> & result)
 {
 	for (size_t i = 0; i < dimMatrix_1; ++i)
 	{
@@ -136,8 +136,8 @@ void MultiplicationTransposedMatrix(const size_t dimMatrix_1, const size_t dimMa
 }
 
 void MultiplicationMatrixTransposed(const size_t dimMatrix_1, const size_t dimMatrix_2, const size_t dimMatrix_3,
-	const std::vector<std::vector<std::complex<float>>> lhs, const std::vector<std::vector<std::complex<float>>> rhs,
-	std::vector<std::vector<std::complex<float>>> & result)
+	const vector<vector<complex<float>>> & lhs, const vector<vector<complex<float>>> & rhs,
+	vector<vector<complex<float>>> & result)
 {
 	for (size_t i = 0; i < dimMatrix_1; ++i)
 	{
@@ -168,8 +168,8 @@ void MultiplicationMatrixTransposed(const size_t dimMatrix_1, const size_t dimMa
 }
 
 void MultiplicationTransposedMatrixVector(const size_t dimMatrix_1, const size_t dimMatrix_2,
-	const std::vector<std::vector<std::complex<float>>> matrix, const std::vector<std::complex<float>> vect,
-	std::vector<std::complex<float>> & result)
+	const vector<vector<complex<float>>> & matrix, const vector<complex<float>> & vect,
+	vector<complex<float>> & result)
 {
 	for (size_t i = 0; i < dimMatrix_1; ++i)
 	{
@@ -185,8 +185,8 @@ void MultiplicationTransposedMatrixVector(const size_t dimMatrix_1, const size_t
 }
 
 void MultiplicationMatrixVector(const size_t dimMatrix_1, const size_t dimMatrix_2,
-	const std::vector<std::vector<std::complex<float>>> matrix, const std::vector<std::complex<float>> vect,
-	std::vector<std::complex<float>> & result)
+	const vector<vector<complex<float>>> & matrix, const vector<complex<float>> & vect,
+	vector<complex<float>> & result)
 {
 	for (size_t i = 0; i < dimMatrix_1; ++i)
 	{
@@ -201,8 +201,8 @@ void MultiplicationMatrixVector(const size_t dimMatrix_1, const size_t dimMatrix
 	}
 }
 
-std::complex<float> MultiplicationVectorVector(const size_t dim, const std::vector<std::complex<float>> lhs,
-	const std::vector<std::complex<float>> rhs)
+complex<float> MultiplicationVectorVector(const size_t dim, const vector<complex<float>> & lhs,
+	const vector<complex<float>> & rhs)
 {
 	std::complex<float> sum = (0.0f, 0.0f);
 	for (size_t i = 0; i < dim; ++i)
@@ -212,8 +212,8 @@ std::complex<float> MultiplicationVectorVector(const size_t dim, const std::vect
 	return sum;
 }
 
-void AdditionOfVectors(const size_t dim, std::vector<std::complex<float>> & lhs,
-	const std::vector<std::complex<float>> rhs)
+void AdditionOfVectors(const size_t dim, vector<complex<float>> & lhs,
+	const vector<complex<float>> & rhs)
 {
 	for (size_t i = 0; i < dim; ++i)
 	{
@@ -221,8 +221,8 @@ void AdditionOfVectors(const size_t dim, std::vector<std::complex<float>> & lhs,
 	}
 }
 
-void SubtractionOfVectors(const size_t dim, std::vector<std::complex<float>> & lhs,
-	const std::vector<std::complex<float>> rhs)
+void SubtractionOfVectors(const size_t dim, vector<complex<float>> & lhs,
+	const vector<complex<float>> & rhs)
 {
 	for (size_t i = 0; i < dim; ++i)
 	{
@@ -230,8 +230,8 @@ void SubtractionOfVectors(const size_t dim, std::vector<std::complex<float>> & l
 	}
 }
 
-void SubtractionOfSquareMatrices(const size_t dim, std::vector<std::vector<std::complex<float>>> & lhs,
-	const std::vector<std::vector<std::complex<float>>> rhs)
+void SubtractionOfSquareMatrices(const size_t dim, vector<vector<complex<float>>> & lhs,
+	const vector<vector<complex<float>>> & rhs)
 {
 	for (size_t i = 0; i < dim; ++i)
 	{

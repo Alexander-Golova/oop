@@ -11,7 +11,7 @@ int main()
 	const float h = (float)DOMAIN_IN_HOMOGENEITY / N;
 
 	// выделение памяти для акустического поля u
-	vector<vector<complex<float>>> u(N + 1, vector<complex<float>>(N + 1, (0.0f, 0.0f)));
+	vector<vector<complex<float>>> u(N + 1, vector<complex<float>>(N + 1, complex<float>()));
 
 	// задание точного решения \xi
 	vector<vector<float>> xi(N + 1, vector<float>(N + 1, 0.0f));
@@ -45,14 +45,14 @@ int main()
 	// выделение памяти под 4-х мерный "квадратный" комплексный массив
 	vector<vector<vector<vector<complex<float>>>>> a(N + 1,
 		vector<vector<vector<complex<float>>>>(N + 1, vector<vector<complex<float>>>(N + 1,
-			vector<complex<float>>(N + 1, (0.0f, 0.0f)))));
+			vector<complex<float>>(N + 1, complex<float>()))));
 
 	// выделение памяти под 3-х мерный "квадратный" комплексный массив
 	vector<vector<vector<complex<float>>>> overline_a(N + 1, vector<vector<complex<float>>>(N + 1,
-		vector<complex<float>>(N + 1, (0.0f, 0.0f))));
+		vector<complex<float>>(N + 1, complex<float>())));
 
 	// выделение памяти под 2-х мерный квадратный комплексный массив
-	vector<vector<complex<float>>> b(N + 1, vector<complex<float>>(N + 1, (0.0f, 0.0f)));
+	vector<vector<complex<float>>> b(N + 1, vector<complex<float>>(N + 1, complex<float>()));
 
 	// счет индексов метода квадратур
 	vector<float> index(N + 1);
@@ -139,7 +139,7 @@ int main()
 			{
 				for (size_t q = 0; q < N; ++q)
 				{
-					f_a << fixed << setprecision(8) << a[i][j][p][q] << " ";
+					f_a << fixed << setprecision(6) << a[i][j][p][q] << " ";
 				}
 			}
 		}
@@ -153,7 +153,7 @@ int main()
 		{
 			for (size_t q = 0; q < N; ++q)
 			{
-				f_overline_a << fixed << setprecision(8) << overline_a[j][p][q] << " ";
+				f_overline_a << fixed << setprecision(6) << overline_a[j][p][q] << " ";
 			}
 		}
 	}
@@ -164,7 +164,7 @@ int main()
 	{
 		for (size_t j = 0; j <= N; ++j)
 		{
-			f_b << fixed << setprecision(8) << b[i][j] << " ";
+			f_b << fixed << setprecision(6) << b[i][j] << " ";
 		}
 	}
 	f_b.close();
@@ -279,7 +279,7 @@ int main()
 
 	// для нахождения u^(1) составляем СЛАУ основная матрица * u^(1) = правой части
 	// substantiveMatrix[ii][jj] * numbered_u[jj] = rightPartEequation[ii]
-	size_t N_squared = (N + 1) * (N + 1);
+	const size_t N_squared = (N + 1) * (N + 1);
 
 	vector<complex<float>> rightPartEquation(N_squared, (0.0f, 0.0f));
 
