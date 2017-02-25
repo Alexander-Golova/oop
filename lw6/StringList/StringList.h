@@ -16,7 +16,7 @@ class CStringList
 	};
 
 public:
-	CStringList() = default;
+	CStringList();
 	~CStringList();
 
 	void Append(const std::string & data);
@@ -61,7 +61,10 @@ public:
 	CIterator const crbegin() const;
 	CIterator const crend() const;
 private:
+	void CreateFictitiousNode();
+
 	size_t m_size = 0;
 	std::unique_ptr<Node> m_firstNode;
-	Node * m_lastNode = nullptr;
+	Node * m_lastNode;
+	Node * m_endNode;
 };

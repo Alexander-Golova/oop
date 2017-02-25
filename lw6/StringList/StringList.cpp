@@ -4,9 +4,23 @@
 
 using namespace std;
 
+CStringList::CStringList()
+{
+	CreateFictitiousNode();
+}
+
+void CStringList::CreateFictitiousNode()
+{
+	auto newNode = make_unique<Node>("", nullptr, nullptr);
+	m_firstNode = move(newNode);
+	m_lastNode = newNode.get();
+	m_endNode = newNode.get();
+}
+
 CStringList::~CStringList()
 {
 	Clear();
+	m_firstNode = nullptr;
 }
 
 void CStringList::Erase(const CIterator & it)
@@ -60,13 +74,14 @@ void CStringList::Insert(const CIterator & it, const string & data)
 void CStringList::PushFront(const string & data)
 {
 	auto newNode = make_unique<Node>(data, nullptr, move(m_firstNode));
-	if (newNode->next)
+	if (m_lastNode != m_endNode)
 	{
 		newNode->next->prev = newNode.get();
 	}
 	else
 	{
 		m_lastNode = newNode.get();
+		m_endNode->prev = newNode.get();
 	}
 	m_firstNode = move(newNode);
 	m_firstNode->prev = nullptr;
@@ -90,15 +105,16 @@ void CStringList::Clear()
 		m_lastNode->next = nullptr;
 		m_lastNode = m_lastNode->prev;
 	}
-	m_firstNode = nullptr;
+	//m_firstNode = nullptr;
 	m_size = 0;
+	CreateFictitiousNode();
 }
 
 void CStringList::Append(const string & data)
 {
 	auto newNode = make_unique<Node>(data, m_lastNode, nullptr);
 	Node *newLastNode = newNode.get();
-	if (m_lastNode)
+	if (m_lastNode != m_endNode)
 	{
 		m_lastNode->next = move(newNode);
 	}
@@ -107,18 +123,19 @@ void CStringList::Append(const string & data)
 		m_firstNode = move(newNode);
 	}
 	m_lastNode = newLastNode;
+	m_endNode->prev = newLastNode;
 	++m_size;
 }
 
 string & CStringList::GetBackElement()
 {
-	assert(m_lastNode);
+	assert(m_endNode->prev);
 	return m_lastNode->data;
 }
 
 string const & CStringList::GetBackElement() const
 {
-	assert(m_lastNode);
+	assert(m_endNode->prev);
 	return m_lastNode->data;
 }
 
