@@ -1,58 +1,58 @@
-#pragma once
+п»ї#pragma once
 
 const size_t SIZE_BLOCK_PARALLEL_MULTIPLICATION_MATRIX = 32;
 
-// решение системы методом Гаусса
+// СЂРµС€РµРЅРёРµ СЃРёСЃС‚РµРјС‹ РјРµС‚РѕРґРѕРј Р“Р°СѓСЃСЃР°
 void SolveSlauGaussa(const std::vector<std::vector<std::complex<float>>> & matrix,
 	const std::vector<std::complex<float>> & rhs, std::vector<std::complex<float>> & exactSolution);
 
-// сложение двух квадратных матриц - результат записывается в первую матрицу
+// СЃР»РѕР¶РµРЅРёРµ РґРІСѓС… РєРІР°РґСЂР°С‚РЅС‹С… РјР°С‚СЂРёС† - СЂРµР·СѓР»СЊС‚Р°С‚ Р·Р°РїРёСЃС‹РІР°РµС‚СЃСЏ РІ РїРµСЂРІСѓСЋ РјР°С‚СЂРёС†Сѓ
 void AdditionOfSquareMatrices(const size_t dimMatrix, std::vector<std::vector<std::complex<float>>> & matrix,
 	const std::vector<std::vector<std::complex<float>>> rhs);
 
-// блочное умножение матриц
+// Р±Р»РѕС‡РЅРѕРµ СѓРјРЅРѕР¶РµРЅРёРµ РјР°С‚СЂРёС†
 void MultiplicationMatrixBlock(const size_t dimMatrix_1, const size_t dimMatrix_2, const size_t dimMatrix_3,
 	const std::vector<std::vector<std::complex<float>>> lhs, const std::vector<std::vector<std::complex<float>>> rhs,
 	std::vector<std::vector<std::complex<float>>> & result);
 
-// блочное умножение транспонированной матрицы на обычную матрицу
+// Р±Р»РѕС‡РЅРѕРµ СѓРјРЅРѕР¶РµРЅРёРµ С‚СЂР°РЅСЃРїРѕРЅРёСЂРѕРІР°РЅРЅРѕР№ РјР°С‚СЂРёС†С‹ РЅР° РѕР±С‹С‡РЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 void MultiplicationTransposedMatrix(const size_t dimMatrix_1, const size_t dimMatrix_2, const size_t dimMatrix_3,
 	const std::vector<std::vector<std::complex<float>>> lhs, const std::vector<std::vector<std::complex<float>>> rhs,
 	std::vector<std::vector<std::complex<float>>> & result);
 
-// блочное умножение обычной матрицы на транспонированную матрицу
+// Р±Р»РѕС‡РЅРѕРµ СѓРјРЅРѕР¶РµРЅРёРµ РѕР±С‹С‡РЅРѕР№ РјР°С‚СЂРёС†С‹ РЅР° С‚СЂР°РЅСЃРїРѕРЅРёСЂРѕРІР°РЅРЅСѓСЋ РјР°С‚СЂРёС†Сѓ
 void MultiplicationMatrixTransposed(const size_t dimMatrix_1, const size_t dimMatrix_2, const size_t dimMatrix_3,
 	const std::vector<std::vector<std::complex<float>>> lhs, const std::vector<std::vector<std::complex<float>>> rhs,
 	std::vector<std::vector<std::complex<float>>> & result);
 
-// умножение транспонированной матрицы на вектор
+// СѓРјРЅРѕР¶РµРЅРёРµ С‚СЂР°РЅСЃРїРѕРЅРёСЂРѕРІР°РЅРЅРѕР№ РјР°С‚СЂРёС†С‹ РЅР° РІРµРєС‚РѕСЂ
 void MultiplicationTransposedMatrixVector(const size_t dimMatrix_1, const size_t dimMatrix_2,
 	const std::vector<std::vector<std::complex<float>>> matrix, const std::vector<std::complex<float>> vect,
 	std::vector<std::complex<float>> & result);
 
-// умножение матрицы на вектор
+// СѓРјРЅРѕР¶РµРЅРёРµ РјР°С‚СЂРёС†С‹ РЅР° РІРµРєС‚РѕСЂ
 void MultiplicationMatrixVector(const size_t dimMatrix_1, const size_t dimMatrix_2,
 	const std::vector<std::vector<std::complex<float>>> matrix, const std::vector<std::complex<float>> vect,
 	std::vector<std::complex<float>> & result);
 
-// умножение вектора на вектор
+// СѓРјРЅРѕР¶РµРЅРёРµ РІРµРєС‚РѕСЂР° РЅР° РІРµРєС‚РѕСЂ
 std::complex<float> MultiplicationVectorVector(const size_t dim, const std::vector<std::complex<float>> lhs,
 	const std::vector<std::complex<float>> rhs);
 
 
-// сложение двух векторов - результат записывается в первый вектор
+// СЃР»РѕР¶РµРЅРёРµ РґРІСѓС… РІРµРєС‚РѕСЂРѕРІ - СЂРµР·СѓР»СЊС‚Р°С‚ Р·Р°РїРёСЃС‹РІР°РµС‚СЃСЏ РІ РїРµСЂРІС‹Р№ РІРµРєС‚РѕСЂ
 void AdditionOfVectors(const size_t dim, std::vector<std::complex<float>> & lhs,
 	const std::vector<std::complex<float>> rhs);
 
-// вычитание двух векторов - результат записывается в первый вектор
+// РІС‹С‡РёС‚Р°РЅРёРµ РґРІСѓС… РІРµРєС‚РѕСЂРѕРІ - СЂРµР·СѓР»СЊС‚Р°С‚ Р·Р°РїРёСЃС‹РІР°РµС‚СЃСЏ РІ РїРµСЂРІС‹Р№ РІРµРєС‚РѕСЂ
 void SubtractionOfVectors(const size_t dim, std::vector<std::complex<float>> & lhs,
 	const std::vector<std::complex<float>> rhs);
 
 
-// вычитание двух квадратных матриц - результат записывается в первую матрицу
+// РІС‹С‡РёС‚Р°РЅРёРµ РґРІСѓС… РєРІР°РґСЂР°С‚РЅС‹С… РјР°С‚СЂРёС† - СЂРµР·СѓР»СЊС‚Р°С‚ Р·Р°РїРёСЃС‹РІР°РµС‚СЃСЏ РІ РїРµСЂРІСѓСЋ РјР°С‚СЂРёС†Сѓ
 void SubtractionOfSquareMatrices(const size_t dim, std::vector<std::vector<std::complex<float>>> & lhs,
 	const std::vector<std::vector<std::complex<float>>> rhs);
 
-//нахождение обратной матрицы методом Жордана-Гаусса
+//РЅР°С…РѕР¶РґРµРЅРёРµ РѕР±СЂР°С‚РЅРѕР№ РјР°С‚СЂРёС†С‹ РјРµС‚РѕРґРѕРј Р–РѕСЂРґР°РЅР°-Р“Р°СѓСЃСЃР°
 void InvertMatrix(const size_t dim, std::vector<std::vector<std::complex<float>>> matrix,
 	std::vector<std::vector<std::complex<float>>> & invertedMatrix);
