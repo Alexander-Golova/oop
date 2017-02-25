@@ -246,46 +246,55 @@ void InvertMatrix(const size_t dim, std::vector<std::vector<std::complex<float>>
 	std::vector<std::vector<std::complex<float>>> & invertedMatrix)
 {
 	std::complex<float> temp;
-	for (size_t i = 0; i < dim; ++i)
+	for (size_t row = 0; row < dim; ++row)
 	{
-		for (size_t j = 0; j < dim; ++j)
+		for (size_t col = 0; col < dim; ++col)
 		{
-			invertedMatrix[i][j] = (0.0f, 0.0f);
+			invertedMatrix[row][col] = (0.0f, 0.0f);
 		}
-		invertedMatrix[i][i] = (1.0f, 0.0f);
+		invertedMatrix[row][row] = (1.0f, 0.0f);
 	}
 
-	for (size_t k = 0; k < dim; ++k)
+	for (size_t row = 0; row < dim; ++row)
 	{
-		temp = matrix[k][k];
-
-		for (size_t j = 0; j < dim; ++j)
+		complex<float> maxElement = matrix[row][row];
+		size_t maxNumber = row;
+		for (size_t col = row; col < dim; ++col)
 		{
-			matrix[k][j] /= temp;
-			invertedMatrix[k][j] /= temp;
+			if (abs(matrix[col][row]) > abs(maxElement))
+			{
+				maxElement = matrix[col][row];
+				maxNumber = col;
+			}
+		}
+		for (size_t col = 0; col < dim; ++col)
+		{
+			temp = matrix[row][col];
+			matrix[row][col] = matrix[maxNumber][col];
+			matrix[maxNumber][col] = temp;
+		}
+		for (size_t col = 0; col < dim; ++col)
+		{
+			temp = invertedMatrix[row][col];
+			invertedMatrix[row][col] = invertedMatrix[maxNumber][col];
+			invertedMatrix[maxNumber][col] = temp;
 		}
 
-		for (size_t i = k + 1; i < dim; ++i)
+		for (size_t col = 0; col < dim; ++col)
 		{
-			temp = matrix[i][k];
-			for (size_t j = 0; j < dim; ++j)
+			if (row != col)
 			{
-				matrix[i][j] -= matrix[k][j] * temp;
-				invertedMatrix[i][j] -= invertedMatrix[k][j] * temp;
+				complex<float> multiplier = matrix[col][row] / matrix[row][row];
+				for (size_t i = 0; i < dim; ++i)
+				{
+					matrix[col][i] -= matrix[row][i] * multiplier;
+					invertedMatrix[col][i] -= invertedMatrix[row][i] * multiplier;
+				}
 			}
 		}
 	}
-
-	for (size_t k = dim - 1; k > 0; --k)
+	for (size_t row = 0; row < dim; ++row)
 	{
-		for (size_t i = k - 1; i >= 0; --i)
-		{
-			temp = matrix[i][k];
-			for (size_t j = 0; j < dim; ++j)
-			{
-				matrix[i][j] -= matrix[k][j] * temp;
-				invertedMatrix[i][j] -= invertedMatrix[k][j] * temp;
-			}
-		}
+		invertedMatrix[row][row] /= matrix[row][row];
 	}
 }
