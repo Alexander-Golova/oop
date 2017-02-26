@@ -71,105 +71,84 @@ void AdditionOfSquareMatrices(const size_t dim, vector<vector<complex<float>>> &
 	}
 }
 
-void MultiplicationMatrixBlock(const size_t dimMatrix_1, const size_t dimMatrix_2, const size_t dimMatrix_3,
-	const vector<vector<complex<float>>> & lhs, const vector<vector<complex<float>>> & rhs,
-	vector<vector<complex<float>>> & result)
+void MultiplicationMatrixBlock(const size_t dim1, const size_t dim2, const size_t dim3,
+			const vector<vector<complex<float>>> & lhs, const vector<vector<complex<float>>> & rhs,
+			vector<vector<complex<float>>> & result)
 {
-	for (size_t i = 0; i < dimMatrix_1; ++i)
-	{
-		for (size_t j = 0; j < dimMatrix_3; ++j)
-		{
-			result[i][j] = (0.0f, 0.0f);
-		}
-	}
+	vector<complex<float>> thatColumn(dim3);
+	vector<complex<float>> thisRow(dim2);
+	complex<float> summand;
 
-	for (size_t jj = 0; jj < dimMatrix_3; jj += SIZE_BLOCK_PARALLEL_MULTIPLICATION_MATRIX)
+	for (size_t col = 0; col < dim3; ++col)
 	{
-		for (size_t kk = 0; kk < dimMatrix_2; kk += SIZE_BLOCK_PARALLEL_MULTIPLICATION_MATRIX)
+		for (size_t k = 0; k < dim2; ++k)
 		{
-			for (size_t i = 0; i < dimMatrix_1; ++i)
+			thatColumn[k] = rhs[k][col];
+		}
+		for (size_t row = 0; row < dim1; ++row)
+		{
+			thisRow = lhs[row];
+			summand = (0.0f, 0.0f);
+			for (size_t k = 0; k < dim2; ++k)
 			{
-				for (size_t j = jj; j < std::min(jj + SIZE_BLOCK_PARALLEL_MULTIPLICATION_MATRIX, dimMatrix_3); ++j)
-				{
-					std::complex<float> r = (0.0f, 0.0f);
-					for (size_t k = kk; k < std::min(kk + SIZE_BLOCK_PARALLEL_MULTIPLICATION_MATRIX, dimMatrix_2); ++k)
-					{
-						r = r + lhs[i][k] * rhs[k][j];
-					}
-					result[i][j] += r;
-				}
+				summand += thisRow[k] * thatColumn[k];
 			}
+			result[row][col] = summand;
 		}
 	}
 }
 
-void MultiplicationTransposedMatrix(const size_t dimMatrix_1, const size_t dimMatrix_2, const size_t dimMatrix_3,
-	const vector<vector<complex<float>>> & lhs, const vector<vector<complex<float>>> & rhs,
-	vector<vector<complex<float>>> & result)
+void MultiplicationMatrixTransposed(const size_t dim1, const size_t dim2, const size_t dim3,
+			const vector<vector<complex<float>>> & lhs, const vector<vector<complex<float>>> & rhs,
+			vector<vector<complex<float>>> & result)
 {
-	for (size_t i = 0; i < dimMatrix_1; ++i)
-	{
-		for (size_t j = 0; j < dimMatrix_3; ++j)
-		{
-			result[i][j] = (0.0f, 0.0f);
-		}
-	}
+	vector<complex<float>> thatRow(dim2);
+	vector<complex<float>> thisRow(dim2);
+	complex<float> summand;
 
-	for (size_t jj = 0; jj < dimMatrix_3; jj += SIZE_BLOCK_PARALLEL_MULTIPLICATION_MATRIX)
+	for (size_t col = 0; col < dim3; ++col)
 	{
-		for (size_t kk = 0; kk < dimMatrix_2; kk += SIZE_BLOCK_PARALLEL_MULTIPLICATION_MATRIX)
+		for (size_t row = 0; row < dim1; ++row)
 		{
-			for (size_t i = 0; i < dimMatrix_1; ++i)
+			thisRow = lhs[row];
+			thatRow = rhs[row];
+			summand = (0.0f, 0.0f);
+			for (size_t k = 0; k < dim2; ++k)
 			{
-				for (size_t j = jj; j < std::min(jj + SIZE_BLOCK_PARALLEL_MULTIPLICATION_MATRIX, dimMatrix_3); ++j)
-				{
-					std::complex<float> r = (0.0f, 0.0f);
-					for (size_t k = kk; k < std::min(kk + SIZE_BLOCK_PARALLEL_MULTIPLICATION_MATRIX, dimMatrix_2); ++k)
-					{
-						r = r + lhs[k][i] * rhs[k][j];
-					}
-					result[i][j] += r;
-				}
+				summand += thisRow[k] * conj(thatRow[k]);
 			}
+			result[row][col] = summand;
 		}
 	}
 }
 
-void MultiplicationMatrixTransposed(const size_t dimMatrix_1, const size_t dimMatrix_2, const size_t dimMatrix_3,
+void MultiplicationTransposedMatrix(const size_t dim1, const size_t dim2, const size_t dim3,
 	const vector<vector<complex<float>>> & lhs, const vector<vector<complex<float>>> & rhs,
 	vector<vector<complex<float>>> & result)
 {
-	for (size_t i = 0; i < dimMatrix_1; ++i)
+	vector<vector<complex<float>>> newLhs(dim3, vector<complex<float>>(dim1));
+	for (size_t i = 0; i < dim1; ++i)
 	{
-		for (size_t j = 0; j < dimMatrix_3; ++j)
+		for (size_t j = 0; j < dim3; ++j)
 		{
-			result[i][j] = (0.0f, 0.0f);
+			newLhs[j][i] = conj(rhs[i][j]);
 		}
 	}
 
-	for (size_t jj = 0; jj < dimMatrix_3; jj += SIZE_BLOCK_PARALLEL_MULTIPLICATION_MATRIX)
+	vector<vector<complex<float>>> transpResult(dim3, vector<complex<float>>(dim2));
+	MultiplicationMatrixTransposed(dim3, dim1, dim2, newLhs, lhs, transpResult);	
+	for (size_t i = 0; i < dim2; ++i)
 	{
-		for (size_t kk = 0; kk < dimMatrix_2; kk += SIZE_BLOCK_PARALLEL_MULTIPLICATION_MATRIX)
+		for (size_t j = 0; j < dim3; ++j)
 		{
-			for (size_t i = 0; i < dimMatrix_1; ++i)
-			{
-				for (size_t j = jj; j < std::min(jj + SIZE_BLOCK_PARALLEL_MULTIPLICATION_MATRIX, dimMatrix_3); ++j)
-				{
-					std::complex<float> r = (0.0f, 0.0f);
-					for (size_t k = kk; k < std::min(kk + SIZE_BLOCK_PARALLEL_MULTIPLICATION_MATRIX, dimMatrix_2); ++k)
-					{
-						r = r + lhs[i][k] * rhs[j][k];
-					}
-					result[i][j] += r;
-				}
-			}
+			result[i][j] = conj(transpResult[j][i]);
 		}
-	}
+	}	
 }
 
 void MultiplicationTransposedMatrixVector(const size_t dimMatrix_1, const size_t dimMatrix_2,
-	const vector<vector<complex<float>>> & matrix, const vector<complex<float>> & vect,
-	vector<complex<float>> & result)
+					const vector<vector<complex<float>>> & matrix, const vector<complex<float>> & vect,
+						vector<complex<float>> & result)
 {
 	for (size_t i = 0; i < dimMatrix_1; ++i)
 	{
@@ -184,27 +163,27 @@ void MultiplicationTransposedMatrixVector(const size_t dimMatrix_1, const size_t
 	}
 }
 
-void MultiplicationMatrixVector(const size_t dimMatrix_1, const size_t dimMatrix_2,
-	const vector<vector<complex<float>>> & matrix, const vector<complex<float>> & vect,
-	vector<complex<float>> & result)
+void MultiplicationMatrixVector(const size_t dim1, const size_t dim2,
+				const vector<vector<complex<float>>> & matrix, const vector<complex<float>> & vect,
+						vector<complex<float>> & result)
 {
-	for (size_t i = 0; i < dimMatrix_1; ++i)
+	for (size_t row = 0; row < dim1; ++row)
 	{
-		result[i] = (0.0f, 0.0f);
+		result[row] = (0.0f, 0.0f);
 	}
-	for (size_t i = 0; i < dimMatrix_1; ++i)
+	for (size_t row = 0; row < dim1; ++row)
 	{
-		for (size_t j = 0; j < dimMatrix_2; ++j)
+		for (size_t col = 0; col < dim2; ++col)
 		{
-			result[i] += std::conj(matrix[i][j]) * vect[j];
+			result[row] += conj(matrix[row][col]) * vect[col];
 		}
 	}
 }
 
 complex<float> MultiplicationVectorVector(const size_t dim, const vector<complex<float>> & lhs,
-	const vector<complex<float>> & rhs)
+											const vector<complex<float>> & rhs)
 {
-	std::complex<float> sum = (0.0f, 0.0f);
+	complex<float> sum = complex<float>();
 	for (size_t i = 0; i < dim; ++i)
 	{
 		sum += lhs[i] * rhs[i];
@@ -213,7 +192,7 @@ complex<float> MultiplicationVectorVector(const size_t dim, const vector<complex
 }
 
 void AdditionOfVectors(const size_t dim, vector<complex<float>> & lhs,
-	const vector<complex<float>> & rhs)
+						const vector<complex<float>> & rhs)
 {
 	for (size_t i = 0; i < dim; ++i)
 	{
@@ -222,7 +201,7 @@ void AdditionOfVectors(const size_t dim, vector<complex<float>> & lhs,
 }
 
 void SubtractionOfVectors(const size_t dim, vector<complex<float>> & lhs,
-	const vector<complex<float>> & rhs)
+							const vector<complex<float>> & rhs)
 {
 	for (size_t i = 0; i < dim; ++i)
 	{
@@ -231,19 +210,19 @@ void SubtractionOfVectors(const size_t dim, vector<complex<float>> & lhs,
 }
 
 void SubtractionOfSquareMatrices(const size_t dim, vector<vector<complex<float>>> & lhs,
-	const vector<vector<complex<float>>> & rhs)
+									const vector<vector<complex<float>>> & rhs)
 {
-	for (size_t i = 0; i < dim; ++i)
+	for (size_t row = 0; row < dim; ++row)
 	{
-		for (size_t j = 0; j < dim; ++j)
+		for (size_t col = 0; col < dim; ++col)
 		{
-			lhs[i][j] -= rhs[i][j];
+			lhs[row][col] -= rhs[row][col];
 		}
 	}
 }
 
-void InvertMatrix(const size_t dim, std::vector<std::vector<std::complex<float>>> matrix,
-	std::vector<std::vector<std::complex<float>>> & invertedMatrix)
+void InvertMatrix(const size_t dim, vector<vector<complex<float>>> matrix,
+					vector<vector<complex<float>>> & invertedMatrix)
 {
 	std::complex<float> temp;
 	for (size_t row = 0; row < dim; ++row)

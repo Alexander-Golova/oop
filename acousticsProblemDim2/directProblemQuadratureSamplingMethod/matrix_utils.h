@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-const size_t SIZE_BLOCK_PARALLEL_MULTIPLICATION_MATRIX = 32;
-
 // решение системы методом Гаусса
 void SolveSlauGaussa(const std::vector<std::vector<std::complex<float>>> & matrix,
 	const std::vector<std::complex<float>> & rhs, std::vector<std::complex<float>> & exactSolution);
