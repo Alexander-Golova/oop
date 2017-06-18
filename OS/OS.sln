@@ -23,6 +23,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FileSysClient", "lw8_Client
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lw9_Service", "lw9_Service\lw9_Service.vcxproj", "{804B35EF-2C46-4080-BDEF-E1F664042A47}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lw9_Client", "lw9_Client\lw9_Client.vcxproj", "{34C36AE1-4257-4CC9-A619-4C4E3FBCB160}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -111,6 +113,14 @@ Global
 		{804B35EF-2C46-4080-BDEF-E1F664042A47}.Release|x64.Build.0 = Release|x64
 		{804B35EF-2C46-4080-BDEF-E1F664042A47}.Release|x86.ActiveCfg = Release|Win32
 		{804B35EF-2C46-4080-BDEF-E1F664042A47}.Release|x86.Build.0 = Release|Win32
+		{34C36AE1-4257-4CC9-A619-4C4E3FBCB160}.Debug|x64.ActiveCfg = Debug|x64
+		{34C36AE1-4257-4CC9-A619-4C4E3FBCB160}.Debug|x64.Build.0 = Debug|x64
+		{34C36AE1-4257-4CC9-A619-4C4E3FBCB160}.Debug|x86.ActiveCfg = Debug|Win32
+		{34C36AE1-4257-4CC9-A619-4C4E3FBCB160}.Debug|x86.Build.0 = Debug|Win32
+		{34C36AE1-4257-4CC9-A619-4C4E3FBCB160}.Release|x64.ActiveCfg = Release|x64
+		{34C36AE1-4257-4CC9-A619-4C4E3FBCB160}.Release|x64.Build.0 = Release|x64
+		{34C36AE1-4257-4CC9-A619-4C4E3FBCB160}.Release|x86.ActiveCfg = Release|Win32
+		{34C36AE1-4257-4CC9-A619-4C4E3FBCB160}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
