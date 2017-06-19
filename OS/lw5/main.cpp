@@ -27,7 +27,7 @@ int main()
 
 	printf("\nSemaphore %s was created\n", SEMAPHORE_NAME);
 	printf("Press any key...\n");
-	_getch();
+	getchar();
 
 	CloseHandle(hSemaphore);
 
