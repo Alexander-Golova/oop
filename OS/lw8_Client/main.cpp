@@ -2,7 +2,7 @@
 
 using namespace std;
 
-const DWORD BUFFER_SIZE = 2097152; // 2 Mb
+const DWORD BUFFER_SIZE = 2097152;
 
 int _tmain()
 {

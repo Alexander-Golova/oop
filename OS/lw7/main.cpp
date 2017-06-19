@@ -61,9 +61,6 @@ HANDLE g_hFile = INVALID_HANDLE_VALUE;
 HANDLE g_hMapping = INVALID_HANDLE_VALUE;
 uint8_t *g_diskData = nullptr;
 
-// ----------------------------------------------------------------------------
-// Interactions with users
-// ----------------------------------------------------------------------------
 void CreateActionMap();
 bool HandleCommand();
 
@@ -87,9 +84,6 @@ string GetStringArgEx(string &args, const string &pattern);
 int GetNumberArg(string &args);
 bool AskUser(const string &message);
 
-// ----------------------------------------------------------------------------
-// Implementation of file system logic
-// ----------------------------------------------------------------------------
 void CreateDisk(const string &diskFileName, size_t diskSize);
 void MountDisk(const string &diskFileName, HANDLE &hDiskFile, HANDLE &hDiskMapping, uint8_t **diskData);
 void UnMountDisk(HANDLE &hDiskFile, HANDLE &hDiskMapping, uint8_t **diskData);
