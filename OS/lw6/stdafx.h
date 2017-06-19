@@ -16,4 +16,4 @@
 #include <boost/graph/graph_utility.hpp>
 
 typedef boost::adjacency_list <boost::vecS, boost::vecS, boost::directedS,
-	boost::property<boost::vertex_name_t, std::string>> Graph;
+        boost::property<boost::vertex_name_t, std::string>> Graph;

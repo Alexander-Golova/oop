@@ -11,7 +11,7 @@
 #pragma comment (lib, "Mswsock.lib")
 #pragma comment (lib, "AdvApi32.lib")
 
-#define BUFFER_SIZE 2048
+const int BUFFER_SIZE = 2048;
 #define DEFAULT_PORT "27015"
 
 using namespace std;
@@ -30,8 +30,8 @@ int main(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		cout << endl << "Invalid arguments count" << endl
-			<< "Usage: client.exe <server-name>" << endl;
+		cerr << endl << "Invalid arguments count" << endl
+             << "Usage: client.exe <server-name>" << endl;
 		return 1;
 	}
 

@@ -7,8 +7,8 @@ using namespace boost;
 static vector<string> g_vertexNames;
 
 void ParseGraphTextString(string &line, string &vertex);
-void AddVertexIntoGraph(string vertex, Graph &graph);
-void AddEdgeIntoGraph(string vertexFrom, string vertexTo, Graph &graph);
+void AddVertexIntoGraph(string &vertex, Graph &graph);
+void AddEdgeIntoGraph(string &vertexFrom, string vertexTo, Graph &graph);
 size_t GetVertexIndexByName(string vertexName);
 
 bool LoadGraphFromFile(const string &fileName, Graph &graph)
@@ -65,16 +65,14 @@ void ParseGraphTextString(string &line, string &vertex)
 	}
 }
 
-void AddVertexIntoGraph(string vertexName, Graph &graph)
+void AddVertexIntoGraph(string &vertexName, Graph &graph)
 {
 	if (!vertexName.size())
 	{
 		return;
 	}
 
-	vector<string>::iterator it = find(g_vertexNames.begin(), g_vertexNames.end(), vertexName);
-
-	if (it == g_vertexNames.end())
+	if (find(g_vertexNames.begin(), g_vertexNames.end(), vertexName) == g_vertexNames.end())
 	{
 		g_vertexNames.insert(g_vertexNames.end(), vertexName);
 
@@ -83,7 +81,7 @@ void AddVertexIntoGraph(string vertexName, Graph &graph)
 	}
 }
 
-void AddEdgeIntoGraph(string vertexFrom, string vertexTo, Graph &graph)
+void AddEdgeIntoGraph(string &vertexFrom, string vertexTo, Graph &graph)
 {
 	size_t from = GetVertexIndexByName(vertexFrom);
 	size_t to = GetVertexIndexByName(vertexTo);
@@ -93,7 +91,7 @@ void AddEdgeIntoGraph(string vertexFrom, string vertexTo, Graph &graph)
 
 size_t GetVertexIndexByName(string vertexName)
 {
-	vector<string>::iterator it = find(g_vertexNames.begin(), g_vertexNames.end(), vertexName);
+	auto it = find(g_vertexNames.begin(), g_vertexNames.end(), vertexName);
 
 	if (it == g_vertexNames.end())
 	{

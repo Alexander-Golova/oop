@@ -46,13 +46,14 @@ DWORD WINAPI ThreadFunc(LPVOID lpParam)
 			break;
 		case SECOND_THREAD:
 			++g_count2;
+			break;
 		}
 	}
 
 	ExitThread(0);
 }
 
-int main(int argc, char *argv[])
+int main()
 {
 	HANDLE hThreads[2];
 

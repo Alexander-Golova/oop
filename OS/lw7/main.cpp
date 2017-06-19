@@ -21,8 +21,8 @@ typedef map<string, function<void(string &args)>> ActionMap;
 const string DISK_FILE_EXT = ".disk";
 const size_t START_DATA_OFFSET = 16;
 
-#define DISK_HEADER_SIZE 16
-#define CLUSTER_MINIMAL_SIZE 64
+const int DISK_HEADER_SIZE = 16;
+const int CLUSTER_MINIMAL_SIZE = 64;
 
 #define INVALID_OFFSET_VALUE 0xFFFFFFFF
 #define FILE_NOT_EXIST   0x0001
@@ -78,7 +78,6 @@ void DeleteCommand(string &args);
 void SqueezeCommand(string &args);
 void MapCommand(string &args);
 void ExitCommand(string &args);
-void ForceExitCommand(string &args);
 
 string GetDiskFileNameFromArgs(string &args);
 void GetDiskFileNameAndSizeFromArgs(string &args, string &name, size_t &size);
@@ -139,10 +138,9 @@ void AssertDiskFormat(void *diskData);
 void ShowDiskMap(void *diskData);
 void PrintSymbol(char symbol, size_t count);
 
-int main(int argc, char *argv[])
+int main()
 {
-	cout << "File system emulator, v. 1.0" << endl;
-	cout << "(c) Mikhail Glizerin, 2017" << endl;
+	cout << "File system emulator" << endl;
 
 	CreateActionMap();
 
@@ -159,10 +157,6 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
-// ----------------------------------------------------------------------------
-// Interactions with users
-// ----------------------------------------------------------------------------
-
 void CreateActionMap()
 {
 	g_actionMap.insert(make_pair("crdisk", bind(&CreateDiskCommand, _1)));
@@ -174,9 +168,7 @@ void CreateActionMap()
 	g_actionMap.insert(make_pair("dir", bind(&DirCommand, _1)));
 	g_actionMap.insert(make_pair("delete", bind(&DeleteCommand, _1)));
 	g_actionMap.insert(make_pair("squeeze", bind(&SqueezeCommand, _1)));
-	g_actionMap.insert(make_pair("map", bind(&MapCommand, _1)));
 	g_actionMap.insert(make_pair("exit", bind(&ExitCommand, _1)));
-	g_actionMap.insert(make_pair("fexit", bind(&ForceExitCommand, _1)));
 }
 
 bool HandleCommand()
@@ -294,11 +286,6 @@ void ExitCommand(string &args)
 	}
 }
 
-void ForceExitCommand(string &args)
-{
-	exit(0);
-}
-
 string GetDiskFileNameFromArgs(string &args)
 {
 	return GetStringArgEx(args, "[A-Za-z0-9]+");
@@ -377,10 +364,6 @@ bool AskUser(const string &message)
 	return false;
 }
 
-// ----------------------------------------------------------------------------
-// Implementation of file system logic
-// ----------------------------------------------------------------------------
-
 void CreateDisk(const string &diskFileName, size_t diskSize)
 {
 	if (ifstream(diskFileName))
@@ -395,10 +378,8 @@ void CreateDisk(const string &diskFileName, size_t diskSize)
 		throw logic_error("Failed to create disk <" + diskFileName + ">");
 	}
 
-	// Записать размер диска
 	output.write((char*)&diskSize, sizeof(diskSize));
 
-	// Остальное пространство диска заполнить нулями
 	for (size_t i = 0; i < diskSize - sizeof(diskSize); ++i)
 	{
 		output.write("\0", 1);
@@ -408,8 +389,8 @@ void CreateDisk(const string &diskFileName, size_t diskSize)
 void MountDisk(const string &diskFileName, HANDLE &hDiskFile, HANDLE &hDiskMapping, uint8_t **diskData)
 {
 	hDiskFile = CreateFile(wstring(diskFileName.begin(), diskFileName.end()).c_str(),
-		GENERIC_READ | GENERIC_WRITE, 0, nullptr, OPEN_EXISTING,
-		FILE_ATTRIBUTE_NORMAL, nullptr);
+                GENERIC_READ | GENERIC_WRITE, 0, nullptr, OPEN_EXISTING,
+                FILE_ATTRIBUTE_NORMAL, nullptr);
 
 	if (hDiskFile == INVALID_HANDLE_VALUE)
 	{
@@ -465,22 +446,16 @@ void FormatDisk(void *diskData)
 	AssertDiskMounted(diskData);
 
 	uint32_t *data = static_cast<uint32_t*>(diskData);
-	data[1] = 0xFFFFFFFF; // Записываем флаг, показывающий, что диск отформатирован
+	data[1] = 0xFFFFFFFF;
 
-	uint32_t diskSize = data[0]; // Первые четыре байта - размер диска
+	uint32_t diskSize = data[0];
 
-								 // Записываем пустой заголовок первого (еще не существующего) файла.
-								 // Запись файла будет выполнена в блок с этим заголовком, затем
-								 // будет создан следующий пустой заголовок (если будет свободное место)
 	BlockHeader header;
 
-	// Доступное пространство для будущего файла:
-	// Размер диска - заголовок диска (16 байт) - заголовок файла (24 байт)
 	header.size = diskSize - DISK_HEADER_SIZE - sizeof(BlockHeader);
 	header.attrib |= FILE_NOT_EXIST;
 	header.next = INVALID_OFFSET_VALUE;
 
-	// Заголовок первого файла записывается сразу после заголовка диска
 	WriteBlockHeader(diskData, header, DISK_HEADER_SIZE);
 }
 
@@ -842,7 +817,7 @@ size_t GetDiskSize(void* diskData)
 {
 	uint32_t *data = static_cast<uint32_t*>(diskData);
 
-	return data[0]; // The first four bytes are the size of the disk
+	return data[0];
 }
 
 bool BlockIsEmpty(const BlockHeader &header)
@@ -894,7 +869,7 @@ void AssertDiskFormat(void *diskData)
 
 	uint32_t *data = static_cast<uint32_t*>(diskData);
 
-	if (data[1] != 0xFFFFFFFF) // Проверяем флаг, показывающий, что диск отформатирован
+	if (data[1] != 0xFFFFFFFF)
 	{
 		throw logic_error("Disk is not formatted!");
 	}
@@ -904,11 +879,11 @@ void ShowDiskMap(void* diskData)
 {
 	AssertDiskFormat(diskData);
 
-	unsigned char diskHeadCh = 253;
-	unsigned char fileHeadCh = 4;
-	unsigned char existCh = 219;
-	unsigned char emptyCh = 176;
-	unsigned char unusedCh = 249;
+	const unsigned char diskHeadCh = 253;
+	const unsigned char fileHeadCh = 4;
+	const unsigned char existCh = 219;
+	const unsigned char emptyCh = 176;
+	const unsigned char unusedCh = 249;
 
 	cout << endl;
 	PrintSymbol(diskHeadCh, DISK_HEADER_SIZE);

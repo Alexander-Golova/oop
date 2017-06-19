@@ -4,7 +4,7 @@ using namespace std;
 
 const DWORD BUFFER_SIZE = 2097152; // 2 Mb
 
-int _tmain(int argc, _TCHAR* argv[])
+int _tmain()
 {
 	cout << endl << "File system emulator client start..." << endl;
 

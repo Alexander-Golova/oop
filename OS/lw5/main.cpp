@@ -5,7 +5,7 @@
 
 #define SEMAPHORE_NAME "run_single_app"
 
-int main(int argc, char *argv[])
+int main()
 {
 	HANDLE hSemaphore = NULL;
 
