@@ -1,0 +1,2 @@
+Invalid arguments count
+Usage: replace <input file> <output file> <search string> <replace string>
