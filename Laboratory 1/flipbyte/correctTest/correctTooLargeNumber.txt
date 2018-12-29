@@ -1,0 +1,1 @@
+<input byte> must be 0..255

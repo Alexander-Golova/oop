@@ -1,0 +1,6 @@
+triangle 0 0 0 5 4 0 daa520 48f1cc
+circle 50 50 25 142f53 8a2be2
+rectangle 0 100 200 0 daa520 48f1cc
+info
+linesegment 0 0 300 400 000000
+circle 0 0 10
