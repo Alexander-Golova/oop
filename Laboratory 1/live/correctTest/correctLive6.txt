@@ -1,1 +1,0 @@
-The array is defined correctly
