@@ -1,7 +1,4 @@
 #include "pch.h"
-#include <iostream>
-#include <fstream>
-#include <string>
 
 bool FindTextInFile(std::ifstream& input, const std::string& searchString)
 {
