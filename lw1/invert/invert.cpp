@@ -1,13 +1,4 @@
 #include "pch.h"
-#include <iostream>
-#include <fstream>
-#include <iomanip>
-#include <string>
-#include <array>
-#include <cmath>
-#include <cctype> 
-#include <sstream>
-
 
 const double eps = 10e-5;
 const unsigned dim = 3;

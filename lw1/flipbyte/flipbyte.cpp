@@ -1,6 +1,4 @@
 #include "pch.h"
-#include <iostream>
-#include <cctype>
 
 bool IsNumber(const std::string& num)
 {
