@@ -19,7 +19,7 @@ bool IsNumber(const string& str)
 	return all_of(str.begin(), str.end(), isdigit);
 }
 
-set<uint32_t> GeneratePrimeNumbersSet(const unsigned upperBound)
+std::set<size_t> GeneratePrimeNumbersSet(const size_t upperBound)
 {
 	vector<bool> isPrimes(upperBound + 1, true);
 
@@ -34,7 +34,7 @@ set<uint32_t> GeneratePrimeNumbersSet(const unsigned upperBound)
 		}
 	}
 
-	set<uint32_t> primes;
+	set<size_t> primes;
 	if (upperBound >= 2)
 	{
 		primes.insert(2);
