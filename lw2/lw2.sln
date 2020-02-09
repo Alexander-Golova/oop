@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "primes", "primes\primes.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "primes_tests", "primes_tests\primes_tests.vcxproj", "{E5823BFB-57B3-49EE-91DB-3A4A0880A3AD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vector", "vector\vector.vcxproj", "{E258DCC1-49D8-400E-A36B-9C9056A39FCE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{E5823BFB-57B3-49EE-91DB-3A4A0880A3AD}.Release|x64.Build.0 = Release|x64
 		{E5823BFB-57B3-49EE-91DB-3A4A0880A3AD}.Release|x86.ActiveCfg = Release|Win32
 		{E5823BFB-57B3-49EE-91DB-3A4A0880A3AD}.Release|x86.Build.0 = Release|Win32
+		{E258DCC1-49D8-400E-A36B-9C9056A39FCE}.Debug|x64.ActiveCfg = Debug|x64
+		{E258DCC1-49D8-400E-A36B-9C9056A39FCE}.Debug|x64.Build.0 = Debug|x64
+		{E258DCC1-49D8-400E-A36B-9C9056A39FCE}.Debug|x86.ActiveCfg = Debug|Win32
+		{E258DCC1-49D8-400E-A36B-9C9056A39FCE}.Debug|x86.Build.0 = Debug|Win32
+		{E258DCC1-49D8-400E-A36B-9C9056A39FCE}.Release|x64.ActiveCfg = Release|x64
+		{E258DCC1-49D8-400E-A36B-9C9056A39FCE}.Release|x64.Build.0 = Release|x64
+		{E258DCC1-49D8-400E-A36B-9C9056A39FCE}.Release|x86.ActiveCfg = Release|Win32
+		{E258DCC1-49D8-400E-A36B-9C9056A39FCE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
