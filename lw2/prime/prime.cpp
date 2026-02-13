@@ -1,11 +1,25 @@
 #include <iostream>
 #include <vector>
+#include <set>
+
+#include "primesUtilites.h"
 
 
-
-int main()
+int main(int argc, char* argv[])
 {
-	std::vector<bool> isPrimes(1000 + 1, true);
+	if (!CheckArgumentCount(argc) || !IsNumber(argv[1]))
+	{
+		return 1;
+	}
 
-    std::cout << "Hello World!\n";
+	const std::string upperBound = argv[1];
+
+	std::set<size_t> primes = GeneratePrimeNumbersSet(atoi(upperBound.c_str()));
+
+	for (auto pr : primes)
+	{
+		std::cout << pr << " ";
+	}
+
+    std::cout << std::endl;
 }
