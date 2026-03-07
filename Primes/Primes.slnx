@@ -3,6 +3,6 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="../PrimesTests/PrimesTests.vcxproj" />
-  <Project Path="Primes.vcxproj" />
+  <Project Path="../PrimesTests/PrimesTests.vcxproj" Id="9c9380ba-03fb-4a4b-bcfe-530281f009e5" />
+  <Project Path="Primes.vcxproj" Id="718bf39c-2f51-4d8b-a27f-c6360a77ce9c" />
 </Solution>
