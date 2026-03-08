@@ -3,7 +3,6 @@
 
 #include "../TV/TVSet.h"
 
-
 SCENARIO("TV", "[tv]")
 {
 	GIVEN("A new TV has been created")
@@ -56,7 +55,7 @@ SCENARIO("TV", "[tv]")
 			tv.TurnOn();
 			tv.TurnOff();
 			THEN("can be turned off")
-			{			
+			{
 				CHECK(!tv.IsTurnedOn());
 			}
 		}
@@ -94,6 +93,25 @@ SCENARIO("TV", "[tv]")
 			THEN("channel on TV 0")
 			{
 				CHECK(tv.GetChannel() == 48);
+			}
+		}
+	}
+
+	// Повторное включение телевизора
+	GIVEN("Turning on the TV again")
+	{
+		CTVSet tv;
+		tv.TurnOn();
+		tv.SelectChannel(33);
+		tv.TurnOff();
+		// после повторного включения восстанавливает последний выбранный канал
+		WHEN("after turning on the TV again")
+		{
+			tv.TurnOn();
+			// восстанавливает последний выбранный канал
+			THEN("restores last selected channel")
+			{
+				CHECK(tv.GetChannel() == 33);
 			}
 		}
 	}
