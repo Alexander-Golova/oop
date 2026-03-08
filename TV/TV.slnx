@@ -3,5 +3,6 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="TV.vcxproj" />
+  <Project Path="../TVTests/TVTests.vcxproj" Id="342bbde3-2676-477c-a4b5-97622bc9c677" />
+  <Project Path="TV.vcxproj" Id="7cc68bf5-b772-4875-b46a-8c7558a2acc9" />
 </Solution>
