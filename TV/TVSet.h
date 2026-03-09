@@ -4,6 +4,7 @@
 class CTVSet
 {
 public:
+	CTVSet();
 	bool IsTurnedOn() const;
 	void TurnOn();
 	void TurnOff();

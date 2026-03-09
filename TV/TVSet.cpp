@@ -1,5 +1,11 @@
 #include "TVSet.h"
 
+CTVSet::CTVSet()
+	: m_isOn(false)
+	, m_selectedChannel(1)
+	, m_PreviousChannel(1)
+{};
+
 bool CTVSet::IsTurnedOn() const
 {
 	return m_isOn;
