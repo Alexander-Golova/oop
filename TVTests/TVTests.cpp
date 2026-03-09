@@ -18,6 +18,11 @@ SCENARIO("TV", "[tv]")
 			{
 				CHECK(!tv.SelectChannel(87));
 			}
+			// не может выбрать предыдущий канал
+			THEN("can't select the previous channel")
+			{
+				CHECK(!tv.SelectPreviousChannel());
+			}
 			// изначально отображает 0 канал
 			THEN("displays channel 0 by default")
 			{
@@ -26,10 +31,10 @@ SCENARIO("TV", "[tv]")
 		}
 
 		// может быть включен
-		WHEN("TV can be turned on")
+		WHEN("can be turned off")
 		{
 			tv.TurnOn();
-			THEN("displays channel 0 by default")
+			THEN("TV can be turned on")
 			{
 				CHECK(tv.IsTurnedOn());
 			}
@@ -47,6 +52,11 @@ SCENARIO("TV", "[tv]")
 			THEN("displays channel one")
 			{
 				CHECK(tv.GetChannel() == 1);
+			}
+			// не может выбрать предыдущий канал
+			THEN("can't select the previous channel")
+			{
+				CHECK(!tv.SelectPreviousChannel());
 			}
 		}
 		// Включённый телевизор можно выключить
@@ -95,6 +105,24 @@ SCENARIO("TV", "[tv]")
 				CHECK(tv.GetChannel() == 48);
 			}
 		}
+		WHEN("TV returns to the previous channel")
+		{
+			tv.SelectChannel(2);
+			tv.SelectChannel(5);			
+			THEN("channel on TV 2")
+			{
+				REQUIRE(tv.SelectPreviousChannel());
+				CHECK(tv.GetChannel() == 2);
+			}
+			tv.SelectChannel(2);
+			tv.SelectChannel(5);
+			tv.SelectChannel(7);
+			THEN("channel on TV 5")
+			{
+				REQUIRE(tv.SelectPreviousChannel());
+				CHECK(tv.GetChannel() == 5);
+			}
+		}
 	}
 
 	// Повторное включение телевизора
@@ -102,6 +130,7 @@ SCENARIO("TV", "[tv]")
 	{
 		CTVSet tv;
 		tv.TurnOn();
+		tv.SelectChannel(11);
 		tv.SelectChannel(33);
 		tv.TurnOff();
 		// после повторного включения восстанавливает последний выбранный канал
@@ -112,6 +141,12 @@ SCENARIO("TV", "[tv]")
 			THEN("restores last selected channel")
 			{
 				CHECK(tv.GetChannel() == 33);
+			}
+			// восстанавливает предыдущий канал
+			THEN("restores last selected channel")
+			{
+				REQUIRE(tv.SelectPreviousChannel());
+				CHECK(tv.GetChannel() == 11);
 			}
 		}
 	}

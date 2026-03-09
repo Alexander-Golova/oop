@@ -25,8 +25,19 @@ bool CTVSet::SelectChannel(int channel)
 	bool isAvailableChannel = (channel >= 1) && (channel <= 99);
 	if (isAvailableChannel && m_isOn)
 	{
+		m_PreviousChannel = m_selectedChannel;
 		m_selectedChannel = channel;
 		return true;
 	}
 	return false;
+}
+
+bool CTVSet::SelectPreviousChannel()
+{
+	if (!m_isOn || (m_PreviousChannel == 0))
+	{
+		return false;
+	}
+	m_selectedChannel = m_PreviousChannel;
+	return true;	
 }
