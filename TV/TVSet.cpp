@@ -47,3 +47,14 @@ bool CTVSet::SelectPreviousChannel()
 	m_selectedChannel = m_PreviousChannel;
 	return true;	
 }
+
+bool CTVSet::SetChannelName(int channel, const std::string& channelName)
+{
+	if (!m_isOn)
+	{
+		return false;
+	}
+
+	m_channelsData[channel] = channelName;
+	return true;
+}
