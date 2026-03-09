@@ -16,6 +16,8 @@ public:
 	bool SetChannelName(int channel, const std::string& channelName);
 	
 private:
+	bool IsValidChannel(int channel) const;
+
 	bool m_isOn = false;
 	int m_selectedChannel = 1;
 	int m_PreviousChannel = 0;

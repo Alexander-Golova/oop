@@ -38,6 +38,12 @@ SCENARIO("TV", "[tv]")
 			{
 				CHECK(tv.IsTurnedOn());
 			}
+			// не может выбрать предыдущий канал
+			THEN("can't select the previous channel")
+			{
+				CHECK(tv.IsTurnedOn());
+				CHECK(!tv.SelectPreviousChannel());
+			}
 		}
 	}
 
@@ -52,11 +58,6 @@ SCENARIO("TV", "[tv]")
 			THEN("displays channel one")
 			{
 				CHECK(tv.GetChannel() == 1);
-			}
-			// не может выбрать предыдущий канал
-			THEN("can't select the previous channel")
-			{
-				CHECK(!tv.SelectPreviousChannel());
 			}
 		}
 		// Включённый телевизор можно выключить

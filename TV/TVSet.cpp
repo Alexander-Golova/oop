@@ -3,7 +3,7 @@
 CTVSet::CTVSet()
 	: m_isOn(false)
 	, m_selectedChannel(1)
-	, m_PreviousChannel(1)
+	, m_PreviousChannel(0)
 {};
 
 bool CTVSet::IsTurnedOn() const
@@ -26,10 +26,14 @@ int CTVSet::GetChannel() const
 	return m_isOn ? m_selectedChannel : 0;
 }
 
+bool CTVSet::IsValidChannel(int channel) const
+{
+	return (channel >= 1 && channel <= 99);
+}
+
 bool CTVSet::SelectChannel(int channel)
 {
-	bool isAvailableChannel = (channel >= 1) && (channel <= 99);
-	if (isAvailableChannel && m_isOn)
+	if (IsValidChannel(channel) && m_isOn)
 	{
 		m_PreviousChannel = m_selectedChannel;
 		m_selectedChannel = channel;
@@ -44,7 +48,7 @@ bool CTVSet::SelectPreviousChannel()
 	{
 		return false;
 	}
-	m_selectedChannel = m_PreviousChannel;
+	std::swap(m_selectedChannel, m_PreviousChannel);
 	return true;	
 }
 
