@@ -123,6 +123,17 @@ SCENARIO("TV", "[tv]")
 				REQUIRE(tv.SelectPreviousChannel());
 				CHECK(tv.GetChannel() == 5);
 			}
+			// двойной возврат ничего не изменяет
+			THEN("a double refund doesn't change anything")
+			{
+				tv.SelectChannel(15);
+				tv.SelectChannel(17);
+				CHECK(tv.GetChannel() == 17);
+				REQUIRE(tv.SelectPreviousChannel());
+				CHECK(tv.GetChannel() == 15);
+				REQUIRE(tv.SelectPreviousChannel());
+				CHECK(tv.GetChannel() == 17);
+			}
 		}
 	}
 
