@@ -62,3 +62,14 @@ bool CTVSet::SetChannelName(int channel, const std::string& channelName)
 	m_channelsData[channel] = channelName;
 	return true;
 }
+
+bool CTVSet::GetChannelName(int channel, std::string& channelName) const
+{
+	if (!m_isOn || !IsValidChannel(channel))
+	{
+		return false;
+	}
+	channelName = m_channelsData.at(channel);
+	
+	return true;
+}

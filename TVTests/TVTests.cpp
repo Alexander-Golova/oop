@@ -28,6 +28,11 @@ SCENARIO("TV", "[tv]")
 			{
 				CHECK(tv.GetChannel() == 0);
 			}
+			//нельзя задать имя для канала
+			THEN("you can't set a name for the channel")
+			{
+				CHECK(!tv.SetChannelName(1, "ОРТ"));
+			}
 		}
 
 		// может быть включен
@@ -161,5 +166,22 @@ SCENARIO("TV", "[tv]")
 				CHECK(tv.GetChannel() == 11);
 			}
 		}
+	}
+	// Изменение имени канала
+	GIVEN("Changing the channel name")
+	{
+		CTVSet tv;
+		tv.TurnOn();
+		// название канала не может быть пустой строкой
+		WHEN("the channel name cannot be an empty string.")
+		{
+			CHECK(!tv.SetChannelName(1, ""));
+		}
+		// название канала не может содержать только пробелы
+		AND_WHEN("the channel name cannot contain only spaces")
+		{
+			CHECK(!tv.SetChannelName(1, "     "));
+		}
+
 	}
 }
