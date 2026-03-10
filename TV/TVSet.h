@@ -18,6 +18,7 @@ public:
 	
 private:
 	bool IsValidChannel(int channel) const;
+	bool IsChannelNameExist(int channel) const;
 
 	bool m_isOn = false;
 	int m_selectedChannel = 1;
