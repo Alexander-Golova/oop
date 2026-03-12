@@ -78,3 +78,25 @@ bool CTVSet::IsChannelNameExist(int channel) const
 {
 	return m_channelsData.find(channel) != m_channelsData.end();
 }
+
+bool CTVSet::GetChannelByName(const std::string& channelName, int& channel) const
+{
+	if (!m_isOn || !IsValidChannel(channel) || !IsChannelNameExist(channel))
+	{
+		return false;
+	}
+
+	auto isEqual = [&channelName](const std::pair<int, std::string>& element) {
+		return element.second == channelName;
+	};
+
+	auto it = std::find_if(m_channelsData.begin(), m_channelsData.end(), isEqual);
+
+	if (it != std::end(m_channelsData))
+	{
+		channel = it->first;
+		return true;
+	}
+	return false;
+	
+}

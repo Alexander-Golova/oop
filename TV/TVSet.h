@@ -14,7 +14,8 @@ public:
 	bool SelectChannel(int channel);
 	bool SelectPreviousChannel();
 	bool SetChannelName(int channel, const std::string& channelName);
-	bool GetChannelName(int channel, std::string& channelName) const;	
+	bool GetChannelName(int channel, std::string& channelName) const;
+	bool GetChannelByName(const std::string& channelName, int& channel) const;	
 	
 private:
 	bool IsValidChannel(int channel) const;

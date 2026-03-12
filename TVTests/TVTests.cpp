@@ -182,6 +182,14 @@ SCENARIO("TV", "[tv]")
 		{
 			CHECK(!tv.SetChannelName(1, "     "));
 		}
+		// название канала находится
+		AND_WHEN("the name of the channel is")
+		{
+			CHECK(tv.SetChannelName(1, "ОРТ"));
+			std::string& channelName;
+			REQUIRE(GetChannelName(1, channelName));
+
+		}
 
 	}
 }
