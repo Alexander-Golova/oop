@@ -128,11 +128,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="RemoteControl.cpp" />
+    <ClCompile Include="StringUtilites.cpp" />
     <ClCompile Include="TV.cpp" />
     <ClCompile Include="TVSet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RemoteControl.h" />
+    <ClInclude Include="StringUtilites.h" />
     <ClInclude Include="TVSet.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

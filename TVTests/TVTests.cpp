@@ -172,6 +172,7 @@ SCENARIO("TV", "[tv]")
 	{
 		CTVSet tv;
 		tv.TurnOn();
+		std::string channelName;
 		// название канала не может быть пустой строкой
 		WHEN("the channel name cannot be an empty string.")
 		{
@@ -185,9 +186,9 @@ SCENARIO("TV", "[tv]")
 		// название канала находится
 		AND_WHEN("the name of the channel is")
 		{
-			CHECK(tv.SetChannelName(1, "ОРТ"));
-			std::string& channelName;
-			REQUIRE(GetChannelName(1, channelName));
+			CHECK(tv.SetChannelName(1, "ОРТ"));			
+			REQUIRE(tv.GetChannelName(1, channelName));
+			
 
 		}
 

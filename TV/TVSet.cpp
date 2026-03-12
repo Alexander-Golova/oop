@@ -85,10 +85,7 @@ bool CTVSet::GetChannelByName(const std::string& channelName, int& channel) cons
 	{
 		return false;
 	}
-	if (FoundByName(channelName, channel))
-	{		
-		return true;
-	}	
+	return FoundByName(channelName, channel);	
 }
 
 bool CTVSet::FoundByName(const std::string& channelName, int& channel) const
