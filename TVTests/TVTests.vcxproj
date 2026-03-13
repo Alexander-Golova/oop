@@ -143,10 +143,12 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\TV\StringUtilites.cpp" />
     <ClCompile Include="..\TV\TVSet.cpp" />
     <ClCompile Include="TVTests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\TV\StringUtilites.h" />
     <ClInclude Include="..\TV\TVSet.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

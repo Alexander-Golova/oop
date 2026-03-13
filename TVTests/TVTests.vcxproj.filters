@@ -21,9 +21,15 @@
     <ClCompile Include="..\TV\TVSet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\TV\StringUtilites.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\TV\TVSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TV\StringUtilites.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -167,7 +167,7 @@ SCENARIO("TV", "[tv]")
 			}
 		}
 	}
-	// Изменение имени канала
+	//Изменение имени канала
 	GIVEN("Changing the channel name")
 	{
 		CTVSet tv;
@@ -188,8 +188,14 @@ SCENARIO("TV", "[tv]")
 		{
 			CHECK(tv.SetChannelName(1, "ОРТ"));			
 			REQUIRE(tv.GetChannelName(1, channelName));
-			
-
+			CHECK(channelName == "ОРТ");
+		}
+		// в канала названии удаляются лишние пробелы
+		AND_WHEN("the extra spaces are removed in each name")
+		{
+			CHECK(tv.SetChannelName(10, "   national    geographic   "));
+			REQUIRE(tv.GetChannelName(10, channelName));
+			CHECK(channelName == "national geographic");
 		}
 
 	}

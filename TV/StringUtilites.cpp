@@ -1,42 +1,39 @@
 #include "StringUtilites.h"
 
-void RemoveExtraBlanks(std::string& str)
+std::string RemoveExtraBlanks(const std::string& input)
 {
-	if (str.empty())
-		return;
+	std::string result;
+	result.reserve(input.length());
 
-	size_t write = 0;
-	size_t read = 0;
 	bool inSpace = false;
+	bool hasContent = false;
 
-	// Пропускаем начальные пробелы
-	while (read < str.length() && std::isspace(static_cast<unsigned char>(str[read])))
+	for (char c : input)
 	{
-		read++;
-	}
-
-	while (read < str.length())
-	{
-		if (std::isspace(static_cast<unsigned char>(str[read])))
+		if (std::isspace(static_cast<unsigned char>(c)))
 		{
-			if (!inSpace)
-			{
-				str[write++] = ' ';
-				inSpace = true;
+			if (inSpace && hasContent)
+			{				
+				continue;
 			}
+			if (hasContent)
+			{				
+				result += ' ';
+				inSpace = true;
+			}			
 		}
 		else
 		{
-			str[write++] = str[read];
+			result += c;
 			inSpace = false;
+			hasContent = true;
 		}
-		read++;
+	}
+	
+	if (!result.empty() && result.back() == ' ')
+	{
+		result.pop_back();
 	}
 
-	// Удаляем trailing пробел
-	if (write > 0 && str[write - 1] == ' ')
-	{
-		write--;
-	}
-	str.resize(write);
+	return result;
 }

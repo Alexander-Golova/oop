@@ -54,12 +54,13 @@ bool CTVSet::SelectPreviousChannel()
 
 bool CTVSet::SetChannelName(int channel, const std::string& channelName)
 {
-	if (!m_isOn)
+	std::string trimmedChannelName = RemoveExtraBlanks(channelName);
+	if (!m_isOn || !IsValidChannel(channel) || trimmedChannelName.empty())
 	{
 		return false;
 	}
 
-	m_channelsData[channel] = channelName;
+	m_channelsData[channel] = trimmedChannelName;
 	return true;
 }
 

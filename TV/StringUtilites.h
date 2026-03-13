@@ -1,4 +1,5 @@
 #pragma once
 #include<string>
+#include <cctype>
 
-void RemoveExtraBlanks(std::string& str);
+std::string RemoveExtraBlanks(const std::string& str);
