@@ -197,6 +197,27 @@ SCENARIO("TV", "[tv]")
 			REQUIRE(tv.GetChannelName(10, channelName));
 			CHECK(channelName == "national geographic");
 		}
+		AND_WHEN("valid channel name")
+		{
+			REQUIRE(tv.SetChannelName(1, "bbc"));
+			REQUIRE(tv.SetChannelName(2, "cnn"));
+			REQUIRE(tv.SetChannelName(3, "discovery"));
+			// можно переопределить существующее название канала
+			THEN("you can redefine the existing channel name")
+			{
+				CHECK(tv.SetChannelName(3, "abc"));
+				REQUIRE(tv.GetChannelName(3, channelName));
+				CHECK(channelName == "abc");
+			}
+			//можно удалить названия канала
+			AND_THEN("you can delete channel names")
+			{
+				REQUIRE(tv.SetChannelName(1, "bbc"));
+				REQUIRE(tv.DeleteChannelName("bbc"));
+				REQUIRE(tv.GetChannelName(1, channelName));
+			}
+
+		}
 
 	}
 }

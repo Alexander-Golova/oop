@@ -106,3 +106,30 @@ bool CTVSet::FoundByName(const std::string& channelName, int& channel) const
 
 	return false;
 }
+
+bool CTVSet::DeleteChannelName(const std::string& channelName)
+{
+	if (!m_isOn)
+	{
+		return false;
+	}
+	return RemoveChannelByName(channelName);
+}
+
+bool CTVSet::RemoveChannelByName(const std::string& channelName)
+{
+	int channel = 0;
+	if (!FoundByName(channelName, channel))
+	{
+		return false;
+	}
+
+	RemoveChannelByKey(channel);
+
+	return true;
+}
+
+void CTVSet::RemoveChannelByKey(int channel)
+{
+	m_channelsData.erase(channel);
+}
