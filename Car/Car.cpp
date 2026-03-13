@@ -10,3 +10,8 @@ Direction CCar::GetDirection() const
 {
 	return m_direction;
 }
+
+size_t CCar::GetSpeed() const
+{
+	return m_speed;
+}

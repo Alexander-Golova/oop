@@ -13,6 +13,7 @@ SCENARIO("Car", "[car]")
 		{
 			REQUIRE(!car.IsTurnedOn());
 			CHECK(car.GetDirection() == Direction::Stop);
+			CHECK(car.GetSpeed() == 0);
 		}
 	}
 }
