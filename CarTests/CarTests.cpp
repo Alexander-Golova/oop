@@ -16,5 +16,12 @@ SCENARIO("Car", "[car]")
 			CHECK(car.GetSpeed() == 0);
 			CHECK(car.GetGear() == Gear::Neutral);
 		}
+		// машина может быть включена
+		WHEN("Car is turned on")
+		{
+			REQUIRE(car.TurnOnEngine());
+			CHECK(car.IsTurnedOn());
+		}
 	}
+	
 }

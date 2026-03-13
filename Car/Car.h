@@ -26,6 +26,7 @@ public:
 	Direction GetDirection() const;
 	size_t GetSpeed() const;
 	Gear GetGear() const;
+	bool TurnOnEngine();
 
 private:
 
