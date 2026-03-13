@@ -240,3 +240,10 @@ SCENARIO("TV", "[tv]")
 
 	}
 }
+
+SCENARIO("TV", "[tv]")
+{
+	GIVEN("A new TV has been created")
+	{
+	}
+}

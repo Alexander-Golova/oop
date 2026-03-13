@@ -133,3 +133,8 @@ void CTVSet::RemoveChannelByKey(int channel)
 {
 	m_channelsData.erase(channel);
 }
+
+std::map<int, std::string> CTVSet::GetAllChannelWithName() const
+{
+	return m_channelsData;
+}

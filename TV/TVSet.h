@@ -18,6 +18,7 @@ public:
 	bool GetChannelName(int channel, std::string& channelName) const;
 	bool GetChannelByName(int& channel, const std::string& channelName) const;
 	bool DeleteChannelName(const std::string& channelName);
+	std::map<int, std::string> GetAllChannelWithName() const;
 	
 private:
 	bool IsValidChannel(int channel) const;
