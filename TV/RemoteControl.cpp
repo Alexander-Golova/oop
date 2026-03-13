@@ -12,7 +12,7 @@ CRemoteControl::CRemoteControl(CTVSet& tv, std::istream& input, std::ostream& ou
 	, m_output(output)
 	, m_actionMap({
 		  { "TurnOn", [this](istream& strm) { return TurnOn(strm); } },
-		  { "TurnOff", bind(&CRemoteControl::TurnOff, this, std::placeholders::_1) },
+		  { "TurnOff", bind(&CRemoteControl::TurnOff, this, _1) },
 		  { "Info", bind(&CRemoteControl::Info, this, _1) },
 	  })
 {
@@ -50,13 +50,27 @@ bool CRemoteControl::TurnOff(std::istream& /*args*/)
 	return true;
 }
 
-bool CRemoteControl::Info(std::istream& /*args*/)
+bool CRemoteControl::Info(std::istream& args)
 {
-	string info = (m_tv.IsTurnedOn())
-		? ("TV is turned on\nChannel is: " + to_string(m_tv.GetChannel()) + "\n")
-		: "TV is turned off\n";
+	int channel = m_tv.GetChannel();
+	std::string channelName;
 
-	m_output << info;
+	m_output << "TV info: " << std::endl
+			 << " - is turned: " << (m_tv.IsTurnedOn() ? "on" : "off") << std::endl
+			 << " - selected channel: " << channel << (m_tv.GetChannelName(channel, channelName) ? " - " + channelName : "") << std::endl;
+	
+	std::map<int, std::string> channelsData = m_tv.GetAllChannelWithName();
 
+	if (!channelsData.empty())
+	{
+		m_output << " - channels with name: " << std::endl;
+		for (const auto& channelData : channelsData)
+		{
+			m_output << channelData.first << " - " << channelData.second << std::endl;
+		}		
+	}
+	
+
+	
 	return true;
 }
