@@ -22,7 +22,7 @@ SCENARIO("Car", "[car]")
 			REQUIRE(car.TurnOnEngine());
 			CHECK(car.IsTurnedOn());
 		}
-		// включённая машина может быт ьвыключена
+		// включённая машина может быть выключена
 		WHEN("Car is turned off")
 		{
 			REQUIRE(car.TurnOnEngine());

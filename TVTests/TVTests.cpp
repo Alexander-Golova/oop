@@ -99,10 +99,10 @@ SCENARIO("TV", "[tv]")
 			THEN("channel on TV 48")
 			{
 				CHECK(tv.GetChannel() == 48);
-			}
-			tv.SelectChannel(100);
+			}			
 			THEN("channel on TV 100")
 			{
+				REQUIRE(!tv.SelectChannel(100));
 				CHECK(tv.GetChannel() == 48);
 			}
 			tv.SelectChannel(0);
@@ -173,6 +173,7 @@ SCENARIO("TV", "[tv]")
 		CTVSet tv;
 		tv.TurnOn();
 		std::string channelName;
+		int channel;
 		// название канала не может быть пустой строкой
 		WHEN("the channel name cannot be an empty string.")
 		{
@@ -222,7 +223,19 @@ SCENARIO("TV", "[tv]")
 				REQUIRE(tv.GetChannelName(2, channelName));
 				REQUIRE(channelName == "cnn");
 			}
+			// названия канала не существует
+			AND_WHEN("channel name not exist")
+			{
+				REQUIRE(tv.SetChannelName(1, "bbc"));
+				REQUIRE(tv.SetChannelName(2, "cnn"));
+				REQUIRE(tv.SetChannelName(3, "discovery"));
 
+				// нельзя выбрать несуществующее название канала
+				AND_THEN("you cannot select a channel name that does not exist")
+				{
+					REQUIRE(!tv.GetChannelByName(channel, "vesti"));
+				}
+			}
 		}
 
 	}

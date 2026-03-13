@@ -16,13 +16,13 @@ public:
 	bool SelectPreviousChannel();
 	bool SetChannelName(int channel, const std::string& channelName);
 	bool GetChannelName(int channel, std::string& channelName) const;
-	bool GetChannelByName(const std::string& channelName, int& channel) const;
+	bool GetChannelByName(int& channel, const std::string& channelName) const;
 	bool DeleteChannelName(const std::string& channelName);
 	
 private:
 	bool IsValidChannel(int channel) const;
 	bool IsChannelNameExist(int channel) const;
-	bool FoundByName(const std::string& channelName, int& channel) const;
+	bool FoundByName(int& channel, const std::string& channelName) const;
 	bool RemoveChannelByName(const std::string& channelName);
 	void RemoveChannelByKey(int channel);
 
