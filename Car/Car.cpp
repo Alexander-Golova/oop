@@ -26,3 +26,9 @@ bool CCar::TurnOnEngine()
 	m_isOn = true;
 	return IsTurnedOn();
 }
+
+bool CCar::TurnOffEngine()
+{
+	m_isOn = false;
+	return !IsTurnedOn();
+}
