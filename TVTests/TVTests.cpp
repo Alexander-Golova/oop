@@ -214,7 +214,13 @@ SCENARIO("TV", "[tv]")
 			{
 				REQUIRE(tv.SetChannelName(1, "bbc"));
 				REQUIRE(tv.DeleteChannelName("bbc"));
-				REQUIRE(tv.GetChannelName(1, channelName));
+				REQUIRE(!tv.GetChannelName(1, channelName));
+			}
+			// можно получить название канала по его номеру
+			AND_THEN("you can get the channel name by its number")
+			{
+				REQUIRE(tv.GetChannelName(2, channelName));
+				REQUIRE(channelName == "cnn");
 			}
 
 		}
