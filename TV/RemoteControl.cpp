@@ -60,7 +60,6 @@ bool CRemoteControl::Info(std::istream& args)
 			 << " - selected channel: " << channel << (m_tv.GetChannelName(channel, channelName) ? " - " + channelName : "") << std::endl;
 	
 	std::map<int, std::string> channelsData = m_tv.GetAllChannelWithName();
-
 	if (!channelsData.empty())
 	{
 		m_output << " - channels with name: " << std::endl;
@@ -68,9 +67,6 @@ bool CRemoteControl::Info(std::istream& args)
 		{
 			m_output << channelData.first << " - " << channelData.second << std::endl;
 		}		
-	}
-	
-
-	
+	}	
 	return true;
 }
