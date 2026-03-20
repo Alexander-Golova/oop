@@ -26,5 +26,11 @@ TEST_CASE("CComplex Arithmetic Operators", "[complex][arithmetic]")
 		CHECK(res.Re() == Approx(11.0));
 		CHECK(res.Im() == Approx(-2.0));
 	}
+	SECTION("Division Operator (/)")
+	{
+		CComplex res = a / b;
+		CHECK(res.Re() == Approx(-1.0));
+		CHECK(res.Im() == Approx(2.0));
+	}
 	
 }
