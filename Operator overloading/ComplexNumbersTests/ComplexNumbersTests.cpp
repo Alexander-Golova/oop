@@ -14,5 +14,17 @@ TEST_CASE("CComplex Arithmetic Operators", "[complex][arithmetic]")
 		CHECK(res.Re() == Approx(4.0));
 		CHECK(res.Im() == Approx(2.0));
 	}
+	SECTION("Subtraction Operator (-)")
+	{
+		CComplex res = a - b;
+		CHECK(res.Re() == Approx(2.0));
+		CHECK(res.Im() == Approx(6.0));
+	}
+	SECTION("Multiplication Operator (*)")
+	{
+		CComplex res = a * b;
+		CHECK(res.Re() == Approx(11.0));
+		CHECK(res.Im() == Approx(-2.0));
+	}
 	
 }

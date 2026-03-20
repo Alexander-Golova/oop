@@ -41,6 +41,6 @@ CComplex const operator-(const CComplex& lhs, const CComplex& rhs)
 CComplex const operator*(const CComplex& lhs, const CComplex& rhs)
 {
 	double re = lhs.Re() * rhs.Re() - lhs.Im() * rhs.Im();
-	double im = lhs.Re() * lhs.Im() + rhs.Im() * lhs.Re();
+	double im = lhs.Re() * rhs.Im() + lhs.Im() * rhs.Re();
 	return CComplex(re, im);
 }
