@@ -89,9 +89,19 @@ bool const operator==(const CComplex& lhs, const CComplex& rhs)
 	return (lhs.Re() == rhs.Re() && lhs.Im() == rhs.Im());
 }
 
+bool const operator==(const CComplex& lhs, const double rhs)
+{
+	return lhs == CComplex(rhs, 0);
+}
+
 bool const operator!=(const CComplex& lhs, const CComplex& rhs)
 {
 	return !(lhs == rhs);
+}
+
+bool const operator!=(const CComplex& lhs, const double rhs)
+{
+	return !(lhs == CComplex(rhs, 0));
 }
 
 CComplex const operator+(const CComplex& lhs, const double rhs)

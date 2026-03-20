@@ -38,4 +38,6 @@ CComplex const operator/(const CComplex& lhs, const CComplex& rhs);
 CComplex const operator/(const CComplex& lhs, const double rhs);
 
 bool const operator==(const CComplex& lhs, const CComplex& rhs);
+bool const operator==(const CComplex& lhs, const double rhs);
 bool const operator!=(const CComplex& lhs, const CComplex& rhs);
+bool const operator!=(const CComplex& lhs, const double rhs);

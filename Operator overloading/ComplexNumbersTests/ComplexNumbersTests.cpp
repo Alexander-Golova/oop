@@ -105,13 +105,19 @@ TEST_CASE("CComplex Comparison Operators", "[complex][comparison]")
 
 		CHECK(a == b);
 		CHECK_FALSE(a == c);
+		
+		CComplex d(5.0, 0.0);
+		double e = 5.0;
+		CHECK(d == e);
 	}
 	SECTION("Inequality Operator (!=)")
 	{
 		CComplex a(0.0, 0.0);
 		CComplex b(0.0, 1.0);
+		double c = 5.0;
 
 		CHECK(a != b);
 		CHECK_FALSE(a != a);
+		CHECK(a != c);
 	}
 }
