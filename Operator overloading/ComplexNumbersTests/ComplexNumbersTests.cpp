@@ -58,3 +58,20 @@ TEST_CASE("CComplex Compound Assignment", "[complex][assignment]")
 		CHECK(a.Im() == Approx(13.0));
 	}
 }
+
+TEST_CASE("CComplex Unary Operators", "[complex][unary]")
+{
+	SECTION("Unary Minus (-)") {
+		CComplex a(3.0, -4.0);
+		CComplex res = -a;
+		CHECK(res.Re() == Approx(-3.0));
+		CHECK(res.Im() == Approx(4.0));
+	}
+	SECTION("Unary Plus (+)")
+	{
+		CComplex a(3.0, -4.0);
+		CComplex res = a;
+		CHECK(res.Re() == Approx(3.0));
+		CHECK(res.Im() == Approx(-4.0));
+	}
+}

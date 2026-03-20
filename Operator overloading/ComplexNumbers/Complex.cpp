@@ -66,3 +66,13 @@ CComplex& CComplex::operator*=(const CComplex& rhs)
 	*this = *this * rhs;
 	return *this;
 }
+
+CComplex const CComplex::operator-() const
+{
+	return CComplex(-m_real, -m_imag);
+}
+
+CComplex const CComplex::operator+() const
+{
+	return *this;
+}
