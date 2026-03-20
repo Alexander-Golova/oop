@@ -30,3 +30,17 @@ CComplex const operator+(const CComplex& lhs, const CComplex& rhs)
 	double im = lhs.Im() + rhs.Im();
 	return CComplex(re, im);
 }
+
+CComplex const operator-(const CComplex& lhs, const CComplex& rhs)
+{
+	double re = lhs.Re() - rhs.Re();
+	double im = lhs.Im() - rhs.Im();
+	return CComplex(re, im);
+}
+
+CComplex const operator*(const CComplex& lhs, const CComplex& rhs)
+{
+	double re = lhs.Re() * rhs.Re() - lhs.Im() * rhs.Im();
+	double im = lhs.Re() * lhs.Im() + rhs.Im() * lhs.Re();
+	return CComplex(re, im);
+}
