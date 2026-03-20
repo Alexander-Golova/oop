@@ -6,7 +6,7 @@ class CComplex
 {
 public:
 	// инициализация комплексного числа значениями действительной и мнимой частей
-	CComplex(double real = 0, double image = 0);
+	CComplex(double real = 0.0, double image = 0.0);
 
 	// возвращает действительную часть комплексного числа
 	double Re() const;

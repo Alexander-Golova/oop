@@ -3,5 +3,6 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="ComplexNumbers.vcxproj" />
+  <Project Path="../ComplexNumbersTests/ComplexNumbersTests.vcxproj" Id="9dd8ea52-4110-40e9-be31-feed83f8e73c" />
+  <Project Path="ComplexNumbers.vcxproj" Id="214a5782-1f4f-41b3-8c53-6be81a2e4b29" />
 </Solution>
