@@ -7,24 +7,34 @@ TEST_CASE("CComplex Arithmetic Operators", "[complex][arithmetic]")
 {
 	CComplex a(3.0, 4.0);
 	CComplex b(1.0, -2.0);
+	double c = 0.5;
 
 	SECTION("Addition Operator (+)")
 	{
 		CComplex res = a + b;	
 		CHECK(res.Re() == Approx(4.0));
 		CHECK(res.Im() == Approx(2.0));
+		res = a + c;
+		CHECK(res.Re() == Approx(3.5));
+		CHECK(res.Im() == Approx(4.0));
 	}
 	SECTION("Subtraction Operator (-)")
 	{
 		CComplex res = a - b;
 		CHECK(res.Re() == Approx(2.0));
 		CHECK(res.Im() == Approx(6.0));
+		res = a - c;
+		CHECK(res.Re() == Approx(2.5));
+		CHECK(res.Im() == Approx(4.0));
 	}
 	SECTION("Multiplication Operator (*)")
 	{
 		CComplex res = a * b;
 		CHECK(res.Re() == Approx(11.0));
 		CHECK(res.Im() == Approx(-2.0));
+		res = a * c;
+		CHECK(res.Re() == Approx(1.5));
+		CHECK(res.Im() == Approx(2.0));
 	}
 	SECTION("Division Operator (/)")
 	{

@@ -86,3 +86,20 @@ bool const operator!=(const CComplex& lhs, const CComplex& rhs)
 {
 	return !(lhs == rhs);
 }
+
+CComplex const operator+(const CComplex& lhs, const double rhs)
+{
+	return lhs + CComplex(rhs, 0);
+}
+
+CComplex const operator-(const CComplex& lhs, const double rhs)
+{
+	return lhs - CComplex(rhs, 0);
+}
+
+CComplex const operator*(const CComplex& lhs, const double rhs)
+{
+	double re = lhs.Re() * rhs;
+	double im = lhs.Im() * rhs;
+	return CComplex(re, im);
+}
