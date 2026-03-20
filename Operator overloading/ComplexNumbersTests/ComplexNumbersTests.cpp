@@ -31,6 +31,18 @@ TEST_CASE("CComplex Arithmetic Operators", "[complex][arithmetic]")
 		CComplex res = a / b;
 		CHECK(res.Re() == Approx(-1.0));
 		CHECK(res.Im() == Approx(2.0));
+	}	
+}
+
+TEST_CASE("CComplex Compound Assignment", "[complex][assignment]")
+{
+	CComplex a(2.0, 2.0);
+	CComplex b(3.0, 3.0);
+
+	SECTION("Plus Equals (+=)")
+	{
+		a += b;
+		CHECK(a.Re() == Approx(5.0));
+		CHECK(a.Im() == Approx(5.0));
 	}
-	
 }

@@ -5,20 +5,15 @@
 class CComplex
 {
 public:
-	// инициализация комплексного числа значениями действительной и мнимой частей
 	CComplex(double real = 0.0, double image = 0.0);
 
-	// возвращает действительную часть комплексного числа
 	double Re() const;
-
-	// возвращает мнимую часть комплексного числа
 	double Im() const;
-
-	// возвращает модуль комплексного числа
 	double GetMagnitude() const;
-
-	// возвращает аргумент комплексного числа
 	double GetArgument() const;
+
+	CComplex& operator+=(const CComplex& rhs);
+
 
 private:
 	double m_real;

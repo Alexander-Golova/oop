@@ -25,17 +25,13 @@ double CComplex::GetArgument() const
 }
 
 CComplex const operator+(const CComplex& lhs, const CComplex& rhs)
-{
-	double re = lhs.Re() + rhs.Re();
-	double im = lhs.Im() + rhs.Im();
-	return CComplex(re, im);
+{	
+	return CComplex(lhs.Re() + rhs.Re(), lhs.Im() + rhs.Im());
 }
 
 CComplex const operator-(const CComplex& lhs, const CComplex& rhs)
 {
-	double re = lhs.Re() - rhs.Re();
-	double im = lhs.Im() - rhs.Im();
-	return CComplex(re, im);
+	return CComplex(lhs.Re() - rhs.Re(), lhs.Im() - rhs.Im());
 }
 
 CComplex const operator*(const CComplex& lhs, const CComplex& rhs)
@@ -51,4 +47,10 @@ CComplex const operator/(const CComplex& lhs, const CComplex& rhs)
 	double re = (lhs.Re() * rhs.Re() + lhs.Im() * rhs.Im()) / denom;		
 	double im = (lhs.Im() * rhs.Re() - lhs.Re() * rhs.Im()) / denom;
 	return CComplex(re, im);		
+}
+
+CComplex& CComplex::operator+=(const CComplex& rhs)
+{
+	*this = *this + rhs;
+	return *this;
 }
