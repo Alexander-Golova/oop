@@ -13,6 +13,7 @@ public:
 	double GetArgument() const;
 
 	CComplex& operator+=(const CComplex& rhs);
+	CComplex& operator-=(const CComplex& rhs);
 
 
 private:

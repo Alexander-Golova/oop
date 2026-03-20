@@ -54,3 +54,9 @@ CComplex& CComplex::operator+=(const CComplex& rhs)
 	*this = *this + rhs;
 	return *this;
 }
+
+CComplex& CComplex::operator-=(const CComplex& rhs)
+{
+	*this = *this - rhs;
+	return *this;
+}
