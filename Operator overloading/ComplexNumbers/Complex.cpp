@@ -67,6 +67,13 @@ CComplex& CComplex::operator*=(const CComplex& rhs)
 	return *this;
 }
 
+CComplex& CComplex::operator/=(const CComplex& rhs)
+{
+	*this = *this / rhs;
+	return *this;
+}
+
+
 CComplex const CComplex::operator-() const
 {
 	return CComplex(-m_real, -m_imag);
@@ -101,5 +108,12 @@ CComplex const operator*(const CComplex& lhs, const double rhs)
 {
 	double re = lhs.Re() * rhs;
 	double im = lhs.Im() * rhs;
+	return CComplex(re, im);
+}
+
+CComplex const operator/(const CComplex& lhs, const double rhs)
+{
+	double re = lhs.Re() / rhs;
+	double im = lhs.Im() / rhs;
 	return CComplex(re, im);
 }

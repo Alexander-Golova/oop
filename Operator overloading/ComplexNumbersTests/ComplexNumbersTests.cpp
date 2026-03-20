@@ -41,6 +41,9 @@ TEST_CASE("CComplex Arithmetic Operators", "[complex][arithmetic]")
 		CComplex res = a / b;
 		CHECK(res.Re() == Approx(-1.0));
 		CHECK(res.Im() == Approx(2.0));
+		res = a / c;
+		CHECK(res.Re() == Approx(6.0));
+		CHECK(res.Im() == Approx(8.0));
 	}	
 }
 
@@ -66,6 +69,12 @@ TEST_CASE("CComplex Compound Assignment", "[complex][assignment]")
 		a *= b;
 		CHECK(a.Re() == Approx(0.0));
 		CHECK(a.Im() == Approx(13.0));
+	}
+	SECTION("Divide Equals (/=)")
+	{
+		a /= b;
+		CHECK(a.Re() == Approx(0.9230769231));
+		CHECK(a.Im() == Approx(0.3846153846));
 	}
 }
 
