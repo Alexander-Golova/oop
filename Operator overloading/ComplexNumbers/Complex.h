@@ -29,3 +29,4 @@ private:
 CComplex const operator+(const CComplex& lhs, const CComplex& rhs);
 CComplex const operator-(const CComplex& lhs, const CComplex& rhs);
 CComplex const operator*(const CComplex& lhs, const CComplex& rhs);
+CComplex const operator/(const CComplex& lhs, const CComplex& rhs);

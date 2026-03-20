@@ -44,3 +44,11 @@ CComplex const operator*(const CComplex& lhs, const CComplex& rhs)
 	double im = lhs.Re() * rhs.Im() + lhs.Im() * rhs.Re();
 	return CComplex(re, im);
 }
+
+CComplex const operator/(const CComplex& lhs, const CComplex& rhs)
+{
+	double denom = rhs.Re() * rhs.Re() + rhs.Im() * rhs.Im();
+	double re = (lhs.Re() * rhs.Re() + lhs.Im() * rhs.Im()) / denom;		
+	double im = (lhs.Im() * rhs.Re() - lhs.Re() * rhs.Im()) / denom;
+	return CComplex(re, im);		
+}
