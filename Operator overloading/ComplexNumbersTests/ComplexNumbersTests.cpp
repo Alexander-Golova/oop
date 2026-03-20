@@ -75,3 +75,24 @@ TEST_CASE("CComplex Unary Operators", "[complex][unary]")
 		CHECK(res.Im() == Approx(-4.0));
 	}
 }
+
+TEST_CASE("CComplex Comparison Operators", "[complex][comparison]")
+{
+	SECTION("Equality Operator (==)")
+	{
+		CComplex a(5.0, 5.0);
+		CComplex b(5.0, 5.0);
+		CComplex c(5.0, 5.0000001);
+
+		CHECK(a == b);
+		CHECK_FALSE(a == c);
+	}
+	SECTION("Inequality Operator (!=)")
+	{
+		CComplex a(0.0, 0.0);
+		CComplex b(0.0, 1.0);
+
+		CHECK(a != b);
+		CHECK_FALSE(a != a);
+	}
+}

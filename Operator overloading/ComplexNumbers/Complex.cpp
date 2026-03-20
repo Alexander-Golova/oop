@@ -76,3 +76,13 @@ CComplex const CComplex::operator+() const
 {
 	return *this;
 }
+
+bool const operator==(const CComplex& lhs, const CComplex& rhs)
+{
+	return (lhs.Re() == rhs.Re() && lhs.Im() == rhs.Im());
+}
+
+bool const operator!=(const CComplex& lhs, const CComplex& rhs)
+{
+	return !(lhs == rhs);
+}
