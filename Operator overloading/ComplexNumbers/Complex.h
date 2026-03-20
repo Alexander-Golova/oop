@@ -24,3 +24,6 @@ private:
 	double m_real;
 	double m_imag;
 };
+
+
+CComplex const operator+(const CComplex& lhs, const CComplex& rhs);

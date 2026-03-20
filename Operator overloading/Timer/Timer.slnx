@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Timer.vcxproj" />
+  <Project Path="Timer.vcxproj" Id="62fb2960-8d95-4d72-9b3a-51cbc10e5f01" />
 </Solution>

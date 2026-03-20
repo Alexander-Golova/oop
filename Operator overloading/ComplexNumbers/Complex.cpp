@@ -23,3 +23,10 @@ double CComplex::GetArgument() const
 {
 	return std::atan2(m_imag, m_real);
 }
+
+CComplex const operator+(const CComplex& lhs, const CComplex& rhs)
+{
+	double re = lhs.Re() + rhs.Re();
+	double im = lhs.Im() + rhs.Im();
+	return CComplex(re, im);
+}
