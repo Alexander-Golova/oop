@@ -45,10 +45,16 @@ TEST_CASE("CComplex Compound Assignment", "[complex][assignment]")
 		CHECK(a.Re() == Approx(5.0));
 		CHECK(a.Im() == Approx(5.0));
 	}
-	SECTION("Minus  Equals (-=)")
+	SECTION("Minus Equals (-=)")
 	{
 		a -= b;
 		CHECK(a.Re() == Approx(-1.0));
 		CHECK(a.Im() == Approx(1.0));
+	}
+	SECTION("Multiply Equals (*=)")
+	{
+		a *= b;
+		CHECK(a.Re() == Approx(0.0));
+		CHECK(a.Im() == Approx(13.0));
 	}
 }

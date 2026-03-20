@@ -14,6 +14,7 @@ public:
 
 	CComplex& operator+=(const CComplex& rhs);
 	CComplex& operator-=(const CComplex& rhs);
+	CComplex& operator*=(const CComplex& rhs);
 
 
 private:
