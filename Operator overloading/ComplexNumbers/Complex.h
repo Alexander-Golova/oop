@@ -1,5 +1,7 @@
 #pragma once
 #include <cmath>
+#include <iostream>
+#include <iomanip>
 
 
 class CComplex
@@ -41,3 +43,6 @@ bool const operator==(const CComplex& lhs, const CComplex& rhs);
 bool const operator==(const CComplex& lhs, const double rhs);
 bool const operator!=(const CComplex& lhs, const CComplex& rhs);
 bool const operator!=(const CComplex& lhs, const double rhs);
+
+std::ostream& operator<<(std::ostream& strm, const CComplex& rhs);
+std::istream& operator>>(std::istream& strm, CComplex& rhs);

@@ -127,3 +127,62 @@ CComplex const operator/(const CComplex& lhs, const double rhs)
 	double im = lhs.Im() / rhs;
 	return CComplex(re, im);
 }
+
+std::ostream& operator<<(std::ostream& strm, const CComplex& rhs)
+{
+	strm << std::fixed << std::setprecision(1) << rhs.Re();
+	if (rhs.Im() >= 0)
+	{
+		strm << '+';
+	}
+	strm << rhs.Im() << 'i';
+	return strm;
+}
+
+std::istream& operator>>(std::istream& strm, CComplex& rhs)
+{
+	double re = 0.0;
+	double im = 0.0;
+	char sign = '+';
+	char ch_i = '\0';
+
+	std::ios old_state(nullptr);
+	old_state.copyfmt(strm);
+
+	if (strm >> re)
+	{
+		strm >> std::ws;
+		if (strm.get(sign))
+		{
+			if (sign == '+' || sign == '-')
+			{
+				if (strm >> im)
+				{
+					strm >> std::ws;
+					if (strm.get(ch_i))
+					{
+						if (ch_i == 'i' || ch_i == 'I')
+						{
+							rhs = CComplex(re, (sign == '-') ? -im : im);
+						}
+						else
+						{
+							strm.setstate(std::ios_base::failbit);
+						}
+					}
+				}
+			}
+			else
+			{
+				strm.setstate(std::ios_base::failbit);
+				strm.putback(sign);
+			}
+		}
+	}
+	if (strm.fail())
+	{
+		rhs = CComplex(0.0, 0.0);
+		strm.copyfmt(old_state);
+	}
+	return strm;
+}
