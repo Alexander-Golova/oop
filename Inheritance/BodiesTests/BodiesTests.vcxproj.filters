@@ -21,9 +21,15 @@
     <ClCompile Include="..\Bodies\Sphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Bodies\Body.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bodies\Sphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Bodies\Body.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
