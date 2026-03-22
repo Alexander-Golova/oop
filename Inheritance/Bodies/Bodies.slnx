@@ -3,5 +3,6 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Bodies.vcxproj" />
+  <Project Path="../BodiesTests/BodiesTests.vcxproj" Id="5d923932-ebd8-4394-9c1a-bd5631b464b4" />
+  <Project Path="Bodies.vcxproj" Id="fc578720-bac9-474d-a5f9-5e64d9836235" />
 </Solution>
