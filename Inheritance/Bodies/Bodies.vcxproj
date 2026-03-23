@@ -129,10 +129,12 @@
   <ItemGroup>
     <ClCompile Include="Bodies.cpp" />
     <ClCompile Include="Body.cpp" />
+    <ClCompile Include="Parallelepiped.cpp" />
     <ClCompile Include="Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Body.h" />
+    <ClInclude Include="Parallelepiped.h" />
     <ClInclude Include="Sphere.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
