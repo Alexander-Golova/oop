@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="EmulationEconomy.vcxproj" Id="252eaf2c-c189-476e-8281-e22a42cf53d1" />
+  <Project Path="SolvingQuadraticEquation.vcxproj" />
 </Solution>
