@@ -3,6 +3,6 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="../CarTests/CarTests.vcxproj" />
-  <Project Path="Car.vcxproj" />
+  <Project Path="../CarTests/CarTests.vcxproj" Id="90d839ac-9e77-4b41-bb31-3882f61c293e" />
+  <Project Path="Car.vcxproj" Id="901e4ba2-e0f4-40ab-ba54-a812101d8bb2" />
 </Solution>

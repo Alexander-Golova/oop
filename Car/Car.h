@@ -28,6 +28,8 @@ public:
 	Gear GetGear() const;
 	bool TurnOnEngine();
 	bool TurnOffEngine();
+	bool SetGear(int gear);
+	bool SetSpeed(size_t speed); 
 
 private:
 

@@ -30,5 +30,52 @@ SCENARIO("Car", "[car]")
 			CHECK(!car.IsTurnedOn());
 		}
 	}
+	GIVEN("Car is Turned On")
+	{
+		CCar car;
+		REQUIRE(car.TurnOnEngine());
+		// тестируем передачи
+		WHEN("Car is turned off")
+		{
+			REQUIRE(car.SetGear(1));
+			CHECK(car.GetSpeed() == 0);
+			REQUIRE(car.SetSpeed(10));
+			CHECK(car.GetSpeed() == 10);
+			REQUIRE(!car.SetSpeed(40));
+			REQUIRE(car.SetSpeed(30));
+
+			REQUIRE(car.SetGear(2));
+			REQUIRE(car.SetSpeed(50));
+			CHECK(car.GetSpeed() == 50);
+			REQUIRE(!car.SetSpeed(150));
+			
+			REQUIRE(car.SetGear(3));
+			REQUIRE(car.SetSpeed(60));
+			CHECK(car.GetSpeed() == 60);
+			REQUIRE(!car.SetSpeed(100));
+
+			REQUIRE(car.SetGear(4));
+			REQUIRE(car.SetSpeed(80));
+			CHECK(car.GetSpeed() == 80);
+			REQUIRE(!car.SetSpeed(100));
+
+			REQUIRE(car.SetGear(5));
+			REQUIRE(car.SetSpeed(120));
+			CHECK(car.GetSpeed() == 120);
+			REQUIRE(!car.SetSpeed(160));
+			REQUIRE(!car.SetGear(-1));
+
+			REQUIRE(car.SetGear(0));
+			REQUIRE(car.SetSpeed(0));
+			CHECK(car.GetSpeed() == 0);
+			REQUIRE(car.SetGear(-1));
+			REQUIRE(car.SetSpeed(10));
+			CHECK(car.GetSpeed() == 10);
+			REQUIRE(!car.SetSpeed(25));
+
+			REQUIRE(!car.SetGear(1));
+		}
+
+	}
 	
 }
