@@ -49,7 +49,7 @@ bool CCar::SetGear(int gear)
 		m_direction = Direction::Back;
 		return true;
 	}
-	if (m_speed >= 0 && m_speed <= 30 && gear == 1)
+	if (m_direction != Direction::Back && m_speed >= 0 && m_speed <= 30 && gear == 1)
 	{
 		m_gear = Gear::First;
 		m_direction = Direction::Forward;
