@@ -64,6 +64,21 @@ bool CCarMenu::TurnOnEngine()
 	return m_car.TurnOnEngine();
 }
 
+bool CCarMenu::TurnOffEngine()
+{
+	return m_car.TurnOffEngine();
+}
+
+bool CCarMenu::SetGear(int gear)
+{
+	return m_car.SetGear(gear);
+}
+
+bool CCarMenu::SetSpeed(size_t speed)
+{
+	return m_car.SetSpeed(speed);
+}
+
 void CCarMenu::RunCommand(std::string& command)
 {
 	std::vector<std::string> commands;
@@ -84,18 +99,18 @@ void CCarMenu::RunCommand(std::string& command)
 		{
 			TurnOnEngine();
 		}
-		//else if ((commands[0] == "engine") && (commands[1] == "off"))
-		//{
-		//	TurnOffEngine();
-		//}
-		//else if ((commands[0] == "setgear") && (stoi(commands[1]) >= -1 && stoi(commands[1]) <= 5))
-		//{
-		//	SetGear(stoi(commands[1]));
-		//}
-		//else if ((commands[0] == "setspeed") && (stoi(commands[1]) >= 0))
-		//{
-		//	SetSpeed(stoi(commands[1]));
-		//}
+		else if ((commands[0] == "engine") && (commands[1] == "off"))
+		{
+			TurnOffEngine();
+		}
+		else if ((commands[0] == "setgear") && (stoi(commands[1]) >= -1 && stoi(commands[1]) <= 5))
+		{
+			SetGear(stoi(commands[1]));
+		}
+		else if ((commands[0] == "setspeed") && (stoi(commands[1]) >= 0))
+		{
+			SetSpeed(stoi(commands[1]));
+		}
 		else
 		{
 			std::cout << "Unknown command" << std::endl;

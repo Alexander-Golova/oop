@@ -15,9 +15,9 @@ public:
 
 	void GetInfo() const;
 	bool TurnOnEngine();
-	//bool TurnOffEngine();
-	//bool SetGear(int gear);
-	//bool SetSpeed(int speed);
+	bool TurnOffEngine();
+	bool SetGear(int gear);
+	bool SetSpeed(size_t speed);
 	void RunCommand(std::string& command);
 
 private:

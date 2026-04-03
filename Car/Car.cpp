@@ -85,6 +85,13 @@ bool CCar::SetGear(int gear)
 
 bool CCar::SetSpeed(size_t speed)
 {
+	if (speed == 0)
+	{
+		m_speed = speed;
+		m_direction = Direction::Stop;
+		return true;
+	}
+
 	if (m_gear == Gear::First && speed >= 0 && speed <= 30)
 	{
 		m_speed = speed;
