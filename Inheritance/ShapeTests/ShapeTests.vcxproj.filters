@@ -15,33 +15,27 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Shape.cpp">
+    <ClCompile Include="ShapeTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IShape.cpp">
+    <ClCompile Include="..\Shape\LineSegment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Point.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LineSegment.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AdditionalFunction.cpp">
+    <ClCompile Include="..\Shape\AdditionalFunction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="IShape.h">
+    <ClInclude Include="..\Shape\IShape.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Point.h">
+    <ClInclude Include="..\Shape\LineSegment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LineSegment.h">
+    <ClInclude Include="..\Shape\Point.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AdditionalFunction.h">
+    <ClInclude Include="..\Shape\AdditionalFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

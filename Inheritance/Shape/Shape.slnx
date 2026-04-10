@@ -3,5 +3,6 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Shape.vcxproj" />
+  <Project Path="../ShapeTests/ShapeTests.vcxproj" Id="632ff4d2-5daa-4265-af0b-4b0989fb32cd" />
+  <Project Path="Shape.vcxproj" Id="d2a5a703-affa-4671-8bd9-362a12a10a4d" />
 </Solution>
