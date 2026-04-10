@@ -129,15 +129,19 @@
   <ItemGroup>
     <ClCompile Include="AdditionalFunction.cpp" />
     <ClCompile Include="IShape.cpp" />
+    <ClCompile Include="ISolidShape.cpp" />
     <ClCompile Include="LineSegment.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Shape.cpp" />
+    <ClCompile Include="Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdditionalFunction.h" />
     <ClInclude Include="IShape.h" />
+    <ClInclude Include="ISolidShape.h" />
     <ClInclude Include="LineSegment.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="Triangle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
