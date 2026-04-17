@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AdditionalFunction.cpp" />
+    <ClCompile Include="Circle.cpp" />
     <ClCompile Include="IShape.cpp" />
     <ClCompile Include="ISolidShape.cpp" />
     <ClCompile Include="LineSegment.cpp" />
@@ -138,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdditionalFunction.h" />
+    <ClInclude Include="Circle.h" />
     <ClInclude Include="IShape.h" />
     <ClInclude Include="ISolidShape.h" />
     <ClInclude Include="LineSegment.h" />
