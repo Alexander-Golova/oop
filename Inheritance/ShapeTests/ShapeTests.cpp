@@ -5,6 +5,8 @@
 #include "../Shape/LineSegment.h"
 #include "../Shape/Point.h"
 #include "../Shape/AdditionalFunction.h"
+#include "../Shape/Rectangle.h"
+#include "../Shape/Triangle.h"
 
 
 // отрезок
@@ -43,6 +45,56 @@ TEST_CASE("segment")
 //	endPoint(3.00, 4.00)
 //	P = 5.00
 //	Border Color = 16711680
+//)");
+//	}
+}
+
+// треугольник
+TEST_CASE("triangle")
+{
+	CTriangle triangle({ 7, 8 }, { -4, 5 }, { 1, -4 }, "ffffff", "ffff00");
+
+	// треугольник имеет координаты
+	SECTION("triangle has coordinates")
+	{
+		CHECK(triangle.GetVertex1().x == 7);
+		CHECK(triangle.GetVertex1().y == 8);
+		CHECK(triangle.GetVertex2().x == -4);
+		CHECK(triangle.GetVertex2().y == 5);
+		CHECK(triangle.GetVertex3().x == 1);
+		CHECK(triangle.GetVertex3().y == -4);
+	}
+	// у треугольника можно найти площадь
+	SECTION("triangle has area")
+	{
+		CHECK(static_cast<int>(triangle.GetArea()) == 57);
+	}
+	// у треугольника можно найти периметр
+	SECTION("triangle has perimeter")
+	{
+		CHECK(static_cast<int>(triangle.GetPerimeter()) == 35);
+	}
+	// у треугольника есть цвет границы
+	SECTION("triangle has a line color")
+	{
+		CHECK(triangle.GetOutlineColor() == FromStringToUint32("ffffff"));
+	}
+	// у треугольника есть заливка
+	SECTION("triangle has a fill color")
+	{
+		CHECK(triangle.GetFillColor() == FromStringToUint32("ffff00"));
+	}
+	// треугольник имеет строковое представление
+//	SECTION("triangle has a string representation")
+//	{
+//		CHECK(triangle.ToString() == R"(Triangle:
+//	area = 57.00
+//	perimeter = 35.11
+//	outline color = 16777215
+//	fill color = 16776960
+//	Vertex1 = (7.00, 8.00)
+//	Vertex2 = (-4.00, 5.00)
+//	Vertex3 = (1.00, -4.00)
 //)");
 //	}
 }

@@ -145,6 +145,8 @@
   <ItemGroup>
     <ClCompile Include="..\Shape\AdditionalFunction.cpp" />
     <ClCompile Include="..\Shape\LineSegment.cpp" />
+    <ClCompile Include="..\Shape\Rectangle.cpp" />
+    <ClCompile Include="..\Shape\Triangle.cpp" />
     <ClCompile Include="ShapeTests.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +154,8 @@
     <ClInclude Include="..\Shape\IShape.h" />
     <ClInclude Include="..\Shape\LineSegment.h" />
     <ClInclude Include="..\Shape\Point.h" />
+    <ClInclude Include="..\Shape\Rectangle.h" />
+    <ClInclude Include="..\Shape\Triangle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
