@@ -98,3 +98,51 @@ TEST_CASE("triangle")
 //)");
 //	}
 }
+
+// прямоугольник
+TEST_CASE("rectangle")
+{
+	CRectangle rectangle({ 1, 7 }, { 3, 1 }, "ffffff", "ffff00");
+
+	// прямоугольник имеет координаты
+	SECTION("rectangle has coordinates")
+	{
+		CHECK(rectangle.GetVertex1().x == 1);
+		CHECK(rectangle.GetVertex1().y == 7);
+		CHECK(rectangle.GetVertex2().x == 3);
+		CHECK(rectangle.GetVertex2().y == 1);
+	}
+	// у прямоугольника можно найти площадь
+	SECTION("rectangle has area")
+	{
+		CHECK(static_cast<int>(rectangle.GetArea()) == 12);
+	}
+	// у прямоугольника можно найти периметр
+	SECTION("triangle has perimeter")
+	{
+		CHECK(static_cast<int>(rectangle.GetPerimeter()) == 16);
+	}
+	// у прямоугольника есть цвет границы
+	SECTION("rectangle has a line color")
+	{
+		CHECK(rectangle.GetOutlineColor() == FromStringToUint32("ffffff"));
+	}
+	// у прямоугольника есть заливка
+	SECTION("rectangle has a fill color")
+	{
+		CHECK(rectangle.GetFillColor() == FromStringToUint32("ffff00"));
+	}
+	// прямоугольника имеет строковое представление
+	//	SECTION("triangle has a string representation")
+	//	{
+	//		CHECK(triangle.ToString() == R"(Triangle:
+	//	area = 57.00
+	//	perimeter = 35.11
+	//	outline color = 16777215
+	//	fill color = 16776960
+	//	Vertex1 = (7.00, 8.00)
+	//	Vertex2 = (-4.00, 5.00)
+	//	Vertex3 = (1.00, -4.00)
+	//)");
+	//	}
+}
