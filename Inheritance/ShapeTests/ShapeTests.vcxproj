@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Shape\AdditionalFunction.cpp" />
+    <ClCompile Include="..\Shape\Circle.cpp" />
     <ClCompile Include="..\Shape\LineSegment.cpp" />
     <ClCompile Include="..\Shape\Rectangle.cpp" />
     <ClCompile Include="..\Shape\Triangle.cpp" />
@@ -151,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Shape\AdditionalFunction.h" />
+    <ClInclude Include="..\Shape\Circle.h" />
     <ClInclude Include="..\Shape\IShape.h" />
     <ClInclude Include="..\Shape\LineSegment.h" />
     <ClInclude Include="..\Shape\Point.h" />
