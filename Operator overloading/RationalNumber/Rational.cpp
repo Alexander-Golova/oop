@@ -29,3 +29,11 @@ double CRational::ToDouble() const
 {
 	return static_cast<double>(m_numerator / m_denominator);
 }
+
+CRational const operator+(const CRational& lhs, const CRational& rhs)
+{
+	int denominator = std::lcm(lhs.GetDenominator(), rhs.GetDenominator());
+	int numerator = denominator / lhs.GetDenominator() * lhs.GetNumerator() + denominator / rhs.GetDenominator() * rhs.GetNumerator();
+	int div = std::gcd(denominator, numerator);
+	return CRational(numerator / div, denominator / div);
+}

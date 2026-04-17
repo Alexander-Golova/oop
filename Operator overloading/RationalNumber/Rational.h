@@ -1,5 +1,5 @@
 #pragma once
-
+#include<numeric>
 
 class CRational
 {
@@ -32,3 +32,5 @@ private:
 	int m_denominator;
 
 };
+
+CRational const operator+(const CRational& lhs, const CRational& rhs);
