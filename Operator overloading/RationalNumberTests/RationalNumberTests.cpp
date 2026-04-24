@@ -72,25 +72,31 @@ TEST_CASE("RationalNumber Operators", "[rational][arithmetic]")
 		CHECK(res.GetNumerator() == 7);
 		CHECK(res.GetDenominator() == 6);
 	}
-	SECTION("Addition Operator (-=)")
+	SECTION("Subtraction Operator (-=)")
 	{
 		CRational res(3, 4);
 		res -= a;
 		CHECK(res.GetNumerator() == 1);
 		CHECK(res.GetDenominator() == 3);
 	}
-	SECTION("Addition Operator (*=)")
+	SECTION("Multiplication Operator (*=)")
 	{
 		CRational res(3, 4);
 		res *= a;
 		CHECK(res.GetNumerator() == 5);
 		CHECK(res.GetDenominator() == 16);
 	}
-	SECTION("Addition Operator (/=)")
+	SECTION("Division Operator (/=)")
 	{
 		CRational res(3, 4);
 		res /= a;
 		CHECK(res.GetNumerator() == 9);
 		CHECK(res.GetDenominator() == 5);
+	}
+	SECTION("Operator equality (==)")
+	{
+		CRational res(5, 12);
+		CHECK(res == a);
+		CHECK(!(res == b));
 	}
 }

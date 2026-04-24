@@ -45,3 +45,5 @@ CRational const operator+(const CRational& lhs, const CRational& rhs);
 CRational const operator-(const CRational& lhs, const CRational& rhs);
 CRational const operator*(const CRational& lhs, const CRational& rhs);
 CRational const operator/(const CRational& lhs, const CRational& rhs);
+
+bool const operator==(const CRational& lhs, const CRational& rhs);

@@ -96,3 +96,8 @@ CRational& CRational::operator/=(const CRational& rhs)
 	*this = *this / rhs;
 	return *this;
 }
+
+bool const operator==(const CRational& lhs, const CRational& rhs)
+{
+	return (lhs.GetNumerator() * rhs.GetDenominator() == rhs.GetNumerator() * lhs.GetDenominator());
+}
