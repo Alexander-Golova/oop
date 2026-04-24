@@ -33,6 +33,7 @@ public:
 	CRational& operator+=(const CRational& rhs);
 	CRational& operator-=(const CRational& rhs);
 	CRational& operator*=(const CRational& rhs);
+	CRational& operator/=(const CRational& rhs);
 
 private:
 	int m_numerator;
