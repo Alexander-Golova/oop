@@ -48,3 +48,4 @@ CRational const operator/(const CRational& lhs, const CRational& rhs);
 
 bool const operator==(const CRational& lhs, const CRational& rhs);
 bool const operator!=(const CRational& lhs, const CRational& rhs);
+bool const operator<(const CRational& lhs, const CRational& rhs);

@@ -106,3 +106,8 @@ bool const operator!=(const CRational& lhs, const CRational& rhs)
 {
 	return !(lhs == rhs);
 }
+
+bool const operator<(const CRational& lhs, const CRational& rhs)
+{
+	return (lhs.GetNumerator() * rhs.GetDenominator() < rhs.GetNumerator() * lhs.GetDenominator());
+}
