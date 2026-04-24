@@ -27,6 +27,10 @@ public:
 	// Возвращает отношение числителя и знаменателя в виде числа double
 	double ToDouble() const;
 
+	CRational const operator-() const;
+	CRational const operator+() const;
+
+
 private:
 	int m_numerator;
 	int m_denominator;

@@ -53,4 +53,16 @@ TEST_CASE("RationalNumber Operators", "[rational][arithmetic]")
 		CHECK(res.GetNumerator() == 14);
 		CHECK(res.GetDenominator() == 15);
 	}
+	SECTION("Operator unary minus (-)")
+	{
+		CRational res = -a;
+		CHECK(res.GetNumerator() == -5);
+		CHECK(res.GetDenominator() == 12);
+	}
+	SECTION("Operator unary minus (+)")
+	{
+		CRational res = a;
+		CHECK(res.GetNumerator() == 5);
+		CHECK(res.GetDenominator() == 12);
+	}
 }
