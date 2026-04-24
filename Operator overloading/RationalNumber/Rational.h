@@ -36,3 +36,4 @@ private:
 CRational const operator+(const CRational& lhs, const CRational& rhs);
 CRational const operator-(const CRational& lhs, const CRational& rhs);
 CRational const operator*(const CRational& lhs, const CRational& rhs);
+CRational const operator/(const CRational& lhs, const CRational& rhs);

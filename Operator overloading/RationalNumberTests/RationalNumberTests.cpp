@@ -44,13 +44,13 @@ TEST_CASE("RationalNumber Operators", "[rational][arithmetic]")
 		CHECK(res.GetNumerator() == 8);
 		CHECK(res.GetDenominator() == 15);		
 	}
-	//SECTION("Division Operator (/)")
-	//{
-	//	CComplex res = a / b;
-	//	CHECK(res.Re() == Approx(-1.0));
-	//	CHECK(res.Im() == Approx(2.0));
-	//	res = a / c;
-	//	CHECK(res.Re() == Approx(6.0));
-	//	CHECK(res.Im() == Approx(8.0));
-	//}
+	SECTION("Division Operator (/)")
+	{
+		CRational res = a / b;
+		CHECK(res.GetNumerator() == 15);
+		CHECK(res.GetDenominator() == 14);
+		res = b / a;
+		CHECK(res.GetNumerator() == 14);
+		CHECK(res.GetDenominator() == 15);
+	}
 }
