@@ -99,4 +99,10 @@ TEST_CASE("RationalNumber Operators", "[rational][arithmetic]")
 		CHECK(res == a);
 		CHECK(!(res == b));
 	}
+	SECTION("Operator not equality (!=)")
+	{
+		CRational res(5, 12);
+		CHECK(!(res != a));
+		CHECK(res != b);
+	}
 }
