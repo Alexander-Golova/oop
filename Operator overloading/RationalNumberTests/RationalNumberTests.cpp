@@ -26,15 +26,24 @@ TEST_CASE("RationalNumber Operators", "[rational][arithmetic]")
 		CHECK(res.GetNumerator() == -1);
 		CHECK(res.GetDenominator() == 36);
 	}
-	//SECTION("Multiplication Operator (*)")
-	//{
-	//	CComplex res = a * b;
-	//	CHECK(res.Re() == Approx(11.0));
-	//	CHECK(res.Im() == Approx(-2.0));
-	//	res = a * c;
-	//	CHECK(res.Re() == Approx(1.5));
-	//	CHECK(res.Im() == Approx(2.0));
-	//}
+	CRational d(6, 25);
+	CRational e(20, 9);
+	SECTION("Multiplication Operator (*)")
+	{
+		CRational res = a * b;
+		CHECK(res.GetNumerator() == 35);
+		CHECK(res.GetDenominator() == 216);
+		int c = 5;
+		res = a * c;
+		CHECK(res.GetNumerator() == 25);
+		CHECK(res.GetDenominator() == 12);
+		res = d * e;
+		CHECK(res.GetNumerator() == 8);
+		CHECK(res.GetDenominator() == 15);
+		res = e * d;
+		CHECK(res.GetNumerator() == 8);
+		CHECK(res.GetDenominator() == 15);		
+	}
 	//SECTION("Division Operator (/)")
 	//{
 	//	CComplex res = a / b;

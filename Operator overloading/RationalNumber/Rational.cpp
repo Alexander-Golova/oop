@@ -45,3 +45,12 @@ CRational const operator-(const CRational& lhs, const CRational& rhs)
 	int div = std::gcd(denominator, numerator);
 	return CRational(numerator / div, denominator / div);
 }
+
+CRational const operator*(const CRational& lhs, const CRational& rhs)
+{
+	int numerator = lhs.GetNumerator()	/ std::gcd(rhs.GetDenominator(), lhs.GetNumerator());
+	int denominator = rhs.GetDenominator() / std::gcd(rhs.GetDenominator(), lhs.GetNumerator());
+	numerator *= (rhs.GetNumerator() / std::gcd(rhs.GetNumerator(), lhs.GetDenominator()));
+	denominator *= (lhs.GetDenominator() / std::gcd(rhs.GetNumerator(), lhs.GetDenominator()));
+	return CRational(numerator, denominator);
+}

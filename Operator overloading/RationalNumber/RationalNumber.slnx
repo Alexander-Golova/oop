@@ -3,6 +3,6 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="../RationalNumberTests/RationalNumberTests.vcxproj" />
-  <Project Path="RationalNumber.vcxproj" />
+  <Project Path="../RationalNumberTests/RationalNumberTests.vcxproj" Id="b5575588-bf0f-4113-916a-94d0836f0c14" />
+  <Project Path="RationalNumber.vcxproj" Id="02c6eabc-4a77-4f97-8ae2-0a75f595da6a" />
 </Solution>
