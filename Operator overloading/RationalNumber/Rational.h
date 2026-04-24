@@ -30,6 +30,7 @@ public:
 	CRational const operator-() const;
 	CRational const operator+() const;
 
+	CRational& operator+=(const CRational& rhs);
 
 private:
 	int m_numerator;

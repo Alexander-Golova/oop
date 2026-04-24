@@ -72,3 +72,9 @@ CRational const CRational::operator+() const
 {
 	return CRational(m_numerator, m_denominator);
 }
+
+CRational& CRational::operator+=(const CRational& rhs)
+{
+	*this = *this + rhs;
+	return *this;
+}
