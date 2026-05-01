@@ -128,3 +128,10 @@ TEST_CASE("RationalNumber Operators", "[rational][arithmetic]")
 		CHECK(!(b >= a));
 	}
 }
+
+TEST_CASE("can put a rational number in the stream")
+{
+	std::ostringstream out;
+	out << CRational(1, 2);
+	CHECK(out.str() == "1/2");
+}

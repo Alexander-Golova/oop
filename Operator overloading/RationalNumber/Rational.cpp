@@ -126,3 +126,9 @@ bool const operator>=(const CRational& lhs, const CRational& rhs)
 {
 	return (lhs.GetNumerator() * rhs.GetDenominator() >= rhs.GetNumerator() * lhs.GetDenominator());
 }
+
+std::ostream& operator<<(std::ostream& strm, const CRational& rhs)
+{
+	strm << rhs.GetNumerator() << '/' << rhs.GetDenominator();
+	return strm;
+}
