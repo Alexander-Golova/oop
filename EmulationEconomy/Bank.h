@@ -1,5 +1,6 @@
 #pragma once
 #include <stdexcept>
+#include <set>
 
 
 using AccountId = unsigned long long;
@@ -12,32 +13,37 @@ public:
 	using runtime_error::runtime_error;
 };
 
-class Account
+//class account
+//{
+//public:
+//	AccountId id;
+//	money getmoney()
+//	{
+//		return m_money;
+//	}
+//	void deposit(money money)
+//	{
+//		m_money += money;
+//	}
+//	bool iswithdraw(money money)
+//	{
+//		if (money <= m_money)
+//		{
+//			m_money -= money;
+//			return true;
+//		}
+//		return false;
+//	}
+//
+//private:
+//	money m_money;
+//};
+
+struct Account
 {
-public:
 	AccountId id;
-	Money GetMoney()
-	{
-		return m_money;
-	}
-	void Deposit(Money money)
-	{
-		m_money += money;
-	}
-	bool IsWithdraw(Money money)
-	{
-		if (money <= m_money)
-		{
-			m_money -= money;
-			return true;
-		}
-		return false;
-	}
-
-private:
-	Money m_money;
+	Money money;
 };
-
 
 
 class CBank
@@ -57,6 +63,9 @@ public:
 	CBank(const CBank&) = delete;
 	CBank& operator=(const CBank&) = delete;
 
+	bool FindId(AccountId const id);
+	void AddAccount(AccountId const accountId, Money money);
+	Money GetMoney(AccountId const accountId);
 	// Перевести деньги с исходного счёта (srcAccountId) на целевой (dstAccountId)
 	// Нельзя перевести больше, чем есть на исходном счёте
 	// Нельзя перевести отрицательное количество денег
@@ -115,4 +124,5 @@ public:
 
 private:
 	Money m_cash;
+	std::set<Account> m_account;
 };
