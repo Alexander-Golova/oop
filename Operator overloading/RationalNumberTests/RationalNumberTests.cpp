@@ -135,3 +135,13 @@ TEST_CASE("can put a rational number in the stream")
 	out << CRational(1, 2);
 	CHECK(out.str() == "1/2");
 }
+
+TEST_CASE("can take a rational number from the stream")
+{
+	std::string str = "1/2";
+	std::istringstream input(str);
+	CRational rational;
+	input >> rational;
+	CRational res(1, 2);
+	CHECK(rational == res);
+}
