@@ -105,10 +105,26 @@ TEST_CASE("RationalNumber Operators", "[rational][arithmetic]")
 		CHECK(!(res != a));
 		CHECK(res != b);
 	}
-
 	SECTION("Operator less (<)")
 	{		
 		CHECK(b < a);
 		CHECK(!(a < b));
+	}
+	SECTION("Operator less (<=)")
+	{
+		CHECK(b <= a);
+		CHECK(a <= a);
+		CHECK(!(a <= b));
+	}
+	SECTION("Operator more (>)")
+	{
+		CHECK(a > b);
+		CHECK(!(b > a));
+	}
+	SECTION("Operator more (>=)")
+	{
+		CHECK(a >= b);
+		CHECK(a >= a);
+		CHECK(!(b >= a));
 	}
 }
