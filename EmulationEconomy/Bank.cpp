@@ -6,5 +6,6 @@ void CBank::SendMoney(AccountId srcAccountId, AccountId dstAccountId, Money amou
 	{
 		throw std::out_of_range("amount cannot be negative");
 	}
+	if (amount <= srcAccountId)
 
 }

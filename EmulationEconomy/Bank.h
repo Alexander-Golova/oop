@@ -12,6 +12,32 @@ public:
 	using runtime_error::runtime_error;
 };
 
+class Account
+{
+public:
+	AccountId id;
+	Money GetMoney()
+	{
+		return m_money;
+	}
+	void Deposit(Money money)
+	{
+		m_money += money;
+	}
+	bool IsWithdraw(Money money)
+	{
+		if (money <= m_money)
+		{
+			m_money -= money;
+			return true;
+		}
+		return false;
+	}
+
+private:
+	Money m_money;
+};
+
 
 
 class CBank
@@ -80,7 +106,7 @@ public:
 	// Открывает счёт в банке. После открытия счёта на нём нулевой баланс.
 	// Каждый открытый счёт имеет уникальный номер.
 	// Возвращает номер счёта
-	[[nodiscard]] AccountId OpenAccount();
+	//[[nodiscard]] AccountId OpenAccount();
 
 	// Закрывает указанный счёт.
 	// Возвращает количество денег, которые были на счёте в момент закрытия
