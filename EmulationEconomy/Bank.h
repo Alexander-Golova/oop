@@ -72,7 +72,7 @@ public:
 	// Исключение BankOperationError выбрасывается, при отсутствии счетов или
 	// недостатке денег на исходном счёте
 	// При отрицательном количестве переводимых денег выбрасывается std::out_of_range
-	void SendMoney(AccountId srcAccountId, AccountId dstAccountId, Money amount);
+	void SendMoney(AccountId const srcAccountId, const AccountId dstAccountId, Money amount);
 
 	// Перевести деньги с исходного счёта (srcAccountId) на целевой (dstAccountId)
 	// Нельзя перевести больше, чем есть на исходном счёте
@@ -122,7 +122,12 @@ public:
 	// Эти деньги переходят в наличный оборот
 	//[[nodiscard]] Money CloseAccount(AccountId accountId);
 
-private:
+private:	
 	Money m_cash;
 	std::set<Account> m_account;
 };
+
+bool const operator<(const Account& lhs, const Account& rhs)
+{
+	return (lhs.id < rhs.id);
+}

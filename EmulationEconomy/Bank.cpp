@@ -24,17 +24,31 @@ Money CBank::GetMoney(AccountId const accountId)
 	return it->money;
 }
 
-void CBank::SendMoney(AccountId srcAccountId, AccountId dstAccountId, Money amount)
+void CBank::SendMoney(AccountId const srcAccountId, AccountId const dstAccountId, Money amount)
 {
 	if (amount < 0)
 	{
 		throw std::out_of_range("amount cannot be negative");
 	}
-	if (amount <= GetMoney(srcAccountId))
+	auto srcHandler = m_account.extract({ srcAccountId, 0 });
+	if (srcHandler.empty())
 	{
-
+		throw BankOperationError("error srcAccountId not found");
 	}
+	auto sdtHandler = m_account.extract({ dstAccountId, 0 });
+	if (sdtHandler.empty())
+	{
+		throw BankOperationError("error dstAccountId not found");
+	}
+	if (srcHandler.value().money < amount)
+	{
+		m_account.insert(std::move(srcHandler));
+		throw BankOperationError("insufficient funds in the account");
+	}
+
+	srcHandler.value().money -= amount;
+	m_account.insert(std::move(srcHandler));
+	sdtHandler.value().money += amount;
+	m_account.insert(std::move(sdtHandler));	
 }
-
-
 
