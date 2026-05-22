@@ -52,3 +52,26 @@ void CBank::SendMoney(AccountId const srcAccountId, AccountId const dstAccountId
 	m_account.insert(std::move(sdtHandler));	
 }
 
+bool CBank::Deposit(AccountId const dstAccountId, Money amount)
+{
+	auto dstHandler = m_account.extract({ dstAccountId, 0 });
+	if (dstHandler.empty())
+	{
+		return false;
+	}
+	dstHandler.value().money += amount;
+}
+
+bool CBank::TryWithdrawMoney(AccountId account, Money amount)
+{
+	auto dstHandler = m_account.extract({ account, 0 });
+	if (dstHandler.empty())
+	{
+		return false;
+	}
+	if (dstHandler.value().money < amount)
+	{
+		return false;
+	}
+	dstHandler.value().money -= amount;
+}

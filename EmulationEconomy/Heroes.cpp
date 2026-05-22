@@ -1,14 +1,16 @@
 #include "Heroes.h"
 
-CHeroes::CHeroes(std::string name, AccountId id, Money money)
+CHeroes::CHeroes(std::string name, AccountId id, Money money, Money moneyBank)
 	: name(name)
 	, id(id)
 	, m_money(money)
+	, m_moneyBank(moneyBank)
 {};
+
 
 bool CHeroes::GiveMoney(Money money)
 {
-	if (money < GetMoney())
+	if (money <= CheckPocket())
 	{
 		m_money -= money;
 		return true;
@@ -16,7 +18,7 @@ bool CHeroes::GiveMoney(Money money)
 	return false;	
 }
 
-Money CHeroes::FindMoney()
+Money CHeroes::CheckPocket()
 {
 	return m_money;
 }

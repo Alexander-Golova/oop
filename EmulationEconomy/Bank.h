@@ -13,31 +13,6 @@ public:
 	using runtime_error::runtime_error;
 };
 
-//class account
-//{
-//public:
-//	AccountId id;
-//	money getmoney()
-//	{
-//		return m_money;
-//	}
-//	void deposit(money money)
-//	{
-//		m_money += money;
-//	}
-//	bool iswithdraw(money money)
-//	{
-//		if (money <= m_money)
-//		{
-//			m_money -= money;
-//			return true;
-//		}
-//		return false;
-//	}
-//
-//private:
-//	money m_money;
-//};
 
 struct Account
 {
@@ -62,6 +37,8 @@ public:
 
 	CBank(const CBank&) = delete;
 	CBank& operator=(const CBank&) = delete;
+
+	bool Deposit(AccountId const accountId, Money amount);
 
 	bool FindId(AccountId const id);
 	void AddAccount(AccountId const accountId, Money money);
@@ -101,7 +78,7 @@ public:
 	// При нехватке денег на счёте возвращается false, а количество наличных денег остаётся неизменным
 	// При невалидном номере аккаунта выбрасывается BankOperationError.
 	// При отрицательном количестве денег выбрасывается std::out_of_range
-	//[[nodiscard]] bool TryWithdrawMoney(AccountId account, Money amount);
+	bool TryWithdrawMoney(AccountId account, Money amount);
 
 	// Поместить наличные деньги на счёт. Количество денег в наличном обороте
 	// уменьшается на величину amount.

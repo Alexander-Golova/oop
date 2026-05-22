@@ -5,9 +5,9 @@
 class CHeroes
 {
 public:
-	CHeroes(std::string name, AccountId id, Money money);
+	CHeroes(std::string name, AccountId id, Money money, Money moneyBank);
 	CHeroes(const CHeroes&) = delete;
-	Money FindMoney();
+	Money CheckPocket();
 
 	bool GiveMoney(Money money);
 	bool GetMoney(Money money);
@@ -17,4 +17,6 @@ public:
 
 private:
 	Money m_money;
+	Money m_moneyBank;
+
 };
